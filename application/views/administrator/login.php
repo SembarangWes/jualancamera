@@ -4,9 +4,9 @@
     <title>Bootstrap Admin Theme v3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/')?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/')?>css/styles.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,7 +22,7 @@
 	           <div class="col-md-12">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="index.html">Bootstrap Admin Theme</a></h1>
+	                 <h1><a href="index">Bootstrap Admin Theme</a></h1>
 	              </div>
 	           </div>
 	        </div>
@@ -35,19 +35,31 @@
 				<div class="login-wrapper">
 			        <div class="box">
 			            <div class="content-wrap">
-			                <h6>Sign Up</h6>
+			                <h6>Sign In</h6>
+			                <div class="social">
+	                            <a class="face_login" href="#">
+	                                <span class="face_icon">
+	                                    <img src="<?php echo base_url('assets/')?>images/facebook.png" alt="fb">
+	                                </span>
+	                                <span class="text">Sign in with Facebook</span>
+	                            </a>
+	                            <div class="division">
+	                                <hr class="left">
+	                                <span>or</span>
+	                                <hr class="right">
+	                            </div>
+	                        </div>
 			                <input class="form-control" type="text" placeholder="E-mail address">
 			                <input class="form-control" type="password" placeholder="Password">
-			                <input class="form-control" type="password" placeholder="Confirm Password">
 			                <div class="action">
-			                    <a class="btn btn-primary signup" href="index.html">Sign Up</a>
+			                    <a class="btn btn-primary signup" href="index">Login</a>
 			                </div>                
 			            </div>
 			        </div>
 
 			        <div class="already">
-			            <p>Have an account already?</p>
-			            <a href="login.html">Login</a>
+			            <p>Don't have an account yet?</p>
+			            <a href="signup">Sign Up</a>
 			        </div>
 			    </div>
 			</div>
@@ -57,9 +69,9 @@
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="<?php echo base_url('assets/')?>js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="<?php echo base_url('assets/')?>bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url('assets/')?>js/custom.js"></script>
   </body>
 </html>
