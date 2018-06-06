@@ -40,6 +40,7 @@
 						<!-- Main menu -->
 						<li><a href="<?php echo site_url('admin/') ?>"><i class="glyphicon glyphicon-home"></i> Beranda</a></li>
 						<li class="current"><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
+						<li><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
 					</ul>
 				</div>
 			</div>
@@ -49,78 +50,73 @@
 					<div class="col-md-12">
 						<div class="content-box-large">
 
-<?php if($page=="create") { // Tampilan Tambah ?>
+<?php if($page=="create") { ?> <!-- Create -->
 
 							<div class="panel-heading">
-					            <div class="panel-title">Tambah Kamera</div>
+					            <div class="panel-title"><legend>Tambah Kamera</legend></div>
 							</div>
 							
 			  				<div class="panel-body">
-<?php echo form_open_multipart('admin/store') ?>
+<?php echo form_open_multipart('camera/store') ?>
 								<fieldset>
 									<div class="form-group">
 										<label for="Kamera">Kamera :</label>
 										<input type="text" class="form-control" id="kamera" name="kamera"
-											pattern="[A-Za-z0-9-]{1,50}" title="Harap diisi dengan angka dan/atau huruf"
-											placeholder="Nama Kamera/Jenis Kamera/Tipe Kamera ..."
-											value="<?php echo set_value('kamera') ?>">  
+											pattern="^[^-\s][a-zA-Z0-9_\s-]{1,50}" required title="Harap diisi dengan angka dan/atau huruf"
+											placeholder="Nama Kamera/Jenis Kamera/Tipe Kamera ...">  
 									</div>
 									<div class="form-group">
 										<label for="Foto">Foto / Gambar :</label>
 										<input type="file" id="foto" name="foto" size="20" accept="image/*">
+<?php echo $error ?>
 									</div>
 									<div class="form-group">
 										<label for="Spesifikasi">Spesifikasi :</label>
 										<textarea id="bootstrap-editor" style="width:98%;height:200px;" id="spesifikasi"
-											name="spesifikasi" pattern="{1,1000}" title="Harap diisi dengan angka dan/atau huruf"
+											name="spesifikasi" pattern="{1,1000}" required title="Harap diisi dengan angka dan/atau huruf"
 											placeholder="Masukkan Spesifikasi ...">
-											<?php echo set_value('spesifikasi') ?>
 										</textarea>
 									</div>
 									<div class="form-group">
 										<label for="Harga">Harga (Rp.) :</label>
 										<input type="number" class="form-control" id="harga" name="harga"
-											pattern="[0-9]{1,15}" title="Harap diisi dengan angka"
-											placeholder="Masukkan Harga ..."
-											value="<?php echo set_value('harga') ?>">  
+											pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+											placeholder="Masukkan Harga ...">  
 									</div>
 									<div class="form-group">
 										<label for="Stok">Stok Kamera :</label>
 										<input type="number" class="form-control" id="stok" name="stok"
-											pattern="[0-9]{1,5}" title="Harap diisi dengan angka"
-											placeholder="Masukkan Jumlah Stok ..."
-											value="<?php echo set_value('stok') ?>">  
+											pattern="[0-9]{1,5}" required title="Harap diisi dengan angka"
+											placeholder="Masukkan Jumlah Stok ...">  
 									</div>
-<?php echo $error ?>
 								</fieldset>
 							</div>
-							<div>
+
+							<div class="panel-footer">
 								<button type="submit" class="btn btn-primary" id="tambah">Tambah</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
 							</div>
-<?php
-	
-	echo form_close(); }
-	elseif ($page=="edit") { // Tampilan Edit
-?>
+
+<?php echo form_close(); } elseif ($page=="edit") { ?>  <!-- Edit -->
+
 							<div class="panel-heading">
-					            <div class="panel-title">Edit Kamera</div>
+					            <div class="panel-title"><legend>Edit Kamera</legend></div>
 							</div>
 							
 			  				<div class="panel-body">
-<?php echo form_open_multipart('admin/update/'.$dataid->id_kamera) ?>
+<?php echo form_open_multipart('camera/update/'.$dataid->id_kamera); echo form_hidden('id', $dataid->id_kamera); ?>
 								<fieldset>
-<?php echo form_hidden('id', $dataid->id_kamera) ?>
 									<div class="form-group">
 										<label for="Kamera">Kamera :</label>
 										<input type="text" class="form-control" id="kamera" name="kamera"
-											pattern="[A-Za-z0-9-]{1,50}" title="Harap diisi dengan angka dan/atau huruf"
+											pattern="^[^-\s][a-zA-Z0-9_\s-]{1,50}" required title="Harap diisi dengan angka dan/atau huruf"
 											placeholder="Nama Kamera/Jenis Kamera/Tipe Kamera ..."
 											value="<?php echo $dataid->nama_kamera ?>">  
 									</div>
 									<div class="form-group">
 										<label for="Foto">Foto / Gambar :</label>
 										<input type="file" id="foto" name="foto" size="20" accept="image/*">
+<?php echo $error ?>
 									</div>
 									<div class="form-group">
 										<label for="Spesifikasi">Spesifikasi :</label>
@@ -144,10 +140,10 @@
 											placeholder="Masukkan Jumlah Stok ..."
 											value="<?php echo $dataid->stok; ?>">  
 									</div>
-<?php if($error != 'null') {echo $error;} ?>
 								</fieldset>
 							</div>
-							<div class="modal-footer">
+
+							<div class="panel-footer">
 								<button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
 							</div>
@@ -162,12 +158,12 @@
 								<table class="table table-striped">
 									<thead>
 										<th>No</th>
-										<th width="200">Kamera</th>
+										<th width="100">Kamera</th>
 										<th>Spesifikasi</th>
 										<th>Harga</th>
 										<th>Stok</th>
 										<th>
-											<a href="<?php echo site_url('admin/camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
+											<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
 										</th>
 									</thead>
 									<tbody>
@@ -214,15 +210,17 @@
 											<?php echo $row->stok ?>
 										</td>
 										<td>
-											<?php echo form_open('admin/destroy/'.$row->id_kamera); ?>
-											<a href="<?php echo site_url('admin/camera/edit/null/'.$row->id_kamera) ?>" type="button" class="btn btn-info btn-sm">Ubah</a>
-											<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
-											<?php echo form_close() ?>
+											<a href="<?php echo site_url('camera/edit/'.$row->id_kamera) ?>" type="button" class="btn btn-info btn-sm">Ubah</a>
+											<a href="<?php echo site_url('camera/destroy/'.$row->id_kamera) ?>" type="button" class="btn btn-danger btn-sm"
+												onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 										</td>
 										</tr>
-										<?php } echo $error ?>
+										<?php } ?>
 									</tbody>
 								</table>
+							</div>
+
+							<div class="panel-footer">
 <?php echo $links ?>
 							</div>
 
@@ -240,12 +238,13 @@
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="<?php echo base_url('assets/')?>js/jquery.js"></script>
+		<script src="<?php echo base_url('assets/js/jquery-3.3.1.min.js') ?>"></script>
 		<!-- jQuery UI -->
 		<script src="<?php echo base_url('assets/')?>js/jquery-ui.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="<?php echo base_url('assets/')?>bootstrap/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url('assets/')?>js/custom.js"></script>
-		
+<?php if ($page=="edit" || $page=="create") { ?>
 		<!-- JS Editor -->
 	    <script src="<?php echo base_url('assets/')?>js/editors.js"></script>
 
@@ -267,6 +266,6 @@
 		<script src="<?php echo base_url('assets/')?>js/bootstrap-editable.min.js"></script>
 
 		<script src="<?php echo base_url('assets/')?>js/forms.js"></script>
-
+<?php } ?>
   	</body>
 </html>

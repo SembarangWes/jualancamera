@@ -13,9 +13,7 @@ class Kamera_model extends CI_Model {
     }
 
     public function insert($data = [])
-    {
-        return $this->db->insert('kamera', $data);
-    }
+    { return $this->db->insert('kamera', $data); }
 
     public function show($id)
     {
@@ -28,7 +26,7 @@ class Kamera_model extends CI_Model {
         // TODO: set data yang akan di update
         // https://www.codeigniter.com/userguide3/database/query_builder.html#updating-data
 
-        $foto=$this->db->where('id_kamera', $id);
+        $this->db->where('id_kamera', $id);
         $this->db->update('kamera', $data);
         return result;
     }
