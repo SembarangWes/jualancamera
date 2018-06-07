@@ -10,8 +10,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$kat = $this->Kategori_model->list();
-		$this->load->view('index', $kat);
+		$this->load->view('index');
 	}
 
 	public function about()

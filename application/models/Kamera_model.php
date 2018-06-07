@@ -3,11 +3,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kamera_model extends CI_Model {
 
-    public function getTotal()
-    { return $this->db->count_all('kamera'); }
+    public function getTotal($box, $search)
+    { 
+        if ($box != 'null' && $search != 'null')
+        {  $this->db->like($box, $search); }
 
-    public function list($limit, $start)
+        return $this->db->count_all_results('kamera');
+    }
+
+    public function list($limit, $start, $box, $search)
     {
+        if ($box != 'null' && $search != 'null')
+        {  $this->db->like($box, $search); }
+
         $query = $this->db->get('kamera', $limit, $start);
         return ($query->num_rows() > 0) ? $query->result() : false;
     }

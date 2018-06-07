@@ -19,7 +19,10 @@ class Camera extends CI_Controller {
     
     public function create()
     { 
-        $data = [ 'page' => 'create' ];
+        $data = [
+            'page' => 'create',
+            'error' => ''
+        ];
         $this->load->view('admin/camera', $data);
     }
 
