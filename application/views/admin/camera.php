@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<label for="Spesifikasi">Spesifikasi :</label>
 										<textarea id="bootstrap-editor" style="width:98%;height:200px;" id="spesifikasi"
-											name="spesifikasi" pattern="{1,1000}" required title="Harap diisi dengan angka dan/atau huruf"
+											name="spesifikasi" pattern="{1,1000}" required title="Harap diisi"
 											placeholder="Masukkan Spesifikasi ...">
 										</textarea>
 									</div>

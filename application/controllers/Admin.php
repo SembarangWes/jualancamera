@@ -80,10 +80,24 @@ class Admin extends CI_Controller {
     }
 
     public function category()
+    { $this->load->view('admin/category'); }
+    
+    public function user()
     {
-        // Cek isi kotak
+        // Cek kolom combobox
         if($this->uri->segment(3))
-        { $search=$this->uri->segment(3); }
+        { $box=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
+            else
+            { $box = 'null'; }
+        }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search=$this->uri->segment(4); }
         else
         {
             if($this->input->post("search"))
@@ -93,16 +107,16 @@ class Admin extends CI_Controller {
         }
 
         $data = [];
-        $total = $this->Kategori_model->getTotal($search);
+        $total = $this->User_model->getTotal($box, $search);
         if ($total > 0)
         {
             $limit = 2;
-            $start = $this->uri->segment(4, 0);
+            $start = $this->uri->segment(5, 0);
             $config = [
-                'base_url' => base_url() . 'admin/category/' . $search,
+                'base_url' => base_url() . 'admin/user/' . $box . '/' . $search,
                 'total_rows' => $total,
                 'per_page' => $limit,
-                'uri_segment' => 4,
+                'uri_segment' => 5,
 
                 // Bootstrap 3 Pagination
                 'first_link' => '&laquo;',
@@ -126,17 +140,15 @@ class Admin extends CI_Controller {
             ];
             $this->pagination->initialize($config);
             $data = [
-                'data' => $this->Kategori_model->list($limit, $start, $search),
+                'data' => $this->User_model->list($limit, $start, $box, $search),
                 'links' => $this->pagination->create_links(),
-                'start' => $start
+                'start' => $start,
+                'page' => 'index',
             ];
         }
-
-        $this->load->view('admin/category', $data);
+        
+		$this->load->view('admin/user', $data);
     }
-
-    public function user()
-    { $this->load->view('admin/user'); }
 
 	public function login()
 	{ $this->load->view('admin/login'); }

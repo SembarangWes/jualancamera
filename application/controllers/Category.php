@@ -3,37 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Category extends CI_Controller {
 
-	public function __construct()
+    public function list()
     {
-        parent::__construct();
+        $result = $this->Kategori_model->select();
+        header("Content-Type: application/json");
+        echo json_encode($result);
     }
 
-	public function store()
-    {
-            // Insert data
-            $data = [ 'nama_kategori' => $this->input->post('kategori') ];
-            
-            if ($this->Kategori_model->insert($data))
-            { redirect('admin/category'); }        
+    public function add()
+    { 
+        $data = $this->input->post();
+        $this->Kategori_model->insert($data);
     }
 
-	public function update($id)
-    {
-        //Ambil Value
-        $id=$this->input->post('id');
-		
-		$data = [ 'nama_kategori' => $this->input->post('kategori') ];
+    public function edit()
+    { 
+        $id = $this->input->post('id_kategori');
+        $data = $this->input->post();
+        $this->Kategori_model->update($id,$data);
+    }
 
-        $result = $this->Kategori_model->update($id,$data);
-
-        if ($result)
-        { redirect('admin/category'); }
-	}
-	
-	public function destroy($id)
-    {
-		$result = $this->Kategori_model->delete($id);
-		if ($result)
-		{ redirect('admin/category'); }
+    public function destroy()
+    { 
+        $id = $this->input->post('id_kategori');
+        $this->Kategori_model->delete($id);
     }
 }
