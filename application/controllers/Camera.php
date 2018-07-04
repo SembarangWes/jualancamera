@@ -16,7 +16,7 @@ class Camera extends CI_Controller {
 
         $this->load->library('upload', $config);
 
-        if($this->session->username!='admin')
+        if($this->session->role!='Administrator')
         { redirect('log/'); }
     }
     

@@ -6,7 +6,7 @@ class User extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        if($this->session->username!='admin')
+        if($this->session->role!='Administrator')
         { redirect('log/'); }
     }
 
@@ -18,7 +18,8 @@ class User extends CI_Controller {
                 'alamat' => $this->input->post('alamat'),
                 'no_hp' => $this->input->post('hp'),
                 'email  ' => $this->input->post('email'),
-                'password' => $this->input->post('pass')
+                'password' => $this->input->post('pass'),
+                'role' => $this->input->post('role')
                 ];
             
             if ($this->User_model->insert($data))
@@ -35,7 +36,8 @@ class User extends CI_Controller {
             'alamat' => $this->input->post('alamat'),
             'no_hp' => $this->input->post('hp'),
             'email  ' => $this->input->post('email'),
-            'password' => $this->input->post('pass')
+            'password' => $this->input->post('pass'),
+            'role' => $this->input->post('role')
             ];
 
         if ($this->User_model->update($id,$data))

@@ -22,11 +22,12 @@ class Log extends CI_Controller {
             $log = [
                 'id' => $set->id_user,
                 'username' => $set->nama_user,
+                'role' => $set->role,
                 'status' => 'Logged'
             ];
             $this->session->set_userdata($log);            
 
-            if($this->session->username=="admin")
+            if($this->session->role=="Administrator")
             { redirect('admin/'); }
             else
             { redirect('home/'); }

@@ -65,6 +65,7 @@
                                         <option value="alamat">Alamat</option>
                                         <option value="no_hp">HP</option>
                                         <option value="email">E-mail</option>
+                                        <option value="role">Hak Akses</option>
                                     </select>
 									<input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
 									<input class="btn btn-default" type="submit" name="filter" value="Go">
@@ -126,6 +127,13 @@
                             maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
                             onmousedown="this.type='text'" onmouseup="this.type='password'">
                         <font color="#808080">Klik untuk melihat</font>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Hak Akses Sebagai :</label>
+                        <select class="form-control" id="role" name="role">
+                            <option value="Administrator">Administrator</option>
+                            <option value="Pengguna">Pengguna</option>
+                        </select>
                     </div>
                 </fieldset>
             </div>
@@ -213,6 +221,14 @@
                             onmousedown="this.type='text'" onmouseup="this.type='password'"
                             value="<?php echo $row->password ?>">
                         <font color="#808080">Klik untuk melihat</font>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Hak Akses Sebagai :</label>
+<?php if($row->role=="Administrator"){$a='selected';$p=null;}else{$a=null;$p='selected';}?>
+                        <select class="form-control" id="role" name="role">
+                            <option value="Administrator" <?php echo $a ?>>Administrator</option>
+                            <option value="Pengguna" <?php echo $p ?>>Pengguna</option>
+                        </select>
                     </div>
                 </fieldset>
             </div>

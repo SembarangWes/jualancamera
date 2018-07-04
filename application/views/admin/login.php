@@ -26,9 +26,9 @@
 					<div class="box">
 						<div class="content-wrap">
 <?php if($this->session->status=='Logged') { ?>
-							<h6>Halo!</h6>
+							<h6>Halo, <?php echo $this->session->username ?>!</h6>
 							<h5>Anda Login Sebagai,</h5>
-							<h4><?php echo $this->session->username ?></h4>
+							<h4><?php echo $this->session->role ?></h4>
 <?php } else { ?>
 							<h6>Sign In</h6>
 <?php echo form_open('log/login') ?>							
