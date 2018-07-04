@@ -6,6 +6,8 @@ class User extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+        if($this->session->username!='admin')
+        { redirect('log/'); }
     }
 
 	public function store()

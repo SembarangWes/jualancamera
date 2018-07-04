@@ -15,6 +15,9 @@ class Camera extends CI_Controller {
         $config['max_height']           = 768;
 
         $this->load->library('upload', $config);
+
+        if($this->session->username!='admin')
+        { redirect('log/'); }
     }
     
     public function create()
