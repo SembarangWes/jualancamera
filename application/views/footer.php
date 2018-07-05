@@ -14,8 +14,8 @@
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Information</h3>
 					<ul class="info"> 
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="mail.html">Contact Us</a></li>
+						<li><a href="<?php echo site_url('home/about_us') ?>">About Us</a></li>
+						<li><a href="<?php echo site_url('home/mail_us') ?>">Contact Us</a></li>
 						<li><a href="codes.html">Short Codes</a></li>
 						<li><a href="faq.html">FAQ's</a></li>
 						<li><a href="products.html">Special Products</a></li>
@@ -34,7 +34,7 @@
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profile</h3>
 					<ul class="info"> 
-						<li><a href="index.html">Home</a></li>
+						<li><a href="<?php echo site_url('home') ?>">Home</a></li>
 						<li><a href="products.html">Today's Deals</a></li>
 					</ul>
 					<h4>Follow Us</h4>

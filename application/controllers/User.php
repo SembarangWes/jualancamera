@@ -30,7 +30,7 @@ class User extends CI_Controller {
     {
         //Ambil Value
         $id=$this->input->post('id');
-		
+
 		$data = [
             'nama_user' => $this->input->post('name'),
             'alamat' => $this->input->post('alamat'),

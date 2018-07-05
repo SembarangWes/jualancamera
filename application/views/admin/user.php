@@ -150,6 +150,7 @@
 
 										</th>
 									</thead>
+<?php if(isset($data)) { ?>
 									<tbody>
 										<?php foreach($data as $row) { ?>
 										<tr>
@@ -214,7 +215,7 @@
                             placeholder="Masukkan email ..." value="<?php echo $row->email ?>">  
                     </div>
                     <div class="form-group">
-                        <label for="pass">Password :</label>
+                        <label for="pass">Password Lama :</label>
                         <input type="password" class="form-control" id="pass" name="pass"
                             pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
                             maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
@@ -255,6 +256,8 @@
 							<div class="panel-footer">
 <?php echo $links ?>
 							</div>
+
+<?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
 
 						</div>
 					</div>

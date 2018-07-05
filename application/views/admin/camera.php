@@ -189,6 +189,7 @@
 												<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
 											</th>
 										</thead>
+<?php if(isset($data)) { ?>
 										<tbody>
 											<?php foreach($data as $row) { ?>
 											<tr>
@@ -238,7 +239,7 @@
 													onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 											</td>
 											</tr>
-											<?php } ?>
+<?php } ?>
 										</tbody>
 									</table>
 								</div>
@@ -248,7 +249,7 @@
 								</div>
 							</div>
 
-<?php } ?>
+<?php } else {echo "<center>Tidak Ada Data!</center>";} } ?>
 
 					</div>
 				</div>
