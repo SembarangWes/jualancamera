@@ -6,35 +6,48 @@ class Admin extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-
-        // Konfigurasi Upload
-        $config['upload_path']          = './assets/uploads/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 1500;
-        $config['max_width']            = 1336;
-        $config['max_height']           = 768;
-
-        $this->load->library('upload', $config);
+        if($this->session->role!='Administrator')
+        { redirect('log/'); }
     }
 
 	public function index()
-	{
-		$this->load->view('admin/index');
-	}
+	{ $this->load->view('admin/index'); }
 
-	public function camera($page='',$error='',$id='')
+	public function camera()
 	{
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $box=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
+            else
+            { $box = 'null'; }
+        }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search=$this->uri->segment(4); }
+        else
+        {
+            if($this->input->post("search"))
+            { $search = $this->input->post("search"); }
+            else
+            { $search = 'null'; }
+        }
+
         $data = [];
-        $total = $this->Kamera_model->getTotal();
+        $total = $this->Kamera_model->getTotal($box, $search);
         if ($total > 0)
         {
             $limit = 2;
-            $start = $this->uri->segment(3, 0);
+            $start = $this->uri->segment(5, 0);
             $config = [
-                'base_url' => base_url() . 'admin/camera',
+                'base_url' => base_url() . 'admin/camera/' . $box . '/' . $search,
                 'total_rows' => $total,
                 'per_page' => $limit,
-                'uri_segment' => 3,
+                'uri_segment' => 5,
 
                 // Bootstrap 3 Pagination
                 'first_link' => '&laquo;',
@@ -58,176 +71,97 @@ class Admin extends CI_Controller {
             ];
             $this->pagination->initialize($config);
             $data = [
-                'data' => $this->Kamera_model->list($limit, $start),
+                'data' => $this->Kamera_model->list($limit, $start, $box, $search),
                 'links' => $this->pagination->create_links(),
                 'start' => $start,
-                'page' => $page,
-			    'error' => $error,
-			    'dataid' => $this->Kamera_model->show($id)
+                'page' => 'index',
             ];
         }
         
 		$this->load->view('admin/camera', $data);
+    }
+
+    public function print_camera()
+	{ 
+		$data = [
+            'data' => $this->Kamera_model->list(10, 0, 'null', 'null')
+        ];
+
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->load_view('admin/print_camera', $data, 'print.pdf'); 
 	}
 
-	public function store()
+    public function category()
+    { $this->load->view('admin/category'); }
+    
+    public function user()
     {
-		$page = 'create';
-        // Ambil value 
-        $value = [
-            'nama_kamera' => $this->input->post('kamera'),
-            'spesifikasi' => $this->input->post('spesifikasi'),
-            'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok')
-        ];
-
-        // Validasi Nama dan Jabatan
-        $errorval = $this->validate($value);
-
-        // Pesan Error atau Upload
-        if ($errorval==false)
-        {
-            // Percobaan Upload
-            if ( ! $this->upload->do_upload('foto'))
-            {
-                $error = $this->upload->display_errors();
-                $this->camera($page,$error);
-            }
-            else
-            {
-                // Insert data
-                $data = [
-                    'nama_kamera' => $this->input->post('kamera'),
-					'spesifikasi' => $this->input->post('spesifikasi'),
-					'harga' => $this->input->post('harga'),
-					'stok' => $this->input->post('stok'),
-                    'foto_kamera' => $this->upload->data('file_name')
-                    ];
-                $result = $this->Kamera_model->insert($data);
-                
-                if ($result)
-                {
-                    redirect('admin/camera');
-                }
-                else
-                {
-					$data = [
-						'page' => $page,
-						'error' => 'Gagal'
-					];
-                    $this->load->view('admin/camera', $error);
-                }
-            }
-        }
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $box=$this->uri->segment(3); }
         else
         {
-            $error = validation_errors();
-            $this->camera($page,$error);
-        }
-    }
-
-	public function update($id)
-    {
-		$page = 'edit';
-        //Ambil Value
-        $id=$this->input->post('id');
-		$value = [
-            'nama_kamera' => $this->input->post('kamera'),
-            'spesifikasi' => $this->input->post('spesifikasi'),
-            'harga' => $this->input->post('harga'),
-            'stok' => $this->input->post('stok')
-        ];
-
-        // Validasi Nama dan Jabatan
-        $errorval = $this->validate($value);
-
-        if ($errorval==false)
-        {
-            if ( ! $this->upload->do_upload('foto'))
-            {
-                $result = $this->Kamera_model->update($id,$value);
-
-                if ($result)
-                {
-                    redirect('admin/camera');
-                }
-                else
-                {
-					$data = [
-						'page' => $page,
-						'error' => 'Gagal'
-					];
-                    $this->load->view('admin/camera', $data);
-                }
-            }
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
             else
-            {
-                $data = [
-                    'nama_kamera' => $this->input->post('kamera'),
-					'spesifikasi' => $this->input->post('spesifikasi'),
-					'harga' => $this->input->post('harga'),
-					'stok' => $this->input->post('stok'),	
-                    'foto_kamera' => $this->upload->data('file_name')
-                ];
-                
-                $delpic = $this->Kamera_model->show($id);
-                unlink('./assets/uploads/'.$delpic->foto_kamera);
-
-                $result = $this->Kamera_model->update($id,$data);
-                
-                if ($result)
-                {
-                    redirect('admin/camera');
-                }
-                else
-                {
-                    $data = [
-						'page' => $page,
-						'error' => 'Gagal'
-					];
-                    $this->load->view('admin/camera', $data);
-                }
-            }
+            { $box = 'null'; }
         }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search=$this->uri->segment(4); }
         else
         {
-            $error = validation_errors();
-            $this->camera($page,$error);
+            if($this->input->post("search"))
+            { $search = $this->input->post("search"); }
+            else
+            { $search = 'null'; }
         }
-    }
 
-    public function destroy($id)
-    {
-        $kamera = $this->Kamera_model->show($id);
-        unlink('./assets/uploads/'.$kamera->foto_kamera);
+        $data = [];
+        $total = $this->User_model->getTotal($box, $search);
+        if ($total > 0)
+        {
+            $limit = 2;
+            $start = $this->uri->segment(5, 0);
+            $config = [
+                'base_url' => base_url() . 'admin/user/' . $box . '/' . $search,
+                'total_rows' => $total,
+                'per_page' => $limit,
+                'uri_segment' => 5,
+
+                // Bootstrap 3 Pagination
+                'first_link' => '&laquo;',
+                'last_link' => '&raquo;',
+                'next_link' => 'Next',
+                'prev_link' => 'Prev',
+                'full_tag_open' => '<ul class="pagination">',
+                'full_tag_close' => '</ul>',
+                'num_tag_open' => '<li>',
+                'num_tag_close' => '</li>',
+                'cur_tag_open' => '<li class="active"><span>',
+                'cur_tag_close' => '<span class="sr-only">(current)</span></span></li>',
+                'next_tag_open' => '<li>',
+                'next_tag_close' => '</li>',
+                'prev_tag_open' => '<li>',
+                'prev_tag_close' => '</li>',
+                'first_tag_open' => '<li>',
+                'first_tag_close' => '</li>',
+                'last_tag_open' => '<li>',
+                'last_tag_close' => '</li>',
+            ];
+            $this->pagination->initialize($config);
+            $data = [
+                'data' => $this->User_model->list($limit, $start, $box, $search),
+                'links' => $this->pagination->create_links(),
+                'start' => $start,
+                'page' => 'index',
+            ];
+        }
         
-        $this->Kamera_model->delete($id);
-
-        redirect('admin/camera');
+		$this->load->view('admin/user', $data);
     }
 
 	public function login()
-	{
-		$this->load->view('admin/login');
-	}
-
-	public function signup()
-	{
-		$this->load->view('admin/signup');
-	}
-
-	public function validate($dataval)
-    {
-        // Validasi
-
-		$this->form_validation->set_rules('kamera','Kamera','trim|required');
-		$this->form_validation->set_rules('spesifikasi','Spesifikasi','trim|required');
-		$this->form_validation->set_rules('harga','Harga','trim|required');
-		$this->form_validation->set_rules('stok','Stok','trim|required');
-
-        if (! $this->form_validation->run())
-        { return true; }
-        else
-        { return false; }
-    } 
+	{ $this->load->view('admin/login'); }
 }
