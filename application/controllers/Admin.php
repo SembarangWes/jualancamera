@@ -81,6 +81,16 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/camera', $data);
     }
 
+    public function print_camera()
+	{ 
+		$data = [
+            'data' => $this->Kamera_model->list(10, 0, 'null', 'null')
+        ];
+
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->load_view('admin/print_camera', $data, 'print.pdf'); 
+	}
+
     public function category()
     { $this->load->view('admin/category'); }
     
@@ -154,8 +164,4 @@ class Admin extends CI_Controller {
 
 	public function login()
 	{ $this->load->view('admin/login'); }
-
-	public function signup()
-	{ $this->load->view('admin/signup'); }
-
 }

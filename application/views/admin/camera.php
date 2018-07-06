@@ -103,96 +103,96 @@
 
 <?php echo form_close(); } elseif ($page=="edit") { ?>  <!-- Edit -->
 
-							<div class="content-box-large">
+						<div class="content-box-large">
 
-								<div class="panel-title">
-									<legend>Admin / Kamera / Ubah Kamera</legend>
-								</div>
-							
-								<div class="panel-body">
-<?php echo form_open_multipart('camera/update/'.$dataid->id_kamera); echo form_hidden('id', $dataid->id_kamera); ?>
-									<fieldset>
-										<div class="form-group">
-											<label for="Kamera">Kamera :</label>
-											<input type="text" class="form-control" id="kamera" name="kamera"
-												pattern="^[^-\s][a-zA-Z0-9_\s-]{1,50}" required title="Harap diisi dengan angka dan/atau huruf"
-												placeholder="Nama Kamera/Jenis Kamera/Tipe Kamera ..."
-												value="<?php echo $dataid->nama_kamera ?>">  
-										</div>
-										<div class="form-group">
-											<label for="Foto">Foto / Gambar :</label>
-											<input type="file" id="foto" name="foto" size="20" accept="image/*">
-<?php echo $error ?>
-										</div>
-										<div class="form-group">
-											<label for="Spesifikasi">Spesifikasi :</label>
-											<textarea id="bootstrap-editor" style="width:98%;height:200px;" id="spesifikasi"
-												name="spesifikasi" pattern="{1,1000}" title="Harap diisi dengan angka dan/atau huruf"
-												placeholder="Masukkan Spesifikasi ...">
-												<?php echo $dataid->spesifikasi ?>
-											</textarea>
-										</div>
-										<div class="form-group">
-											<label for="Harga">Harga (Rp.) :</label>
-											<input type="number" class="form-control" id="harga" name="harga"
-												pattern="[0-9]{1,15}" title="Harap diisi dengan angka"
-												placeholder="Masukkan Harga ..."
-												value="<?php echo $dataid->harga ?>">  
-										</div>
-										<div class="form-group">
-											<label for="Stok">Stok Kamera :</label>
-											<input type="number" class="form-control" id="stok" name="stok"
-												pattern="[0-9]{1,5}" title="Harap diisi dengan angka"
-												placeholder="Masukkan Jumlah Stok ..."
-												value="<?php echo $dataid->stok; ?>">  
-										</div>
-									</fieldset>
-								</div>
-
-								<div class="panel-footer">
-									<button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
-									<button type="button" class="btn btn-default">Kembali</button>
-								</div>
-
+							<div class="panel-title">
+								<legend>Admin / Kamera / Ubah Kamera</legend>
 							</div>
+						
+							<div class="panel-body">
+<?php echo form_open_multipart('camera/update/'.$dataid->id_kamera); echo form_hidden('id', $dataid->id_kamera); ?>
+								<fieldset>
+									<div class="form-group">
+										<label for="Kamera">Kamera :</label>
+										<input type="text" class="form-control" id="kamera" name="kamera"
+											pattern="^[^-\s][a-zA-Z0-9_\s-]{1,50}" required title="Harap diisi dengan angka dan/atau huruf"
+											placeholder="Nama Kamera/Jenis Kamera/Tipe Kamera ..."
+											value="<?php echo $dataid->nama_kamera ?>">  
+									</div>
+									<div class="form-group">
+										<label for="Foto">Foto / Gambar :</label>
+										<input type="file" id="foto" name="foto" size="20" accept="image/*">
+<?php echo $error ?>
+									</div>
+									<div class="form-group">
+										<label for="Spesifikasi">Spesifikasi :</label>
+										<textarea id="bootstrap-editor" style="width:98%;height:200px;" id="spesifikasi"
+											name="spesifikasi" pattern="{1,1000}" title="Harap diisi dengan angka dan/atau huruf"
+											placeholder="Masukkan Spesifikasi ...">
+											<?php echo $dataid->spesifikasi ?>
+										</textarea>
+									</div>
+									<div class="form-group">
+										<label for="Harga">Harga (Rp.) :</label>
+										<input type="number" class="form-control" id="harga" name="harga"
+											pattern="[0-9]{1,15}" title="Harap diisi dengan angka"
+											placeholder="Masukkan Harga ..."
+											value="<?php echo $dataid->harga ?>">  
+									</div>
+									<div class="form-group">
+										<label for="Stok">Stok Kamera :</label>
+										<input type="number" class="form-control" id="stok" name="stok"
+											pattern="[0-9]{1,5}" title="Harap diisi dengan angka"
+											placeholder="Masukkan Jumlah Stok ..."
+											value="<?php echo $dataid->stok; ?>">  
+									</div>
+								</fieldset>
+							</div>
+
+							<div class="panel-footer">
+								<button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
+								<button type="button" class="btn btn-default">Kembali</button>
+							</div>
+
+						</div>
 
 <?php echo form_close(); } else { ?> <!-- Daftar Tabel -->
 
-							<div class="content-box-header">
-								<div class="panel-title"><b>Admin / Kamera</b></div>
-							</div>
+						<div class="content-box-header">
+							<div class="panel-title"><b>Admin / Kamera</b></div>
+						</div>
 
-							<div class="content-box-large box-with-header">
-								<div class="panel-body">
+						<div class="content-box-large box-with-header">
+							<div class="panel-body">
 
-									<form class="form-inline" action="<?php echo site_url('admin/camera') ?>" method="post">
-										<label for="Cari">Pencarian : </label>
-										<select class="form-control" id="kolom" name="kolom">
-											<option value="nama_kamera">Nama Kamera</option>
-											<option value="foto_kamera">Foto</option>
-											<option value="spesifikasi">Spesifikasi</option>
-											<option value="harga">Harga</option>
-											<option value="stok">Stok</option>
-										</select>
-										<input class="form-control" type="text" name="search" value="" placeholder="Search...">
-										<input class="btn btn-default" type="submit" name="filter" value="Go">
-									</form>
+								<form class="form-inline" action="<?php echo site_url('admin/camera') ?>" method="post">
+									<label for="Cari">Pencarian : </label>
+									<select class="form-control" id="kolom" name="kolom">
+										<option value="nama_kamera">Nama Kamera</option>
+										<option value="foto_kamera">Foto</option>
+										<option value="spesifikasi">Spesifikasi</option>
+										<option value="harga">Harga</option>
+										<option value="stok">Stok</option>
+									</select>
+									<input class="form-control" type="text" name="search" value="" placeholder="Search...">
+									<input class="btn btn-default" type="submit" name="filter" value="Go">
+								</form>
 
-									<table class="table table-striped">
-										<thead>
-											<th>No</th>
-											<th width="100">Kamera</th>
-											<th>Spesifikasi</th>
-											<th>Harga</th>
-											<th>Stok</th>
-											<th>
-												<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
-											</th>
-										</thead>
+								<table class="table table-striped">
+									<thead>
+										<th>No</th>
+										<th width="100">Kamera</th>
+										<th>Spesifikasi</th>
+										<th>Harga</th>
+										<th>Stok</th>
+										<th>
+											<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
+										</th>
+									</thead>
 <?php if(isset($data)) { ?>
-										<tbody>
-											<?php foreach($data as $row) { ?>
-											<tr>
+									<tbody>
+										<?php foreach($data as $row) { ?>
+										<tr>
 											<td>
 												<?php echo $start+=1 ?>
 											</td>
@@ -203,26 +203,26 @@
 											<td>
 												<!--Tombol Modal Detail-->
 												<a href="#bannerformmodal" data-toggle="modal" data-target="#modalDetail">Detail</a>
-											
+										
 <!-- Modal Detail -->
 <div id="modalDetail" class="modal fade" role="dialog">
-	<div class="modal-dialog">
+<div class="modal-dialog">
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Detail Spesifikasi Kamera</h4>
-			</div>
-			<div class="modal-body">
-				<?php echo $row->spesifikasi ?>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-			</div>
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Detail Spesifikasi Kamera</h4>
 		</div>
-
+		<div class="modal-body">
+			<?php echo $row->spesifikasi ?>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+		</div>
 	</div>
+
+</div>
 </div>
 <!-- Tutup Modal Detail-->
 
@@ -238,16 +238,16 @@
 												<a href="<?php echo site_url('camera/destroy/'.$row->id_kamera) ?>" type="button" class="btn btn-danger btn-sm"
 													onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 											</td>
-											</tr>
+										</tr>
 <?php } ?>
-										</tbody>
-									</table>
-								</div>
-
-								<div class="panel-footer">
-<?php echo $links ?>
-								</div>
+									</tbody>
+								</table>
 							</div>
+
+							<div class="panel-footer">
+<?php echo $links ?>
+							</div>
+						</div>
 
 <?php } else {echo "<center>Tidak Ada Data!</center>";} } ?>
 
