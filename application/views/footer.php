@@ -3,12 +3,12 @@
 		<div class="container">
 			<div class="w3_footer_grids">
 				<div class="col-md-3 w3_footer_grid">
-					<h3>Contact</h3>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+					<h3>Kontak</h3>
+					<p>hubungi kami di.</p>
 					<ul class="address">
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>JL SOEKARNO HATTA 999999, <span>INDONESIA.</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">BAKULKAMERA@Xmple.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+6281230104854</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="container">
-				<p>&copy; 2017 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+				<p>&copy; 2018 BAKUL KAMERA. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>
 		</div>
 	</div>
