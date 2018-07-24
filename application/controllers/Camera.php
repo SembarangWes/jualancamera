@@ -24,7 +24,8 @@ class Camera extends CI_Controller {
     { 
         $data = [
             'page' => 'create',
-            'error' => ''
+            'error' => '',
+            'datakat' => $this->Kategori_model->select()
         ];
         $this->load->view('admin/camera', $data);
     }
@@ -48,6 +49,7 @@ class Camera extends CI_Controller {
                 'spesifikasi' => $this->input->post('spesifikasi'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
+                'id_kategori' => $this->input->post('kategori'),
                 'foto_kamera' => $this->upload->data('file_name')
                 ];
             
@@ -61,7 +63,8 @@ class Camera extends CI_Controller {
         $data = [
             'error' => '',
             'page' => 'edit',
-			'dataid' => $this->Kamera_model->show($id)
+            'dataid' => $this->Kamera_model->show($id),
+            'datakat' => $this->Kategori_model->select()
         ];
         $this->load->view('admin/camera', $data);
     }
@@ -77,7 +80,8 @@ class Camera extends CI_Controller {
                 'nama_kamera' => $this->input->post('kamera'),
                 'spesifikasi' => $this->input->post('spesifikasi'),
                 'harga' => $this->input->post('harga'),
-                'stok' => $this->input->post('stok')
+                'stok' => $this->input->post('stok'),
+                'id_kategori' => $this->input->post('kategori'),
             ];
 
             $result = $this->Kamera_model->update($id,$data);
@@ -91,7 +95,8 @@ class Camera extends CI_Controller {
                 'nama_kamera' => $this->input->post('kamera'),
                 'spesifikasi' => $this->input->post('spesifikasi'),
                 'harga' => $this->input->post('harga'),
-                'stok' => $this->input->post('stok'),	
+                'stok' => $this->input->post('stok'),
+                'id_kategori' => $this->input->post('kategori'),
                 'foto_kamera' => $this->upload->data('file_name')
             ];
             

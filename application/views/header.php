@@ -6,7 +6,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+					<h4 class="modal-title" id="myModalLabel">Daftar Sekarang!</h4>
 				</div>
 				<div class="modal-body modal-body-sub">
 					<div class="row">
@@ -14,17 +14,17 @@
 							<div class="sap_tabs">	
 								<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 									<ul>
-										<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
-										<li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+										<li class="resp-tab-item" aria-controls="tab_item-0"><span>Masuk</span></li>
+										<li class="resp-tab-item" aria-controls="tab_item-1"><span>Daftar</span></li>
 									</ul>		
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
 												<form action="#" method="post">			
-													<input name="Email" placeholder="Email Address" type="text" required="">						
+													<input name="Email" placeholder="Email" type="text" required="">						
 													<input name="Password" placeholder="Password" type="password" required="">										
 													<div class="sign-up">
-														<input type="submit" value="Sign in"/>
+														<input type="submit" value="Masuk"/>
 													</div>
 												</form>
 											</div>
@@ -39,7 +39,7 @@
 													<input placeholder="Password" name="Password" type="password" required="">	
 													<input placeholder="Confirm Password" name="Password" type="password" required="">
 													<div class="sign-up">
-														<input type="submit" value="Create Account"/>
+														<input type="submit" value="Buat Akun"/>
 													</div>
 												</form>
 											</div>
@@ -57,12 +57,12 @@
 									});
 								});
 							</script>
-							<div id="OR" class="hidden-xs">OR</div>
+							<div id="OR" class="hidden-xs">ATAU</div>
 						</div>
 						<div class="col-md-4 modal_body_right modal_body_right1">
 							<div class="row text-center sign-with">
 								<div class="col-md-12">
-									<h3 class="other-nw">Sign in with</h3>
+									<h3 class="other-nw">Masuk dengan</h3>
 								</div>
 								<div class="col-md-12">
 									<ul class="social">
@@ -87,15 +87,15 @@
 				<a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
 			</div>
 			<div class="w3l_logo">
-				<h1><a href="<?php echo site_url('home') ?>">Electronic Store<span>Your stores. Your place.</span></a></h1>
+				<h1><a href="<?php echo site_url('home') ?>">Bakul Kamera<span>Bakul'e Kameramu</span></a></h1>
 			</div>
 			<div class="search">
 				<input class="search_box" type="checkbox" id="search_box">
 				<label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
 				<div class="search_form">
 					<form action="#" method="post">
-						<input type="text" name="Search" placeholder="Search...">
-						<input type="submit" value="Send">
+						<input type="text" name="Search" placeholder="Cari...">
+						<input type="submit" value="Kirim">
 					</form>
 				</div>
 			</div>

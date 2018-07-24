@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Electronic Store a Ecommerce Online Shopping Category Bootstrap Responsive Website Template | About :: w3layouts</title>
+	<title>Bakul'e Kamera :: Tentang</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -63,57 +63,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div> 
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
-						<li><a href="<?php echo site_url('home') ?>">Home</a></li>	
+						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>	
 						<!-- Mega Menu -->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
-							<ul class="dropdown-menu multi-column columns-3">
-								<div class="row">
-									<div class="col-sm-3">
-										<ul class="multi-column-dropdown">
-											<h6>Mobiles</h6>
-											<li><a href="products.html">Mobile Phones</a></li>
-											<li><a href="products.html">Mp3 Players <span>New</span></a></li> 
-											<li><a href="products.html">Popular Models</a></li>
-											<li><a href="products.html">All Tablets<span>New</span></a></li>
-										</ul>
-									</div>
-									<div class="col-sm-3">
-										<ul class="multi-column-dropdown">
-											<h6>Accessories</h6>
-											<li><a href="products1.html">Laptop</a></li>
-											<li><a href="products1.html">Desktop</a></li>
-											<li><a href="products1.html">Wearables <span>New</span></a></li>
-											<li><a href="products1.html"><i>Summer Store</i></a></li>
-										</ul>
-									</div>
-									<div class="col-sm-2">
-										<ul class="multi-column-dropdown">
-											<h6>Home</h6>
-											<li><a href="products2.html">Tv</a></li>
-											<li><a href="products2.html">Camera</a></li>
-											<li><a href="products2.html">AC</a></li>
-											<li><a href="products2.html">Grinders</a></li>
-										</ul>
-									</div>
-									<div class="col-sm-4">
-										<div class="w3ls_products_pos">
-											<h4>30%<i>Off/-</i></h4>
-											<img src="<?php echo base_url('assets/')?>images/1.jpg" alt=" " class="img-responsive" />
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
+						<li class="w3pages"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kamera <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<?php foreach($kategori as $row) { ?>
+								<li><a href="products.html"><?php echo $row->nama_kategori ?></a></li>
+							<?php } ?>
 							</ul>
 						</li>
-						<li><a href="<?php echo site_url('home/about_us') ?>" class="act">About Us</a></li> 
-						<li class="w3pages"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="icons.html">Web Icons</a></li>
-								<li><a href="codes.html">Short Codes</a></li>     
-							</ul>
-						</li>  
-						<li><a href="<?php echo site_url('home/mail_us') ?>">Mail Us</a></li>
+						<li><a href="<?php echo site_url('home/about_us') ?>" class="act">Tentang</a></li> 
+						<li><a href="<?php echo site_url('home/mail_us') ?>">Kontak</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -123,7 +83,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- banner -->
 	<div class="banner banner10">
 		<div class="container">
-			<h2>About Us</h2>
+			<h2>Tentang Kami</h2>
 		</div>
 	</div>
 	<!-- //banner -->   
@@ -131,8 +91,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="breadcrumb_dress">
 		<div class="container">
 			<ul>
-				<li><a href="<?php echo site_url('home') ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
-				<li>About Us</li>
+				<li><a href="<?php echo site_url('home') ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Beranda</a> <i>/</i></li>
+				<li>Tentang Kami</li>
 			</ul>
 		</div>
 	</div>
@@ -142,8 +102,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">	
 			<div class="w3ls_about_grids">
 				<div class="col-md-6 w3ls_about_grid_left">
-					<p>Bakul kamera merupakan salah satu website jual beli kamera untuk memudahkan anda mendapatkan kamera yang anda inginkan,
-					kami menjual produk asli 100%,ayo wujudkan impian kamera anda bersama Bakul kamera,dapatkan diskon 10% untuk pembelanjaan kamera nikon
+					<p>Bakul kamera merupakan salah satu website jual beli kamera untuk memudahkan Anda mendapatkan kamera yang Anda inginkan,
+					kami menjual produk asli 100%, ayo wujudkan impian kamera Anda bersama Bakul kamera, dapatkan diskon 10% untuk pembelanjaan kamera Nikon
 					.</p>
 					
 					<div class="clearfix"> </div>
@@ -159,28 +119,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- team -->
 	<div class="team">
 		<div class="container">
-			
-			<a href="products.html">Belanja sekarang</a>
+			<h3>Tim Kami</h3>
+			<div class="wthree_team_grids">
+				<div class="col-md-6 wthree_team_grid">
+					<img src="<?php echo base_url()?>assets/images/t55.jpg" alt=" " class="img-responsive" />
+					<h4>M. Iqbal Maulana<span>Developer</span></h4>
+					<div class="agileits_social_button">
+						<ul>
+							<li><a href="#" class="facebook"> </a></li>
+							<li><a href="#" class="twitter"> </a></li>
+							<li><a href="#" class="google"> </a></li>
+							<li><a href="#" class="pinterest"> </a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6 wthree_team_grid">
+					<img src="<?php echo base_url()?>assets/images/t44.jpg" alt=" " class="img-responsive" />
+					<h4>Riza Awwalul Baqy<span>Developer</span></h4>
+					<div class="agileits_social_button">
+						<ul>
+							<li><a href="#" class="facebook"> </a></li>
+							<li><a href="#" class="twitter"> </a></li>
+							<li><a href="#" class="google"> </a></li>
+							<li><a href="#" class="pinterest"> </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //team -->
+	<!-- team-bottom -->
+	<div class="team-bottom">
+		<div class="container">
+			<h3>Siap dengan Diskon 30%?</h3>
+			<p>Tunggu apa lagi.</p>
+			<a href="products.html">Belanja Sekarang</a>
 		</div>
 	</div>
 	<!-- //team-bottom -->
-	<!-- newsletter -->
-	<div class="newsletter">
-		<div class="container">
-			<div class="col-md-6 w3agile_newsletter_left">
-				<h3>Berita</h3>
-				<p>Bakul Kamera.</p>
-			</div>
-			<div class="col-md-6 w3agile_newsletter_right">
-				<form action="#" method="post">
-					<input type="email" name="Email" placeholder="Email" required="">
-					<input type="submit" value="" />
-				</form>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<!-- //newsletter -->
 
 <?php $this->load->view('footer') ?>
 

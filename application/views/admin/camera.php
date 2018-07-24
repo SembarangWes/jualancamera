@@ -91,12 +91,22 @@
 											pattern="[0-9]{1,5}" required title="Harap diisi dengan angka"
 											placeholder="Masukkan Jumlah Stok ...">  
 									</div>
+									<div class="form-group">
+										<label for="Kategori">Kategori :</label>
+										<select class="form-control" id="kategori" name="kategori">
+										
+										<?php foreach($datakat as $row) { ?>
+											<option value="<?php echo $row->id_kategori ?>"><?php echo $row->nama_kategori ?></option>
+										<?php } ?>
+										
+										</select>
+									</div>
 								</fieldset>
 							</div>
 
 							<div class="panel-footer">
 								<button type="submit" class="btn btn-primary" id="tambah">Tambah</button>
-								<button type="button" class="btn btn-default">Kembali</button>
+								<button href="<?php echo site_url("admin/camera") ?>" class="btn btn-default">Kembali</button>
 							</div>
 							
 						</div>
@@ -146,12 +156,29 @@
 											placeholder="Masukkan Jumlah Stok ..."
 											value="<?php echo $dataid->stok; ?>">  
 									</div>
+									<div class="form-group">
+										<label for="Kategori">Kategori :</label>
+										<select class="form-control" id="kategori" name="kategori">
+										
+										<?php
+											foreach($datakat as $row) {
+											$s='';
+												if($dataid->id_kategori == $row->id_kategori)
+												{ $s='selected'; }
+										?>
+											<option value="<?php echo $row->id_kategori ?>" <?php echo $s ?>>
+											<?php echo $row->nama_kategori ?>
+											</option>
+										<?php } ?>
+										
+										</select>
+									</div>
 								</fieldset>
 							</div>
 
 							<div class="panel-footer">
 								<button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
-								<button type="button" class="btn btn-default">Kembali</button>
+								<button href="<?php echo site_url("admin/camera")?>" class="btn btn-default">Kembali</button>
 							</div>
 
 						</div>
@@ -173,6 +200,7 @@
 										<option value="spesifikasi">Spesifikasi</option>
 										<option value="harga">Harga</option>
 										<option value="stok">Stok</option>
+										<option value="nama_kategori">Kategori</option>
 									</select>
 									<input class="form-control" type="text" name="search" value="" placeholder="Search...">
 									<input class="btn btn-default" type="submit" name="filter" value="Go">
@@ -182,6 +210,7 @@
 									<thead>
 										<th>No</th>
 										<th width="100">Kamera</th>
+										<th>Nama Kamera</th>
 										<th>Spesifikasi</th>
 										<th>Harga</th>
 										<th>Stok</th>
@@ -198,7 +227,10 @@
 											</td>
 											<td>
 												<img src="<?php echo base_url('assets/uploads/').$row->foto_kamera ?>"style="display:block; width:100%; height:100%;">
-												<b><?php echo $row->nama_kamera ?></b>
+												
+											</td>
+											<td>
+												<?php echo $row->nama_kamera ?>
 											</td>
 											<td>
 												<!--Tombol Modal Detail-->
@@ -218,7 +250,16 @@
 			<?php echo $row->spesifikasi ?>
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+			<div class="col-md-6">
+				<?php if($row->nama_kategori==null) { ?>
+				<center>Tidak ada kategori.</center>
+				<?php } else { ?>
+				<p align="left"><b>Kategori : <?php echo $row->nama_kategori ?></b></p>
+				<?php } ?>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+			</div>
 		</div>
 	</div>
 
@@ -228,10 +269,10 @@
 
 											</td>
 											<td>
-												<?php echo $row->harga ?>
+												<p align="right">Rp. <?php echo number_format($row->harga,0,",",".") ?>,-</p>
 											</td>
 											<td>
-												<?php echo $row->stok ?>
+												<p align="right"><?php echo $row->stok ?> Buah</p>
 											</td>
 											<td>
 												<a href="<?php echo site_url('camera/edit/'.$row->id_kamera) ?>" type="button" class="btn btn-info btn-sm">Ubah</a>

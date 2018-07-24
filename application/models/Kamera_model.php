@@ -3,20 +3,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kamera_model extends CI_Model {
 
+    public function select()
+    { return $this->db->get('kamera')->result(); }
+
+    public function selectorder()
+    { 
+        $this->db->order_by('id_kamera','desc');
+        return $this->db->get('kamera')->result(); }
+
     public function getTotal($box, $search)
     { 
+        $this->db->select('*');
+        $this->db->from('kamera');
+        $this->db->join('kategori','kamera.id_kategori =kategori.id_kategori','left');
+
         if ($box != 'null' && $search != 'null')
         {  $this->db->like($box, $search); }
 
-        return $this->db->count_all_results('kamera');
+        return $this->db->count_all_results();
     }
 
-    public function list($limit, $start, $box, $search)
+    public function list($limit='null', $start='null', $box='null', $search='null')
     {
-        if ($box != 'null' && $search != 'null')
-        {  $this->db->like($box, $search); }
+        $this->db->select('*');
+        $this->db->from('kamera');
+        $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
 
-        $query = $this->db->get('kamera', $limit, $start);
+        if ($box != 'null' && $search != 'null')
+        { $this->db->like($box, $search); }
+
+        $this->db->limit($limit,$start);
+        $query = $this->db->get();
         return ($query->num_rows() > 0) ? $query->result() : false;
     }
 

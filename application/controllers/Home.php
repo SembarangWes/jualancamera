@@ -7,7 +7,14 @@ class Home extends CI_Controller {
     { parent::__construct(); }
 
 	public function index()
-	{ $this->load->view('index'); }
+	{
+		$data=[
+			'kategori' => $this->Kategori_model->select(),
+			'kamera' => $this->Kamera_model->select(),
+			'kamorder' => $this->Kamera_model->selectorder(),
+		];
+		$this->load->view('index', $data);
+	}
 
 	public function about_us()
 	{ $this->load->view('about_us'); }

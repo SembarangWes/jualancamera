@@ -41,7 +41,7 @@ class Admin extends CI_Controller {
         $total = $this->Kamera_model->getTotal($box, $search);
         if ($total > 0)
         {
-            $limit = 2;
+            $limit = 5;
             $start = $this->uri->segment(5, 0);
             $config = [
                 'base_url' => base_url() . 'admin/camera/' . $box . '/' . $search,
@@ -122,7 +122,7 @@ class Admin extends CI_Controller {
         $total = $this->User_model->getTotal($box, $search);
         if ($total > 0)
         {
-            $limit = 2;
+            $limit = 5;
             $start = $this->uri->segment(5, 0);
             $config = [
                 'base_url' => base_url() . 'admin/user/' . $box . '/' . $search,
