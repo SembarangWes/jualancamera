@@ -42,6 +42,7 @@
 						<li><a href="<?php echo site_url('admin/') ?>"><i class="glyphicon glyphicon-home"></i> Beranda</a></li>
 						<li><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
 						<li class="current"><a href="<?php echo site_url('admin/category') ?>"><i class="glyphicon glyphicon-list"></i> Kategori</a></li>
+						<li><a href="<?php echo site_url('admin/merek') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
 						<li><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
 					</ul>
 				</div>

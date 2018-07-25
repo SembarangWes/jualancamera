@@ -162,6 +162,62 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/user', $data);
     }
 
+    public function merek()
+    {
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $search=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("search"))
+            { $search = $this->input->post("search"); }
+            else
+            { $search = 'null'; }
+        }
+
+        $data = [];
+        $total = $this->Merek_model->getTotal($search);
+        if ($total > 0)
+        {
+            $limit = 5;
+            $start = $this->uri->segment(4, 0);
+            $config = [
+                'base_url' => base_url() . 'admin/merek/'. $search,
+                'total_rows' => $total,
+                'per_page' => $limit,
+                'uri_segment' => 5,
+
+                // Bootstrap 3 Pagination
+                'first_link' => '&laquo;',
+                'last_link' => '&raquo;',
+                'next_link' => 'Next',
+                'prev_link' => 'Prev',
+                'full_tag_open' => '<ul class="pagination">',
+                'full_tag_close' => '</ul>',
+                'num_tag_open' => '<li>',
+                'num_tag_close' => '</li>',
+                'cur_tag_open' => '<li class="active"><span>',
+                'cur_tag_close' => '<span class="sr-only">(current)</span></span></li>',
+                'next_tag_open' => '<li>',
+                'next_tag_close' => '</li>',
+                'prev_tag_open' => '<li>',
+                'prev_tag_close' => '</li>',
+                'first_tag_open' => '<li>',
+                'first_tag_close' => '</li>',
+                'last_tag_open' => '<li>',
+                'last_tag_close' => '</li>',
+            ];
+            $this->pagination->initialize($config);
+            $data = [
+                'data' => $this->Merek_model->list($limit, $start, $search),
+                'links' => $this->pagination->create_links(),
+                'start' => $start
+            ];
+        }
+        
+		$this->load->view('admin/merek', $data);
+    }
+
 	public function login()
 	{ $this->load->view('admin/login'); }
 }

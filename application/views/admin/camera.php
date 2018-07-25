@@ -41,6 +41,7 @@
 						<li><a href="<?php echo site_url('admin/') ?>"><i class="glyphicon glyphicon-home"></i> Beranda</a></li>
 						<li class="current"><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
 						<li><a href="<?php echo site_url('admin/category') ?>"><i class="glyphicon glyphicon-list"></i> Kategori</a></li>
+						<li><a href="<?php echo site_url('admin/merek') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
 						<li><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
 					</ul>
 				</div>
@@ -215,7 +216,7 @@
 										<th>Harga</th>
 										<th>Stok</th>
 										<th>
-											<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm">Tambah</a>
+											<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus"> Tambah</a>
 										</th>
 									</thead>
 <?php if(isset($data)) { ?>
@@ -226,18 +227,17 @@
 												<?php echo $start+=1 ?>
 											</td>
 											<td>
-												<img src="<?php echo base_url('assets/uploads/').$row->foto_kamera ?>"style="display:block; width:100%; height:100%;">
-												
+												<img src="<?php echo base_url('assets/uploads/').$row->foto_kamera ?>"style="display:block; width:100%; height:100%;">	
 											</td>
 											<td>
 												<?php echo $row->nama_kamera ?>
 											</td>
 											<td>
 												<!--Tombol Modal Detail-->
-												<a href="#bannerformmodal" data-toggle="modal" data-target="#modalDetail">Detail</a>
+												<a href="#bannerformmodal" data-toggle="modal" data-target="#modalDetail<?php echo $row->id_kamera ?>">Detail</a>
 										
 <!-- Modal Detail -->
-<div id="modalDetail" class="modal fade" role="dialog">
+<div id="modalDetail<?php echo $row->id_kamera ?>" class="modal fade" role="dialog">
 <div class="modal-dialog">
 
 	<!-- Modal content-->
@@ -275,9 +275,9 @@
 												<p align="right"><?php echo $row->stok ?> Buah</p>
 											</td>
 											<td>
-												<a href="<?php echo site_url('camera/edit/'.$row->id_kamera) ?>" type="button" class="btn btn-info btn-sm">Ubah</a>
-												<a href="<?php echo site_url('camera/destroy/'.$row->id_kamera) ?>" type="button" class="btn btn-danger btn-sm"
-													onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+												<a href="<?php echo site_url('camera/edit/'.$row->id_kamera) ?>" type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil"></a>
+												<a href="<?php echo site_url('camera/destroy/'.$row->id_kamera) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
+													onclick="return confirm('Apakah anda yakin?')"></a>
 											</td>
 										</tr>
 <?php } ?>

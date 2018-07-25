@@ -3,9 +3,40 @@
 		aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
+
+<?php if($this->session->status=='Logged') { ?>
+
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Logged In!</h4>
+				</div>
+				<div class="modal-body modal-body-sub">
+					<div class="row">
+						<div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
+							<div class="sap_tabs">	
+								<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">		
+									<div class="resp-tab-content">
+										<div class="facts">
+											<div class="register">
+												<form>
+													<div class="sign-up">
+														<button href="<?php echo site_url("log/logout") ?>">Log Out</button>
+													</div>
+												</form>
+											</div>
+										</div> 
+									</div> 			        					            	      
+								</div>	
+							</div>
+							<div id="OR" class="hidden-xs"></div>
+						</div>
+					</div>
+				</div>
+
+<?php } else {?>
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">Daftar Sekarang!</h4>
 				</div>
 				<div class="modal-body modal-body-sub">
@@ -20,7 +51,7 @@
 									<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 										<div class="facts">
 											<div class="register">
-												<form action="#" method="post">			
+												<form action="<?php echo site_url() ?>" method="post">			
 													<input name="Email" placeholder="Email" type="text" required="">						
 													<input name="Password" placeholder="Password" type="password" required="">										
 													<div class="sign-up">
@@ -76,6 +107,9 @@
 						</div>
 					</div>
 				</div>
+
+<?php } ?>
+
 			</div>
 		</div>
 	</div>  
@@ -94,18 +128,14 @@
 				<label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
 				<div class="search_form">
 					<form action="#" method="post">
-						<input type="text" name="Search" placeholder="Cari...">
+						<input type="text" name="search" placeholder="Cari...">
 						<input type="submit" value="Kirim">
 					</form>
 				</div>
 			</div>
-			<div class="cart cart box_1"> 
-				<form action="#" method="post" class="last"> 
-					<input type="hidden" name="cmd" value="_cart" />
-					<input type="hidden" name="display" value="1" />
-					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-				</form>   
-			</div>  
+			<div class="w3l_login" style="margin-left:12em;">
+				<a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+			</div>
 		</div>
 	</div>
 <!-- //header -->

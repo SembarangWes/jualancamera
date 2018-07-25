@@ -66,15 +66,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div> 
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
-						<li><a href="<?php echo site_url('home') ?>" class="act">Beranda</a></li>	
-						<!-- Mega Menu -->
-						<li class="w3pages"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kamera <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-							<?php foreach($kategori as $row) { ?>
-								<li><a href="products.html"><?php echo $row->nama_kategori ?></a></li>
-							<?php } ?>
-							</ul>
-						</li>
+						<li><a href="<?php echo site_url('home') ?>" class="act">Beranda</a></li>
+						<li><a href="<?php echo site_url('home/products') ?>">Kamera</a></li>
 						<li><a href="<?php echo site_url('home/about_us') ?>">Tentang</a></li> 
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Kontak</a></li>
 					</ul>
@@ -86,7 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- banner -->
 	<div class="banner">
 		<div class="container">
-			<h3>Bakul Kamera, <span>Spesial</span></h3>
+			<h3>Bakul Kamera, <span></span></h3>
 		</div>
 	</div>
 	<!-- //banner --> 
@@ -125,45 +118,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="col-md-7 wthree_banner_bottom_right">
 				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 					<ul id="myTab" class="nav nav-tabs" role="tablist">
-<?php foreach($kategori as $row) { ?>
-						<li role="presentation"><a href="#<?php echo $row->nama_kategori.$row->id_kategori ?>" id="<?php echo $row->id_kategori ?>" role="tab" data-toggle="tab" aria-controls="home"><?php echo $row->nama_kategori ?></a></li>
+
+<?php $a=1; $b=""; foreach($kategori as $row) { if($a==1) { $b="class='active'"; } else { $b=""; } $a++; ?>
+
+						<li role="presentation" <?php echo $b; ?>><a href="#<?php echo $row->nama_kategori.$row->id_kategori ?>" id="<?php echo $row->id_kategori ?>" role="tab" data-toggle="tab" aria-controls="home"><?php echo $row->nama_kategori ?></a></li>
+
 <?php } ?>
+
 					</ul>
 					
 					<div id="myTabContent" class="tab-content">
 
-<?php foreach($kategori as $row) { ?>
-						<div role="tabpanel" class="tab-pane fade in" id="<?php echo $row->nama_kategori.$row->id_kategori ?>" aria-labelledby="<?php echo $row->nama_kategori ?>-tab">
+<?php  $x=1; $y=""; foreach($kategori as $row) { if($x==1) { $y="active in"; } else { $y=""; } $x++; ?>
+
+						<div role="tabpanel" class="tab-pane fade <?php echo $y; ?>" id="<?php echo $row->nama_kategori.$row->id_kategori ?>" aria-labelledby="<?php echo $row->nama_kategori ?>-tab">
 							<div class="agile_ecommerce_tabs">
 
 <?php $a=0; foreach($kamera as $kam) { if($kam->id_kategori==$row->id_kategori) { ?>
+
 								<div class="col-md-4 agile_ecommerce_tab_left">
 									<div class="hs-wrapper">
-										<img src="<?php echo base_url('assets/uploads/').$kam->foto_kamera ?>" alt=" " class="img-responsive" />
+									<?php for ($i = 0; $i < 8; $i++) { ?>
+										<img src="<?php echo base_url('assets/uploads/').$kam->foto_kamera ?>" alt=" " class="img-responsive" />\
+									<?php } ?>
 										<div class="w3_hs_bottom">
 											<ul>
 												<li>
-													<a href="#" data-toggle="modal" data-target="#<?php echo $row->id_kategori.$kam->id_kamera ?>"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+													<a href="<?php echo site_url("home/show/").$kam->id_kamera ?>"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 												</li>
 											</ul>
 										</div>
 									</div> 
-									<h5><a href="single.html"><?php echo $kam->nama_kamera ?></a></h5>
+									<h5><a href="<?php echo site_url("home/show/").$kam->id_kamera ?>"><?php echo $kam->nama_kamera ?></a></h5>
 									<div class="simpleCart_shelfItem">
 										<p><i class="item_price">Rp. <?php echo number_format($kam->harga,0,",","."); ?>,-</i></p>
-										<form action="#" method="post">
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" /> 
-											<input type="hidden" name="w3ls_item" value="<?php echo $kam->id_kamera ?>" /> 
-											<input type="hidden" name="amount" value="<?php echo $kam->harga ?>" />   
+										<form action="<?php echo site_url("shop/add") ?>" method="post">
+											<input type="hidden" name="idkam" id="idkam" value="<?php echo $kam->id_kamera ?>" />
+											<input type="hidden" name="namkam" id="namkam" value="<?php echo $kam->nama_kamera ?>" />
+											<input type="hidden" name="harga" id="harga" value="<?php echo $kam->harga ?>" />
+											<input type="hidden" name="jumkam" id="jumkam" value="1" />  
 											<button type="submit" class="w3ls-cart">Tambahkan</button>
-										</form>  
+										</form>
 									</div>
 								</div>
+
 <?php if($a<3){ $a++; } else { break; } } } ?>
 
 							</div>
 						</div>
+
 <?php } ?>
 
 					</div>
@@ -181,6 +184,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="agileinfo_new_products_grids">
 
 <?php foreach($kamorder as $row) { ?>
+
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
 						<div class="hs-wrapper hs-wrapper1">
@@ -188,51 +192,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>
-										<a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+									<a href="<?php echo site_url("home/show/").$row->id_kamera ?>"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5><a href="single.html"><?php echo $row->nama_kamera ?></a></h5>
+						<h5><a href="<?php echo site_url("home/show/").$row->id_kamera ?>"><?php echo $row->nama_kamera ?></a></h5>
 						<div class="simpleCart_shelfItem">
-							<p><i class="item_price">Rp. <?php echo number_format($kam->harga,0,",","."); ?>,-</i></p>
-							<form action="#" method="post">
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="add" value="1"> 
-								<input type="hidden" name="w3ls_item" value="<?php echo $row->id_kamera ?>"> 
-								<input type="hidden" name="amount" value="<?php echo $row->harga ?>">   
+							<p><i class="item_price">Rp. <?php echo number_format($row->harga,0,",","."); ?>,-</i></p>
+							<form action="<?php echo site_url("shop/add") ?>" method="post">
+								<input type="hidden" name="idkam" id="idkam" value="<?php echo $row->id_kamera ?>" />
+								<input type="hidden" name="namkam" id="namkam" value="<?php echo $row->nama_kamera ?>" />
+								<input type="hidden" name="harga" id="harga" value="<?php echo $row->harga ?>" />
+								<input type="hidden" name="jumkam" id="jumkam" value="1" />  
 								<button type="submit" class="w3ls-cart">Tambahkan</button>
 							</form>
 						</div>
 					</div>
 				</div>
+
 <?php if($a<4){ $a++; } else { break; } } ?>
+
 				<div class="clearfix"> </div>
 			</div>
 		</div>
 	</div>
 	<!-- //new-products -->
+
 	<!-- top-brands -->
 	<div class="top-brands">
 		<div class="container">
 			<h3>Top Brands</h3>
 			<div class="sliderfig">
 				<ul id="flexiselDemo1">			
+
+<?php foreach($merek as $m) { ?>
+
 					<li>
-						<img src="<?php echo base_url('assets/')?>images/tb1.jpg" alt=" " class="img-responsive" />
+						<img src="<?php echo base_url('assets/uploads/').$m->foto_merek ?>" alt=" " class="img-responsive" />
 					</li>
-					<li>
-						<img src="<?php echo base_url('assets/')?>images/tb2.jpg" alt=" " class="img-responsive" />
-					</li>
-					<li>
-						<img src="<?php echo base_url('assets/')?>images/tb3.jpg" alt=" " class="img-responsive" />
-					</li>
-					<li>
-						<img src="<?php echo base_url('assets/')?>images/tb4.jpg" alt=" " class="img-responsive" />
-					</li>
-					<li>
-						<img src="<?php echo base_url('assets/')?>images/tb5.jpg" alt=" " class="img-responsive" />
-					</li>
+
+<?php } ?>
+
 				</ul>
 			</div>
 			<script type="text/javascript">
@@ -270,7 +271,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php $this->load->view('footer'); ?>
 
 	<!-- cart-js -->
-	<script src="<?php echo base_url('assets/')?>js/minicart.js"></script>
+ 	<script src="<?php echo base_url('assets/')?>js/minicart.js"></script>
 	<script>
         w3ls.render();
 
@@ -284,7 +285,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         		}
         	}
         });
-    </script>  
+    </script>
 	<!-- //cart-js -->   
 </body>
 </html>

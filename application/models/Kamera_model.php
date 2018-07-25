@@ -9,13 +9,14 @@ class Kamera_model extends CI_Model {
     public function selectorder()
     { 
         $this->db->order_by('id_kamera','desc');
-        return $this->db->get('kamera')->result(); }
+        return $this->db->get('kamera')->result();
+    }
 
     public function getTotal($box, $search)
     { 
         $this->db->select('*');
         $this->db->from('kamera');
-        $this->db->join('kategori','kamera.id_kategori =kategori.id_kategori','left');
+        $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
 
         if ($box != 'null' && $search != 'null')
         {  $this->db->like($box, $search); }
@@ -23,7 +24,7 @@ class Kamera_model extends CI_Model {
         return $this->db->count_all_results();
     }
 
-    public function list($limit='null', $start='null', $box='null', $search='null')
+    public function list($limit, $start, $box, $search)
     {
         $this->db->select('*');
         $this->db->from('kamera');
@@ -31,6 +32,32 @@ class Kamera_model extends CI_Model {
 
         if ($box != 'null' && $search != 'null')
         { $this->db->like($box, $search); }
+
+        $this->db->limit($limit,$start);
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : false;
+    }
+
+    public function getTotalProducts($search)
+    { 
+        $this->db->select('*');
+        $this->db->from('kamera');
+        $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+
+        if ($search != 'null')
+        {  $this->db->like('nama_kamera', $search); }
+
+        return $this->db->count_all_results();
+    }
+
+    public function listProducts($limit, $start, $search)
+    {
+        $this->db->select('*');
+        $this->db->from('kamera');
+        $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+
+        if ($search != 'null')
+        { $this->db->like('nama_kamera', $search); }
 
         $this->db->limit($limit,$start);
         $query = $this->db->get();
@@ -48,9 +75,6 @@ class Kamera_model extends CI_Model {
 
     public function update($id, $data)
     {
-        // TODO: set data yang akan di update
-        // https://www.codeigniter.com/userguide3/database/query_builder.html#updating-data
-
         $this->db->where('id_kamera', $id);
         $this->db->update('kamera', $data);
         return result;
@@ -58,7 +82,6 @@ class Kamera_model extends CI_Model {
     
     public function delete($id)
     {
-        // TODO: tambahkan logic penghapusan data
         $this->db->where('id_kamera', $id);
         $this->db->delete('kamera');
     }

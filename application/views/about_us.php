@@ -64,14 +64,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
 						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>	
-						<!-- Mega Menu -->
-						<li class="w3pages"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kamera <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-							<?php foreach($kategori as $row) { ?>
-								<li><a href="products.html"><?php echo $row->nama_kategori ?></a></li>
-							<?php } ?>
-							</ul>
-						</li>
+						<li><a href="<?php echo site_url('home/products') ?>">Kamera</a></li>
 						<li><a href="<?php echo site_url('home/about_us') ?>" class="act">Tentang</a></li> 
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Kontak</a></li>
 					</ul>
