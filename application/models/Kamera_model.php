@@ -17,6 +17,7 @@ class Kamera_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('kamera');
         $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+        $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
 
         if ($box != 'null' && $search != 'null')
         {  $this->db->like($box, $search); }
@@ -29,6 +30,7 @@ class Kamera_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('kamera');
         $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+        $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
 
         if ($box != 'null' && $search != 'null')
         { $this->db->like($box, $search); }
@@ -38,26 +40,28 @@ class Kamera_model extends CI_Model {
         return ($query->num_rows() > 0) ? $query->result() : false;
     }
 
-    public function getTotalProducts($search)
+    public function getTotalOrder($box, $search)
     { 
         $this->db->select('*');
         $this->db->from('kamera');
         $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+        $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
 
-        if ($search != 'null')
-        {  $this->db->like('nama_kamera', $search); }
+        if ($box != 'null' && $search != 'null')
+        { $this->db->order_by($box, $search); }
 
         return $this->db->count_all_results();
     }
 
-    public function listProducts($limit, $start, $search)
+    public function listOrder($limit, $start, $box, $search)
     {
         $this->db->select('*');
         $this->db->from('kamera');
         $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+        $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
 
-        if ($search != 'null')
-        { $this->db->like('nama_kamera', $search); }
+        if ($box != 'null' && $search != 'null')
+        { $this->db->order_by($box, $search); }
 
         $this->db->limit($limit,$start);
         $query = $this->db->get();

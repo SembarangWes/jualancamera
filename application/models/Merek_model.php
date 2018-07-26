@@ -6,9 +6,15 @@ class Merek_model extends CI_Model {
     public function select()
     { return $this->db->get('merek')->result(); }
 
+    public function selectorder()
+    {
+        $this->db->from('merek')->order_by('nama_merek', 'asc');
+        return $this->db->get()->result();
+    }
+
     public function getTotal($search)
     {
-        if ($b$search != 'null')
+        if ($search != 'null')
         {  $this->db->like('nama_merek', $search); }
 
         return $this->db->count_all_results('merek');

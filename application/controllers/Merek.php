@@ -23,23 +23,22 @@ class Merek extends CI_Controller {
     public function store()
     {
         // Percobaan Upload
-        if ( ! $this->upload->do_upload('foto'))
+        if (!$this->upload->do_upload('foto'))
         {
-            $data = [ 
-                'error' => $this->upload->display_errors()
-            ];
-            $this->load->view('admin/merek', $data);
+            $error = $this->upload->display_errors();
+            //echo 1;
+            redirect('admin/merek/'.$error);
         }
         else
         {
             // Insert data
             $data = [
                 'nama_merek' => $this->input->post('name'),
-                'foto_merek' => $this->upload->data('foto')
+                'foto_merek' => $this->upload->data('file_name')
                 ];
             
             if ($this->Merek_model->insert($data))
-            { redirect('admin/merek'); }
+            { redirect('admin/merek'); } else {echo 2;}
         }
     }
 
@@ -48,7 +47,7 @@ class Merek extends CI_Controller {
         //Ambil Value
         $id=$this->input->post('id');
 
-        if ( ! $this->upload->do_upload('foto'))
+        if (!$this->upload->do_upload('foto'))
         {
             $data = [ 'nama_merek' => $this->input->post('name') ];
 
@@ -61,16 +60,16 @@ class Merek extends CI_Controller {
         {
             $data = [
                 'nama_merek' => $this->input->post('name'),
-                'foto_merek' => $this->upload->data('foto')
+                'foto_merek' => $this->upload->data('file_name')
             ];
-            
+
             $delpic = $this->Merek_model->show($id);
             unlink('./assets/uploads/'.$delpic->foto_merek);
 
             $result = $this->Merek_model->update($id,$data);
             
             if ($result)
-            { redirect('admin/camera'); }
+            { redirect('admin/merek'); }
         }
     }
 

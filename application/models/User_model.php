@@ -23,6 +23,12 @@ class User_model extends CI_Model {
     public function insert($data = [])
     { return $this->db->insert('user', $data); }
 
+    public function show($id)
+    {
+        $this->db->where('id_user', $id);
+        return $this->db->get('user')->row();
+    }
+
     public function update($id, $data)
     {
         // TODO: set data yang akan di update

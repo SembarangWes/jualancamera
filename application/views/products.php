@@ -114,13 +114,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 								  <div class="panel-body panel_text">
 									<ul>
-
-<?php foreach($kategori as $kat) { ?>
-
-										<li><a href=""><?php echo $kat->nama_kategori ?></a></li>
-
-<?php } ?>
-
+									<?php foreach($kategori as $kat) { ?>
+										<li><a href="<?php echo site_url('home/products/nama_kategori/').$kat->nama_kategori ?>"><?php echo $kat->nama_kategori ?></a></li>
+									<?php } ?>
 									</ul>
 								  </div>
 								</div>
@@ -138,11 +134,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								   <div class="panel-body panel_text">
 									<ul>
 
-<?php foreach($merek as $m) { ?>
-
-										<li><a href=""><?php echo $m->nama_merek ?></a></li>
-
-<?php } ?>
+									<?php foreach($merek as $m) { ?>
+										<li><a href="<?php echo site_url('home/products/nama_merek/').$m->nama_merek ?>"><?php echo $m->nama_merek ?></a></li>
+									<?php } ?>
 
 									</ul>
 								  </div>
@@ -160,18 +154,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 								   <div class="panel-body panel_text">
 									<ul>
-										<li><a href="products2.html">Di bawah 5 Juta</a></li>
-										<li><a href="products2.html">5 Juta <=> 10 Juta</a></li>
-										<li><a href="products2.html">10 Juta <=> 15 Juta</a></li>
-										<li><a href="products2.html">15 Juta <=> 20 Juta</a></li>
-										<li><a href="products2.html">Di atas 20 Juta</a></li>
+										<li><a href="<?php echo site_url('home/products/harga/asc') ?>">Harga Terendah</a></li>
+										<li><a href="<?php echo site_url('home/products/harga/desc') ?>">Harga Tertinggi</a></li>
 									</ul>
 								  </div>
 								</div>
 							  </div>
 							</div>
 							<ul class="panel_bottom">
-								<li><a href="products.html">Terbaru</a></li>
+								<li><a href="<?php echo site_url('home/products/id_kamera/desc') ?>">Terbaru</a></li>
 							</ul>
 						</div>
 					</div>
@@ -183,45 +174,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="clearfix"></div>
 					<div class="w3ls_mobiles_grid_right_grid2">
 						<div class="w3ls_mobiles_grid_right_grid2_left">
-							<h3>Menampilkan data <b><?php echo $start ?>-<?php echo $limit ?></b> dari <b><?php echo $total ?></b></h3>
-						</div>
-						<div class="w3ls_mobiles_grid_right_grid2_right">
-							<select name="select_item" class="select_item">
-								<option selected="selected">Relevansi</option>
-								<option>Terbaru</option>
-								<option>Harga Terendah</option>
-								<option>Harga Tertinggi</option>
-							</select>
+							<?php $li=$limit; if($total < $limit) { $li=$total; } ?>
+							<h3>Menampilkan data <b><?php echo $start ?>-<?php echo $li ?></b> dari <b><?php echo $total ?></b></h3>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
 					
 <?php $atas = $limit; $bawah = $limit-2; foreach($data as $row) { if(($atas%3) == 0) { ?>
-
 					<div class="w3ls_mobiles_grid_right_grid3">
-
 <?php } ?>
-
 						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
 							<div class="agile_ecommerce_tab_left mobiles_grid">
 								<div class="hs-wrapper hs-wrapper2">
+								<?php for ($i = 0; $i < 8; $i++) { ?>
 									<img src="<?php echo base_url('assets/uploads/').$row->foto_kamera?>" alt=" " class="img-responsive" /> 
+								<?php } ?>
 									<div class="w3_hs_bottom w3_hs_bottom_sub1">
 										<ul>
 											<li>
-												<a href="#" data-toggle="modal" data-target="#myModal9"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+												<a href="<?php echo site_url("home/show/").$row->id_kamera ?>"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
 											</li>
 										</ul>
 									</div>
 								</div>
-								<h5><a href="single.html"><?php echo $row->nama_kamera ?></a></h5> 
+								<h5><a href="<?php echo site_url("home/show/").$row->id_kamera ?>"><?php echo $row->nama_kamera ?></a></h5> 
 								<div class="simpleCart_shelfItem">
 									<p><i class="item_price">Rp. <?php echo number_format($row->harga,0,",","."); ?>,-</i></p>
-									<form action="#" method="post">
-										<input type="hidden" name="cmd" value="_cart" />
-										<input type="hidden" name="add" value="1" /> 
-										<input type="hidden" name="w3ls_item" value="<?php echo $row->nama_kamera ?>" /> 
-										<input type="hidden" name="amount" value="<?php echo $row->harga ?>"/>   
+									<form action="<?php echo site_url("shop/add") ?>" method="post">
+										<input type="hidden" name="idkam" id="idkam" value="<?php echo $row->id_kamera ?>" />
+										<input type="hidden" name="namkam" id="namkam" value="<?php echo $row->nama_kamera ?>" />
+										<input type="hidden" name="harga" id="harga" value="<?php echo $row->harga ?>" />
+										<input type="hidden" name="jumkam" id="jumkam" value="1" />  
 										<button type="submit" class="w3ls-cart">Tambahkan</button>
 									</form>
 								</div>

@@ -172,7 +172,7 @@
 										</td>
 										<td>
                                             <!-- Tombol Modal Ubah-->
-                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_user ?>">Ubah</button>
+                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_user ?>"></button>
 
 <!-- Modal Ubah -->
 <div id="ModalUbah<?php echo $row->id_user ?>" class="modal fade" role="dialog">
@@ -216,7 +216,7 @@
                             placeholder="Masukkan email ..." value="<?php echo $row->email ?>">  
                     </div>
                     <div class="form-group">
-                        <label for="pass">Password Lama :</label>
+                        <label for="pass">Password :</label>
                         <input type="password" class="form-control" id="pass" name="pass"
                             pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
                             maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
@@ -246,7 +246,7 @@
 <!-- Tutup Modal Ubah -->
 
 											<a href="<?php echo site_url('user/destroy/'.$row->id_user) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
-												onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+												onclick="return confirm('Apakah anda yakin?')"></a>
 										</td>
 										</tr>
 <?php } ?>

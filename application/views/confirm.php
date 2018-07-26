@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bakul'e Kamera :: kKeranjang Belanja</title>
+    <title>Bakul'e Kamera :: Konfirmasi Pembelian</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -86,7 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<ul>
 				<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Beranda</a> <i>/</i></li>
-				<li>Keranjang</li>
+				<li>Konfirmasi</li>
 			</ul>
 		</div>
 	</div>
@@ -98,38 +98,51 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
                     
 					<div class="additional_info_grid">
-						<h3>Keranjang Belanja</h3>
+						<h3>Konfirmasi Pemesanan</h3>
+                        <p>
+                            <table class="table" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td>Nama Pemesan</td>
+                                        <td>:</td>
+                                        <td><b><?php echo $user->nama_user ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat Pengiriman</td>
+                                        <td>:</td>
+                                        <td><b><?php echo $user->alamat ?></b></td>
+									</tr>
+										<td>Kontak Telepon</td>
+										<td>:</td>
+										<td><b><?php echo $user->no_hp ?> (<?php echo $user->email ?>)</b></td>
+                                </tbody>
+                            </table>
+						</p>
+						<br>
                         <p>
                             <table class="table table-bordered">
                                 <thead>
                                     <th>ID Kamera</th>
                                     <th>Nama Kamera</th>
-                                    <th>Jumlah</th>
+                                    <th>Jumlah Pembelian</th>
                                     <th>Harga</th>
                                     <th>Total Harga</th>
-                                    <th>Hapus</th>
                                 </thead>
                                 <tbody>
-
-<?php if(!empty($carts)) { echo 3; foreach ($carts as $c) { foreach ($kamera as $kam) { ?>
-
-                                    <td><?php echo $c['id'] ?></td>
-                                    <td><?php echo $c['name'] ?></td>
-                                    <td>
-                                        <input type="number" maxlength="2" size="2" id="jumkam" name="jumkam" value="<?php echo $c['qty'] ?>"
-                                            min="1" max="<?php echo $kamerow->stok; } ?>" pattern="[0-9]{1,2}" required class="form-control">
-                                        <?php echo $c['qty'] ?> Buah
-                                    </td>
-                                    <td>Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
-                                    <td>Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
-                                    <td><a href="<?php echo site_url('shop/cancel/'.$c['rowid']) ?>" type="button" class="btn btn-danger btn-sm">X</a></td>
-
-<?php } } else { echo "<td colspan='6'><center><b>[ Keranjang Anda kosong. ]</b></center></td>"; } ?>
-
+									<tr>
+<?php if(!empty($carts)) { $d=''; foreach ($carts as $c) { ?>
+										<td><?php echo $c['id'] ?></td>
+										<td><?php echo $c['name'] ?></td>
+										<td><?php echo $c['qty'] ?>buah</td>
+										<td>Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
+										<td>Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
+<?php } } else { $d='disabled'; echo "<td colspan='6'><center>Keranjang Anda kosong.</center></td>"; } ?>
+									</tr>
                                 </tbody>
                             </table>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-primary" id="lanjut">Lanjutkan <span class="glyphicon glyphicon-hand-right"></span></button>
+								<a type="button" href="<?php echo site_url("shop/cart") ?>" class="btn btn-primary"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
+                                <a href="<?php echo site_url("shop/done") ?>" type="submit" class="btn btn-success" id="lanjut" <?php echo $d; ?>><span class="fa-money"></span> Pembayaran <span class="fa-money"></span></a>
                             </div><br>
                         </p>
 					</div>

@@ -102,6 +102,16 @@
 										
 										</select>
 									</div>
+									<div class="form-group">
+										<label for="Merek">Merek :</label>
+										<select class="form-control" id="merek" name="merek">
+										
+										<?php foreach($datamer as $row) { ?>
+											<option value="<?php echo $row->id_merek ?>"><?php echo $row->nama_merek ?></option>
+										<?php } ?>
+										
+										</select>
+									</div>
 								</fieldset>
 							</div>
 
@@ -174,6 +184,23 @@
 										
 										</select>
 									</div>
+									<div class="form-group">
+										<label for="Merek">Merek :</label>
+										<select class="form-control" id="merek" name="merek">
+										
+										<?php
+											foreach($datamer as $row) {
+											$s='';
+												if($dataid->id_merek == $row->id_merek)
+												{ $s='selected'; }
+										?>
+											<option value="<?php echo $row->id_merek ?>" <?php echo $s ?>>
+											<?php echo $row->nama_merek ?>
+											</option>
+										<?php } ?>
+										
+										</select>
+									</div>
 								</fieldset>
 							</div>
 
@@ -202,6 +229,7 @@
 										<option value="harga">Harga</option>
 										<option value="stok">Stok</option>
 										<option value="nama_kategori">Kategori</option>
+										<option value="nama_merek">Merek</option>
 									</select>
 									<input class="form-control" type="text" name="search" value="" placeholder="Search...">
 									<input class="btn btn-default" type="submit" name="filter" value="Go">
@@ -250,14 +278,21 @@
 			<?php echo $row->spesifikasi ?>
 		</div>
 		<div class="modal-footer">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<?php if($row->nama_kategori==null) { ?>
-				<center>Tidak ada kategori.</center>
+				<b><center>Tidak ada kategori.</center></b>
 				<?php } else { ?>
 				<p align="left"><b>Kategori : <?php echo $row->nama_kategori ?></b></p>
 				<?php } ?>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
+				<?php if($row->nama_merek==null) { ?>
+				<b><center>Tidak ada merek.</center></b>
+				<?php } else { ?>
+				<p align="left"><b>Merek : <?php echo $row->nama_merek ?></b></p>
+				<?php } ?>
+			</div>
+			<div class="col-md-4">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
 			</div>
 		</div>

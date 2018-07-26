@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bakul'e Kamera :: Detail Kamera</title>
+    <title>Bakul'e Kamera :: Keranjang Belanja</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -65,7 +65,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 					<ul class="nav navbar-nav">
 						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>	
-						<li><a href="<?php echo site_url('home/products') ?>" class="act">Kamera</a></li>
+						<li><a href="<?php echo site_url('home/products') ?>">Kamera</a></li>
 						<li><a href="<?php echo site_url('home/about_us') ?>">Tentang</a></li> 
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Kontak</a></li>
 					</ul>
@@ -77,7 +77,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- banner -->
 	<div class="banner banner10">
 		<div class="container">
-			<h2>Detail Kamera</h2>
+			<h2>Keranjang</h2>
 		</div>
 	</div>
 	<!-- //banner -->   
@@ -86,114 +86,55 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<ul>
 				<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Beranda</a> <i>/</i></li>
-				<li>Detail Kamera</li>
+				<li>Keranjang</li>
 			</ul>
 		</div>
 	</div>
 	<!-- //breadcrumbs -->  
 	<!-- single -->
-	<div class="single">
-		<div class="container">
-			<div class="col-md-4 single-left">
-				<div class="flexslider">
-					<ul class="slides">
-						<li data-thumb="<?php echo base_url('assets/uploads/').$kamerow->foto_kamera ?>">
-							<div class="thumb-image"> <img src="<?php echo base_url('assets/uploads/').$kamerow->foto_kamera ?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
-						</li>
-					</ul>
-				</div>
-				<!-- flexslider -->
-					<script defer src="<?php echo base_url('assets/')?>js/jquery.flexslider.js"></script>
-					<link rel="stylesheet" href="<?php echo base_url('assets/')?>css/flexslider.css" type="text/css" media="screen" />
-					<script>
-					// Can also be used with $(document).ready()
-					$(window).load(function() {
-					  $('.flexslider').flexslider({
-						animation: "slide",
-						controlNav: "thumbnails"
-					  });
-					});
-					</script>
-				<!-- flexslider -->
-				<!-- zooming-effect -->
-					<script src="<?php echo base_url('assets/')?>js/imagezoom.js"></script>
-                <!-- //zooming-effect -->
-			</div>
-
-			<div class="col-md-8 single-right">
-				<h3><?php echo $kamerow->nama_kamera ?></h3>
-				<div class="color-quality">					
-					<div class="color-quality-left">
-						<br>
-						<h5>Stok : <?php echo $kamerow->stok ?></h5>
-					<form action="<?php echo site_url("shop/add") ?>" method="post">
-						<h5>Jumlah : <br><br>
-							<input type="number" maxlength="2" size="2" id="jumkam" name="jumkam" value="1"
-							min="1" max="<?php echo $kamerow->stok ?>" pattern="[0-9]{1,2}" required class="form-control">
-						</h5>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="simpleCart_shelfItem">
-					<p><i class="item_price">Rp. <?php echo number_format($kamerow->harga,0,",","."); ?>,-</i></p>
-					
-						<input type="hidden" name="idkam" id="idkam" value="<?php echo $kamerow->id_kamera ?>">
-						<input type="hidden" name="namkam" value="<?php echo $kamerow->nama_kamera ?>">
-						<input type="hidden" name="harga" value="<?php echo $kamerow->harga ?>">   
-						<button type="submit" class="btn">Tambahkan</button>
-					</form>
-				</div> 
-			</div>
-		</div>
-    </div> 
-    
 	<div class="additional_info">
 		<div class="container">
 			<div class="sap_tabs">	
 				<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
-					<ul>
-						<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Informasi Produk</span></li>
-						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Komentar</span></li>
-                    </ul>		
                     
-					<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
-						<h3><?php echo $kamerow->nama_kamera ?></h3>
-						<p><?php echo $kamerow->spesifikasi ?></p>
-					</div>	
-
-					<div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
-                        <h4>2 Komentar</h4>
-                        
-						<div class="additional_info_sub_grids">
-							<div class="col-xs-2 additional_info_sub_grid_left">
-								<img src="<?php echo base_url('assets/')?>images/t1.png" alt=" " class="img-responsive" />
-							</div>
-							<div class="col-xs-10 additional_info_sub_grid_right">
-								<div class="additional_info_sub_grid_rightl">
-									<a href="single.html">Laura</a>
-									<h5>Oct 06, 2016.</h5>
-									<p>Quis autem vel eum iure reprehenderit qui in ea voluptate 
-										velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-										quo voluptas nulla pariatur.</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="clearfix"> </div>
-                        </div>
-                        
-						<div class="review_grids">
-							<h5>Add A Review</h5>
-							<form action="#" method="post">
-								<input type="text" name="Name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-								<input type="email" name="Email" placeholder="Email" required="">
-								<input type="text" name="Telephone" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-								<textarea name="Review" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Add Your Review';}" required="">Add Your Review</textarea>
-								<input type="submit" value="Submit" >
-							</form>
-                        </div>
-                        
-                    </div> 			        					            	      
-                    
+					<div class="additional_info_grid">
+						<h3>Keranjang Belanja</h3>
+                        <p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>ID Kamera</th>
+                                    <th>Nama Kamera</th>
+                                    <th>Jumlah Pembelian</th>
+                                    <th>Harga</th>
+                                    <th>Total Harga</th>
+                                    <th>Hapus</th>
+                                </thead>
+                                <tbody>
+<?php if(!empty($carts)) { $d=''; foreach ($carts as $c) { ?>
+									<tr>
+										<td><?php echo $c['id'] ?></td>
+										<td><a href="<?php echo site_url("home/show/").$c['id'] ?>"><?php echo $c['name'] ?></a></td>
+										<td><input type="number" size="100"><?php echo $c['qty'] ?> buah</td>
+										<td>Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
+										<td>Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
+										<td><a href="<?php echo site_url('shop/cancel/'.$c['rowid']) ?>" type="button" class="btn btn-danger btn-sm">X</a></td>
+									</tr>
+<?php } } else { $d='disabled'; echo "<td colspan='6'><center>Keranjang Anda kosong.</center></td>"; } ?>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4"><h5><b>Total</b></h5></td>
+										<td colspan="2" align="right"><h5><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h5></td>
+									</tr>
+								</tfoot>
+                            </table>
+                            <div class="row">
+								<a type="button" onclick="history.go(-1);" class="btn btn-primary align-center"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
+								<a type="button" href="<?php echo site_url("shop/cart")?>" class="btn btn-primary" <?php echo $d; ?>><span class="glyphicon glyphicon-refresh"></span></a>
+								<a type="button" href="<?php echo site_url("shop/confirm")?>" class="btn btn-primary" <?php echo $d; ?>>Lanjutkan <span class="glyphicon glyphicon-hand-right"></span></a>
+                            </div><br>
+                        </p>
+					</div>
 				</div>	
 			</div>
 			<script src="<?php echo base_url('assets/')?>js/easyResponsiveTabs.js" type="text/javascript"></script>

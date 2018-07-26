@@ -1,4 +1,6 @@
 <!-- newsletter -->
+	<div class="clearfix"> </div>
+	<br>
 	<div class="newsletter">
 		<div class="container">
 			<div class="col-md-6 w3agile_newsletter_left">
@@ -6,9 +8,9 @@
 				<p>Bakul KAMERA</p>
 			</div>
 			<div class="col-md-6 w3agile_newsletter_right">
-				<form action="#" method="post">
-					<input type="email" name="Email" placeholder="Email" required="">
-					<input type="submit" value="" />
+				<form action="" method="post">
+					<input type="email" name="Email" placeholder="Email" required="" disabled>
+					<input type="submit" value="" disabled/>
 				</form>
 			</div>
 			<div class="clearfix"> </div>
@@ -41,7 +43,9 @@
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Kategori</h3>
 					<ul class="info"> 
-						<li><a href="products.html">Mobiles </a></li>
+					<?php foreach($kategori as $kat) { ?>
+						<li><a href=""><?php echo $kat->nama_kategori ?> </a></li>
+					<?php } ?>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">

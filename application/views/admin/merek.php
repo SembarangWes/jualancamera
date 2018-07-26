@@ -33,8 +33,7 @@
 
 	<div class="page-content">
 		<div class="row">
-
-			<div class="col-md-2">
+		<div class="col-md-2">
 				<div class="sidebar content-box" style="display: block;">
 					<ul class="nav">
 						<!-- Main menu -->
@@ -68,8 +67,8 @@
 								<table class="table table-striped">
 									<thead>
                                         <th>No</th>
-                                        <th>Gambar Merek</th>
-										<th>Nama Merek</th>
+                                        <th>Nama Merek</th>
+										<th width="250">Gambar Merek</th>
 										<th>
                                             <!-- Tombol Modal Tambah-->
                                             <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalTambah"> Tambah</button>
@@ -85,7 +84,7 @@
                 <h4 class="modal-title"><legend>Tambah Merek</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open('merek/store') ?>
+<?php echo form_open_multipart('merek/store') ?>
                 <fieldset>
                     <div class="form-group">
                         <label for="Name">Nama :</label>
@@ -96,7 +95,7 @@
                     <div class="form-group">
                         <label for="Foto">Foto / Gambar :</label>
                         <input type="file" id="foto" name="foto" size="20" accept="image/*">
-<?php echo $error ?>
+<?php if(isset($error)) { echo $error; } ?>
                     </div>
                 </fieldset>
             </div>
@@ -115,7 +114,7 @@
 									</thead>
 <?php if(isset($data)) { ?>
 									<tbody>
-										<?php foreach($data as $row) { ?>
+<?php foreach($data as $row) { ?>
 										<tr>
 										<td>
 											<?php echo $start+=1 ?>
@@ -128,10 +127,10 @@
 										</td>
 										<td>
                                             <!-- Tombol Modal Ubah-->
-                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_user ?>"></button>
+                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_merek ?>"></button>
 
 <!-- Modal Ubah -->
-<div id="ModalUbah<?php echo $row->id_user ?>" class="modal fade" role="dialog">
+<div id="ModalUbah<?php echo $row->id_merek ?>" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -141,7 +140,7 @@
                 <h4 class="modal-title"><legend>Edit Merek</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open('merek/update/'.$row->id_merek); echo form_hidden('id', $row->id_merek); ?>
+<?php echo form_open_multipart('merek/update/'.$row->id_merek); echo form_hidden('id', $row->id_merek); ?>
                 <fieldset>
                     <div class="form-group">
                         <label for="ID_Merek">ID Merek : <?php echo $row->id_merek ?></label>
@@ -170,8 +169,8 @@
 </div>
 <!-- Tutup Modal Ubah -->
 
-											<a href="<?php echo site_url('merek/destroy/'.$row->id_user) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
-												onclick="return confirm('Apakah anda yakin?')">Hapus</a>
+											<a href="<?php echo site_url('merek/destroy/'.$row->id_merek) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
+												onclick="return confirm('Apakah anda yakin?')"></a>
 										</td>
 										</tr>
 <?php } ?>
@@ -182,9 +181,7 @@
 							<div class="panel-footer">
 <?php echo $links ?>
 							</div>
-
-<?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
-
+<?php } else { echo "<tbody></tbody> </table> </div> <center>Tidak Ada Data!</center>"; } ?>
 						</div>
 					</div>
 				</div>

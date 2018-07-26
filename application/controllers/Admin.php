@@ -162,7 +162,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/user', $data);
     }
 
-    public function merek()
+    public function merek($error='')
     {
         // Cek kolom combobox
         if($this->uri->segment(3))
@@ -211,7 +211,8 @@ class Admin extends CI_Controller {
             $data = [
                 'data' => $this->Merek_model->list($limit, $start, $search),
                 'links' => $this->pagination->create_links(),
-                'start' => $start
+                'start' => $start,
+                'error' => $error
             ];
         }
         

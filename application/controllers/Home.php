@@ -12,18 +12,30 @@ class Home extends CI_Controller {
 			'kategori' => $this->Kategori_model->select(),
 			'kamera' => $this->Kamera_model->select(),
             'kamorder' => $this->Kamera_model->selectorder(),
-            'merek' => $this->Kamera_model->select()
+            'merek' => $this->Merek_model->select(),
+            'user' => $this->User_model->show($this->session->id)
 		];
 		$this->load->view('index', $data);
 	}
 
 	public function products()
 	{ 
-		// Cek isi kotak
+		// Cek kolom combobox
         if($this->uri->segment(3))
-        { $search=$this->uri->segment(3); }
+        { $box = $this->uri->segment(3); }
         else
-        {
+        { 
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
+            else
+            { $box = 'null'; }
+        }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search = $this->uri->segment(4); }
+        else
+        { 
             if($this->input->post("search"))
             { $search = $this->input->post("search"); }
             else
@@ -31,13 +43,17 @@ class Home extends CI_Controller {
         }
 
         $data = [];
-        $total = $this->Kamera_model->getTotalProducts($search);
+        if($box=='harga' || $box=='id_kamera')
+        { $total = $this->Kamera_model->getTotalOrder($box,$search); }
+        else
+        { $total = $this->Kamera_model->getTotal($box,$search); }
+
         if ($total > 0)
         {
             $limit = 9;
-            $start = $this->uri->segment(4, 0);
+            $start = $this->uri->segment(5, 0);
             $config = [
-                'base_url' => base_url() . 'home/products/' . $search,
+                'base_url' => base_url() . 'home/products/' . $box . '/' . $search,
                 'total_rows' => $total,
                 'per_page' => $limit,
                 'uri_segment' => 5,
@@ -63,14 +79,19 @@ class Home extends CI_Controller {
                 'last_tag_close' => '</li>',
             ];
             $this->pagination->initialize($config);
+            if($box=='harga' || $box=='id_kamera')
+            { $listlist = $this->Kamera_model->listOrder($limit, $start, $box, $search); }
+            else
+            { $listlist = $this->Kamera_model->list($limit, $start, $box, $search); }
             $data = [
-				'data' => $this->Kamera_model->listProducts($limit, $start, $search),
+				'data' => $listlist,
                 'kategori' => $this->Kategori_model->select(),
                 'links' => $this->pagination->create_links(),
                 'merek' => $this->Merek_model->select(),
 				'start' => $start,
 				'limit' => $limit,
-				'total' => $total
+                'total' => $total,
+                'user' => $this->User_model->show($this->session->id)
             ];
 		}
 		
@@ -78,13 +99,31 @@ class Home extends CI_Controller {
 	}
 
 	public function about_us()
-	{ $this->load->view('about_us'); }
+	{ 
+
+        $data = [
+            'kategori' => $this->Kategori_model->select(),
+            'user' => $this->User_model->show($this->session->id)
+        ];
+        $this->load->view('about_us', $data);
+    }
 
 	public function mail_us()
-	{ $this->load->view('mail_us'); }
+	{ 
+        $data = [
+            'kategori' => $this->Kategori_model->select(),
+            'user' => $this->User_model->show($this->session->id)
+        ];
+        $this->load->view('mail_us', $data); 
+    }
 
 	public function show($id)
 	{ 
-        $data['kamerow']=$this->Kamera_model->show($id);
-        $this->load->view('show', $data); }
+        $data = [
+            'kategori' => $this->Kategori_model->select(),
+            'kamerow' => $this->Kamera_model->show($id),
+            'user' => $this->User_model->show($this->session->id)
+        ];
+        $this->load->view('show', $data);
+    }
 }

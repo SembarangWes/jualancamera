@@ -25,7 +25,8 @@ class Camera extends CI_Controller {
         $data = [
             'page' => 'create',
             'error' => '',
-            'datakat' => $this->Kategori_model->select()
+            'datakat' => $this->Kategori_model->select(),
+            'datamer' => $this->Merek_model->selectorder()
         ];
         $this->load->view('admin/camera', $data);
     }
@@ -33,7 +34,7 @@ class Camera extends CI_Controller {
     public function store()
     {
         // Percobaan Upload
-        if ( ! $this->upload->do_upload('foto'))
+        if (!$this->upload->do_upload('foto'))
         {
             $data = [ 
                 'page' => 'create',
@@ -50,6 +51,7 @@ class Camera extends CI_Controller {
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'id_kategori' => $this->input->post('kategori'),
+                'id_merek' => $this->input->post('merek'),
                 'foto_kamera' => $this->upload->data('file_name')
                 ];
             
@@ -64,7 +66,8 @@ class Camera extends CI_Controller {
             'error' => '',
             'page' => 'edit',
             'dataid' => $this->Kamera_model->show($id),
-            'datakat' => $this->Kategori_model->select()
+            'datakat' => $this->Kategori_model->select(),
+            'datamer' => $this->Merek_model->selectorder()
         ];
         $this->load->view('admin/camera', $data);
     }
@@ -82,6 +85,7 @@ class Camera extends CI_Controller {
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'id_kategori' => $this->input->post('kategori'),
+                'id_merek' => $this->input->post('merek')
             ];
 
             $result = $this->Kamera_model->update($id,$data);
@@ -97,6 +101,7 @@ class Camera extends CI_Controller {
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'id_kategori' => $this->input->post('kategori'),
+                'id_merek' => $this->input->post('merek'),
                 'foto_kamera' => $this->upload->data('file_name')
             ];
             
