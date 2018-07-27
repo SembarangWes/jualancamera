@@ -122,7 +122,8 @@ class Home extends CI_Controller {
         $data = [
             'kategori' => $this->Kategori_model->select(),
             'kamerow' => $this->Kamera_model->show($id),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'cart' => $this->cart->contents()
         ];
         $this->load->view('show', $data);
     }

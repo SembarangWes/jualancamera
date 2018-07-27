@@ -35,32 +35,29 @@
 					<ul class="info"> 
 						<li><a href="<?php echo site_url('home/about_us') ?>">Tentang Kami</a></li>
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Hubungi Kami</a></li>
-						<li><a href="codes.html">Short Codes</a></li>
 						<li><a href="faq.html">FAQ</a></li>
-						<li><a href="products.html">Produk Spesial</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Kategori</h3>
 					<ul class="info"> 
-					<?php foreach($kategori as $kat) { ?>
-						<li><a href=""><?php echo $kat->nama_kategori ?> </a></li>
-					<?php } ?>
+					<?php $a=0; foreach($kategori as $kat) { ?>
+						<li><a href="<?php echo site_url('home/products/nama_kategori/').$kat->nama_kategori ?>"><?php echo $kat->nama_kategori ?> </a></li>
+					<?php $a++; if($a==5){break;} } ?>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Profil</h3>
 					<ul class="info"> 
 						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>
-						<li><a href="products.html">Spesial Hari Ini</a></li>
 					</ul>
 					<h4>Ikuti Kami</h4>
 					<div class="agileits_social_button">
 						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="http://facebook.com" class="facebook"> </a></li>
+							<li><a href="http://twitter.com" class="twitter"> </a></li>
+							<li><a href="http://google.com" class="google"> </a></li>
+							<li><a href="http://pinterest.com" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>
@@ -70,7 +67,7 @@
 		<div class="footer-copy">
 			<div class="footer-copy1">
 				<div class="footer-copy-pos">
-					<a href="#home1" class="scroll"><img src="<?php echo base_url('assets/')?>images/arrow.png" alt=" " class="img-responsive" /></a>
+					<a href="<?php echo site_url('home') ?>" class="scroll"><img src="<?php echo base_url('assets/')?>images/arrow.png" alt=" " class="img-responsive" /></a>
 				</div>
 			</div>
 			<div class="container">

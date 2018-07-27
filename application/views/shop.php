@@ -86,7 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<ul>
 				<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Beranda</a> <i>/</i></li>
-				<li>Keranjang</li>
+				<li><?php if($page=='confirm'){echo'Konfirmasi Pemesanan';}elseif($page=='pay'){echo'Pembayaran';}else{echo'Keranjang Belanja';} ?></li>
 			</ul>
 		</div>
 	</div>
@@ -96,45 +96,170 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<div class="sap_tabs">	
 				<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
-                    
+
+<?php if($page=='confirm') { //KONFIRMASI PESANAN ?>
+
 					<div class="additional_info_grid">
-						<h3>Keranjang Belanja</h3>
+						<h3>Konfirmasi Pemesanan</h3>
+                        <p>
+                            <table class="table" border="0" style="white-space: nowrap; width: 1%;">
+                                <tbody>
+                                    <tr>
+                                        <td>Nama Pemesan</td>
+                                        <td>:</td>
+                                        <td><b><?php echo $user->nama_user ?></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat Pengiriman</td>
+                                        <td>:</td>
+                                        <td><b><?php echo $user->alamat ?></b></td>
+									</tr>
+										<td>Kontak Telepon (Email)</td>
+										<td>:</td>
+										<td><b><?php echo $user->no_hp ?> (<?php echo $user->email ?>)</b></td>
+                                </tbody>
+                            </table>
+						</p>
+						<br>
                         <p>
                             <table class="table table-bordered">
                                 <thead>
-                                    <th>ID Kamera</th>
-                                    <th>Nama Kamera</th>
-                                    <th>Jumlah Pembelian</th>
-                                    <th>Harga</th>
-                                    <th>Total Harga</th>
-                                    <th>Hapus</th>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Nama Kamera</th>
+                                    <th class="text-center">Jumlah Pembelian</th>
+                                    <th class="text-center">Harga Satuan </th>
+                                    <th class="text-center">Total Harga</th>
                                 </thead>
                                 <tbody>
-<?php if(!empty($carts)) { $d=''; foreach ($carts as $c) { ?>
+<?php if(!empty($carts)) { $a=0; foreach ($carts as $c) { ?>
 									<tr>
-										<td><?php echo $c['id'] ?></td>
-										<td><a href="<?php echo site_url("home/show/").$c['id'] ?>"><?php echo $c['name'] ?></a></td>
-										<td><input type="number" size="100"><?php echo $c['qty'] ?> buah</td>
-										<td>Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
-										<td>Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
-										<td><a href="<?php echo site_url('shop/cancel/'.$c['rowid']) ?>" type="button" class="btn btn-danger btn-sm">X</a></td>
+										<td align="center"><?php echo $a++ ?></td>
+										<td><?php echo $c['name'] ?></td>
+										<td align="right"><?php echo $c['qty'] ?> buah</td>
+										<td align="right">Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
+										<td align="right">Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
 									</tr>
-<?php } } else { $d='disabled'; echo "<td colspan='6'><center>Keranjang Anda kosong.</center></td>"; } ?>
+<?php } } else { ?>
+									<tr>
+										<td colspan='6'><center>Keranjang Anda kosong.</center></td>
+									</tr>								
+<?php } ?>
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="4"><h5><b>Total</b></h5></td>
-										<td colspan="2" align="right"><h5><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h5></td>
+										<td align="center">##</td>
+										<td colspan="3"><h4><b>Total</b></h4></td>
+										<td align="right"><h4><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h4></td>
 									</tr>
 								</tfoot>
                             </table>
                             <div class="row">
-								<a type="button" onclick="history.go(-1);" class="btn btn-primary align-center"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
-								<a type="button" href="<?php echo site_url("shop/cart")?>" class="btn btn-primary" <?php echo $d; ?>><span class="glyphicon glyphicon-refresh"></span></a>
-								<a type="button" href="<?php echo site_url("shop/confirm")?>" class="btn btn-primary" <?php echo $d; ?>>Lanjutkan <span class="glyphicon glyphicon-hand-right"></span></a>
-                            </div><br>
+								<div class="col-sm-6 text-left">
+								<button onclick="history.go(-1);" class="btn btn-primary"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
+								</div>
+								<div class="col-sm-6 text-right">
+                                	<a type="button" href="<?php echo site_url("shop/payment") ?>" class="btn btn-success" ><span class="fa fa-money"></span> Pembayaran <span class="fa fa-money"></span></a>
+								</div>
+							</div>
+							<br>
                         </p>
 					</div>
+
+<?php } elseif ($page=='pay') { //PEMBAYARAN ?>
+
+					<div class="additional_info_grid">
+						<h3>Pembayaran</h3>
+                        <p>
+							<center>
+								<br><h4><b>TERIMA KASIH TELAH BERBELANJA
+								<br>DI BAKUL KAMERA.</b></h4>
+								<br>
+								<table class="table" border="0">
+									<tbody>
+										<tr>
+											<td>ID Transaksi</td>
+											<td>:</td>
+											<td align="right"><b><?php echo $id ?></b></td>
+										</tr>
+										<tr>
+											<td>Total Pembelian</td>
+											<td>:</td>
+											<td align="right"><b>Rp. <?php echo number_format($total,0,",","."); ?>,-</b></td>
+										</tr>
+										<tr>
+											<td>Kode Unik</td>
+											<td>:</td>
+											<td align="right"><?php echo $kode ?></td>
+										</tr>
+										<tr>
+											<td>Total Pembayaran</td>
+											<td>:</td>
+											<td align="right"><b>Rp. <?php echo number_format($total+$kode,0,",","."); ?>,-</b></td>
+										</tr>
+									</tbody>
+								</table>
+								<br>
+								<hr>
+								<br>
+								<a type="button" href="<?php echo site_url("shop/done").$id?>" class="btn btn-link">Konfirmasi Pembayaran</a>
+							</center>
+                        </p>
+					</div>
+
+<?php } else { //KERANJANG ?>
+
+<div class="additional_info_grid">
+						
+						<h3>Keranjang Belanja</h3>
+                        <p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Nama Kamera</th>
+                                    <th class="text-center">Jumlah Pembelian</th>
+                                    <th class="text-center">Harga Satuan</th>
+                                    <th class="text-center">Total Harga</th>
+                                    <th class="text-center">Hapus</th>
+								</thead>
+                                <tbody>
+<?php if(!empty($carts)) { $d=''; $a=0; foreach ($carts as $c) {$a++; ?>
+									<tr>
+										<td align="center"><?php echo $a ?></td>
+										<td><a href="<?php echo site_url("home/show/").$c['id'] ?>"><?php echo $c['name'] ?></a></td>
+										<td align="center"><?php echo $c['qty'] ?> Buah</td>
+										<td align="right">Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
+										<td align="right">Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
+										<td align="center"><a href="<?php echo site_url('shop/cancel/'.$c['rowid']) ?>" type="button" class="btn btn-danger btn-sm">X</a></td>
+									</tr>
+<?php } } else { $d='disabled' ?>
+									<tr>
+										<td colspan='6'><center>Keranjang Anda kosong.</center></td>
+									</tr>								
+<?php } ?>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td align="center">##</td>
+										<td colspan="3"><h4><b>Total</b></h4></td>
+										<td align="right"><h4><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h4></td>
+										<td align="center"><a href="<?php echo site_url('shop/cancel/') ?>delete" type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a></td>
+									</tr>
+								</tfoot>
+                            </table>
+                            <div class="row">
+								<div class="col-sm-6 text-left">
+									<button onclick="history.go(-1);" class="btn btn-warning"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
+								</div>
+								<div class="col-sm-6 text-right">
+									<a type="button" href="<?php echo site_url("shop/confirm") ?>" class="btn btn-primary" <?php echo $d; ?>>Lanjutkan <span class="glyphicon glyphicon-hand-right"></span></a>
+								</div>
+							</div>
+							<br>
+						</p>
+					</div>
+
+<?php } ?>
+
 				</div>	
 			</div>
 			<script src="<?php echo base_url('assets/')?>js/easyResponsiveTabs.js" type="text/javascript"></script>

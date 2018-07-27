@@ -185,7 +185,7 @@ class Admin extends CI_Controller {
                 'base_url' => base_url() . 'admin/merek/'. $search,
                 'total_rows' => $total,
                 'per_page' => $limit,
-                'uri_segment' => 5,
+                'uri_segment' => 4,
 
                 // Bootstrap 3 Pagination
                 'first_link' => '&laquo;',

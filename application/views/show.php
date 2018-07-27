@@ -126,10 +126,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="color-quality-left">
 						<br>
 						<h5>Stok : <?php echo $kamerow->stok ?></h5>
-					<form action="<?php echo site_url("shop/add") ?>" method="post">
+						<form action="<?php echo site_url("shop/add") ?>" method="post">
 						<h5>Jumlah : <br><br>
-							<input type="number" maxlength="2" size="2" id="jumkam" name="jumkam" value="1"
-							min="1" max="<?php echo $kamerow->stok ?>" pattern="[0-9]{1,2}" required class="form-control">
+							<input type="number" maxlength="3" size="3" id="jumkam" name="jumkam"
+							value=
+							"<?php $q='';
+								foreach ($cart as $c)
+								{
+									if ($c['id'] == $kamerow->id_kamera)
+									{ $q=$c['qty'];}
+								}
+								if ($q!='') {echo $q;} else {echo 1;}
+							?>"
+							min="1" max="<?php echo $kamerow->stok ?>" required class="form-control">
 						</h5>
 					</div>
 					<div class="clearfix"> </div>

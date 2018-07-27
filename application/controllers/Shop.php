@@ -9,32 +9,55 @@ class Shop extends CI_Controller {
             'carts' => $this->cart->contents(),
             'kamera' => $this->Kamera_model->select(),
             'kategori' => $this->Kategori_model->select(),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'page' => 'shop'
         ];
 
-		$this->load->view('cart',$data);
+		$this->load->view('shop',$data);
     }
 
     public function add()
     {
-        $data = [
-            'id' => $this->input->post('idkam'),
-			'name' => $this->input->post('namkam'),
-			'price' => $this->input->post('harga'),
-            'qty'=> $this->input->post('jumkam'),
-            'user' => $this->User_model->show($this->session->id)
-        ];
-        $this->cart->insert($data);
-        redirect('shop/cart/'.$id);
+        $e=false;
+        foreach ($this->cart->contents() as $c)
+        { if ($c['id'] == $this->input->post('idkam')) { $e=true; } }
+
+        if($e==false)
+        {
+            $data = [
+                'id' => $this->input->post('idkam'),
+                'name' => $this->input->post('namkam'),
+                'price' => $this->input->post('harga'),
+                'qty'=> $this->input->post('jumkam')
+            ];
+    
+            $this->cart->insert($data);
+        }
+        else
+        {
+            $data = [
+                'rowid' => $c['rowid'],
+                'qty' => $this->input->post('jumkam')
+            ];
+    
+            $this->cart->update($data);
+        }
+
+        redirect('shop/cart');
     }
 
     public function cancel()
     {
-		$data= [
-            'rowid' => $this->uri->segment(3),
-			'qty'=>0
-        ];
-        $this->cart->update($data);
+        if($this->uri->segment(3)=='delete')
+        { $this->cart->destroy(); }
+        else
+        {
+            $data= [
+                'rowid' => $this->uri->segment(3),
+                'qty'=>0
+            ];
+            $this->cart->update($data);
+        }
 		redirect('shop/cart');
     }
 
@@ -44,27 +67,32 @@ class Shop extends CI_Controller {
             'carts' => $this->cart->contents(),
             'kamera' => $this->Kamera_model->select(),
             'kategori' => $this->Kategori_model->select(),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'page' => 'confirm'
         ];
 
-		$this->load->view('confirm',$data);
+		$this->load->view('shop',$data);
     }
 
-    public function done()
+    public function payment()
     {
+        $kode=rand(99,1000);
+
         $data = [
             'id_user' => $this->session->id,
             'tgl_transaksi' => date("Y-m-d"),
+            'kode_unik' => $kode,
             'total' => $this->cart->total(),
             'status' => false
         ];
 
         $id=$this->Transaksi_model->insert($data);
 
+        $data = [];
         $cart = $this->cart->contents();
         foreach ($cart as $c)
         {
-            $data = [
+            $data[] = [
                 'id_kamera' => $c['id'],
                 'jumlah' => $c['qty'],
                 'id_transaksi' => $id
@@ -72,6 +100,27 @@ class Shop extends CI_Controller {
         }
 
         $this->Detail_model->insert($data);
+
+        $data = [
+            'total' => $this->cart->total(),
+            'page' => 'pay',
+            'kategori' => $this->Kategori_model->select(),
+            'user' => $this->User_model->show($this->session->id),
+            'id' => $id,
+            'kode' => $kode
+        ];
+
         $this->cart->destroy();
+        $this->load->view('shop', $data);
+    }
+
+    public function done()
+    {
+        $data = [ 
+            'id_transaksi' => $this->uri->segment(3),
+            'bayar' => true
+        ];
+        $this->Transaksi_model->pay($data);
+        redirect('home');
     }
 }

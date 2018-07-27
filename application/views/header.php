@@ -8,11 +8,11 @@
 
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">Halo, <?php echo $this->session->username ?>!</h4>	
+					<h4 class="modal-title" id="myModalLabel">Halo, <?php echo $this->session->username ?>!</h4>
 				</div>
 				<div class="modal-body modal-body-sub">
 					<div class="row">
-						<div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
+						<div class="col-md-6 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
 							<div class="sap_tabs">	
 								<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 								<ul>
@@ -38,8 +38,7 @@
 														placeholder="Masukkan nama ..." value="<?php echo $user->nama_user ?>"><br>
 													<textarea type="text" class="form-control" id="alamat" name="alamat"
 														pattern="{1,1000}" required title="Harap diisi"
-														placeholder="Masukkan alamat ..."><?php echo $user->alamat ?>
-													</textarea><br>
+														placeholder="Masukkan alamat ..."><?php echo $user->alamat ?></textarea><br>
 													<input type="number" class="form-control" id="hp" name="hp"
 														pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
 														placeholder="Masukkan nomer handphone ..." value="<?php echo $user->no_hp ?>">
@@ -72,6 +71,25 @@
 									});
 								});
 							</script>
+						</div>
+						<div class="col-md-4 modal_body_right modal_body_right1">
+							<div class="row text-center sign-with">
+								<div class="col-md-12">
+									<table>
+										<thead>
+											<th>No.</th>
+											<th></th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -118,8 +136,7 @@
 														placeholder="Masukkan nama ..."><br>
 													<textarea type="text" class="form-control" id="alamat" name="alamat"
 														pattern="{1,1000}" required title="Harap diisi"
-														placeholder="Masukkan alamat ...">
-													</textarea><br>
+														placeholder="Masukkan alamat ..."></textarea><br>
 													<input type="number" class="form-control" id="hp" name="hp"
 														pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
 														placeholder="Masukkan nomer handphone ...">
@@ -151,7 +168,7 @@
 									});
 								});
 							</script>
-							<div id="OR" class="hidden-xs">ATAU</div>
+							<div id="OR" class="hidden-xs">|</div>
 						</div>
 						<div class="col-md-4 modal_body_right modal_body_right1">
 							<div class="row text-center sign-with">
@@ -160,10 +177,10 @@
 								</div>
 								<div class="col-md-12">
 									<ul class="social">
-										<li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
-										<li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
-										<li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
-										<li class="social_behance"><a href="#" class="entypo-behance"></a></li>
+										<li class="social_facebook"><a href="http//:facebook.com" class="entypo-facebook"></a></li>
+										<li class="social_dribbble"><a href="http//:google.com" class="entypo-dribbble"></a></li>
+										<li class="social_twitter"><a href="http//:twitter.com" class="entypo-twitter"></a></li>
+										<li class="social_behance"><a href="http//:pinterest.com" class="entypo-behance"></a></li>
 									</ul>
 								</div>
 							</div>
