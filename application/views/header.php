@@ -75,17 +75,40 @@
 						<div class="col-md-4 modal_body_right modal_body_right1">
 							<div class="row text-center sign-with">
 								<div class="col-md-12">
-									<table>
+									<div class="pull-left"><b>-= Pembelian Tertunda =-</b></div>
+									<table class="table" style="white-space: nowrap; width: 1%;">
 										<thead>
-											<th>No.</th>
-											<th></th>
+											<th class="text-center">No.</th>
+											<th class="text-center">ID Transaksi</th>
+											<th class="text-center">Dibayar</th>
+											<th class="text-center">Diverifikasi</th>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-
+<?php $a=0; foreach($riwayat as $r) { $a++; ?>
+											<tr data-toggle="tooltip" data-placement="left" title="Rp. <?php echo number_format($r->total+$r->kode_unik,0,",","."); ?>,-">
+												<td align="center"><?php echo $a ?></td>
+												<td align="center"><?php echo $r->id_transaksi ?></td>
+												<script>
+													$(document).ready(function(){
+														$('[data-toggle="tooltip"]').tooltip();   
+													});
+												</script>
+												<td align="center">
+												<?php if ($r->bayar==true) { ?>
+													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/0/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-check"></span></a>
+												<?php } else { ?>
+													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/1/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
+												<?php } ?>
+												</td>
+												<td align="center">
+												<?php if ($r->status==true) { ?>
+													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-check"></span></a>
+												<?php } else { ?>
+													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-unchecked"></span></a>
+												<?php } ?>
 												</td>
 											</tr>
+<?php } ?>
 										</tbody>
 									</table>
 								</div>

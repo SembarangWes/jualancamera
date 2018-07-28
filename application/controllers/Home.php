@@ -13,7 +13,8 @@ class Home extends CI_Controller {
 			'kamera' => $this->Kamera_model->select(),
             'kamorder' => $this->Kamera_model->selectorder(),
             'merek' => $this->Merek_model->select(),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
 		];
 		$this->load->view('index', $data);
 	}
@@ -91,7 +92,8 @@ class Home extends CI_Controller {
 				'start' => $start,
 				'limit' => $limit,
                 'total' => $total,
-                'user' => $this->User_model->show($this->session->id)
+                'user' => $this->User_model->show($this->session->id),
+                'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
             ];
 		}
 		
@@ -103,7 +105,8 @@ class Home extends CI_Controller {
 
         $data = [
             'kategori' => $this->Kategori_model->select(),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
         $this->load->view('about_us', $data);
     }
@@ -112,7 +115,8 @@ class Home extends CI_Controller {
 	{ 
         $data = [
             'kategori' => $this->Kategori_model->select(),
-            'user' => $this->User_model->show($this->session->id)
+            'user' => $this->User_model->show($this->session->id),
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
         $this->load->view('mail_us', $data); 
     }
@@ -123,7 +127,8 @@ class Home extends CI_Controller {
             'kategori' => $this->Kategori_model->select(),
             'kamerow' => $this->Kamera_model->show($id),
             'user' => $this->User_model->show($this->session->id),
-            'cart' => $this->cart->contents()
+            'cart' => $this->cart->contents(),
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
         $this->load->view('show', $data);
     }

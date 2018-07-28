@@ -70,26 +70,31 @@ class Admin extends CI_Controller {
                 'last_tag_close' => '</li>',
             ];
             $this->pagination->initialize($config);
+            
+            $model='';
+            if($this->input->post("tombol")=='print')
+            { $model = $this->Kamera_model->selectordername($box, $search); }
+            else
+            { $model = $this->Kamera_model->list($limit, $start, $box, $search); }
+
             $data = [
-                'data' => $this->Kamera_model->list($limit, $start, $box, $search),
+                'data' => $model,
                 'links' => $this->pagination->create_links(),
                 'start' => $start,
                 'page' => 'index',
+                'box' => $box,
+                'search' => $search
             ];
         }
         
-		$this->load->view('admin/camera', $data);
+        if($this->input->post("tombol")=='print')
+        {
+            $this->pdf->setPaper('A4', 'landscape');
+            $this->pdf->load_view('report/report_camera', $data, 'print.pdf'); 
+        }
+        else
+        { $this->load->view('admin/camera', $data); }
     }
-
-    public function print_camera()
-	{ 
-		$data = [
-            'data' => $this->Kamera_model->list(10, 0, 'null', 'null')
-        ];
-
-		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->load_view('admin/print_camera', $data, 'print.pdf'); 
-	}
 
     public function category()
     { $this->load->view('admin/category'); }
@@ -151,18 +156,33 @@ class Admin extends CI_Controller {
                 'last_tag_close' => '</li>',
             ];
             $this->pagination->initialize($config);
+
+            $model='';
+            if($this->input->post("tombol")=='print')
+            { $model = $this->User_model->selectordername($box, $search); }
+            else
+            { $model = $this->User_model->list($limit, $start, $box, $search); }
+
             $data = [
-                'data' => $this->User_model->list($limit, $start, $box, $search),
+                'data' => $model,
                 'links' => $this->pagination->create_links(),
                 'start' => $start,
-                'page' => 'index',
+                'box' => $box,
+                'search' => $search
             ];
         }
         
-		$this->load->view('admin/user', $data);
+        if($this->input->post("tombol")=='print')
+        {
+            $this->pdf->setPaper('A4', 'landscape');
+            $this->pdf->load_view('report/report_user', $data, 'print.pdf'); 
+        }
+        else
+        { $this->load->view('admin/user', $data); }
+		
     }
 
-    public function merek($error='')
+    public function brand($error='')
     {
         // Cek kolom combobox
         if($this->uri->segment(3))
@@ -182,7 +202,7 @@ class Admin extends CI_Controller {
             $limit = 5;
             $start = $this->uri->segment(4, 0);
             $config = [
-                'base_url' => base_url() . 'admin/merek/'. $search,
+                'base_url' => base_url() . 'admin/brand/'. $search,
                 'total_rows' => $total,
                 'per_page' => $limit,
                 'uri_segment' => 4,
@@ -216,7 +236,95 @@ class Admin extends CI_Controller {
             ];
         }
         
-		$this->load->view('admin/merek', $data);
+		$this->load->view('admin/brand', $data);
+    }
+
+    public function transact()
+    {
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $box=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
+            else
+            { $box = 'null'; }
+        }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search=$this->uri->segment(4); }
+        else
+        {
+            if($this->input->post("search"))
+            {
+                $search = $this->input->post("search");
+                if($search=='belum'||$search=='belum dibayar'||$search=='belum diverifikasi')
+                {$search="0";}
+                if($search=='sudah'||$search=='sudah dibayar'||$search=='sudah diverifikasi'||$search=='dibayar'||$search=='diverifikasi')
+                {$search="1";}
+            }
+            else
+            { $search = 'null'; }
+        }
+
+        $data = [];
+        $total = $this->Transaksi_model->getTotal($box, $search);
+        if ($total > 0)
+        {
+            $limit = 5;
+            $start = $this->uri->segment(5, 0);
+            $config = [
+                'base_url' => base_url() . 'admin/transact/' . $box . '/' . $search,
+                'total_rows' => $total,
+                'per_page' => $limit,
+                'uri_segment' => 5,
+
+                // Bootstrap 3 Pagination
+                'first_link' => '&laquo;',
+                'last_link' => '&raquo;',
+                'next_link' => 'Next',
+                'prev_link' => 'Prev',
+                'full_tag_open' => '<ul class="pagination">',
+                'full_tag_close' => '</ul>',
+                'num_tag_open' => '<li>',
+                'num_tag_close' => '</li>',
+                'cur_tag_open' => '<li class="active"><span>',
+                'cur_tag_close' => '<span class="sr-only">(current)</span></span></li>',
+                'next_tag_open' => '<li>',
+                'next_tag_close' => '</li>',
+                'prev_tag_open' => '<li>',
+                'prev_tag_close' => '</li>',
+                'first_tag_open' => '<li>',
+                'first_tag_close' => '</li>',
+                'last_tag_open' => '<li>',
+                'last_tag_close' => '</li>',
+            ];
+            $this->pagination->initialize($config);
+
+            $model='';
+            if($this->input->post("tombol")=='print')
+            { $model = $this->Transaksi_model->selectordername($box, $search); }
+            else
+            { $model = $this->Transaksi_model->list($limit, $start, $box, $search); }
+
+            $data = [
+                'data' => $this->Transaksi_model->list($limit, $start, $box, $search),
+                'links' => $this->pagination->create_links(),
+                'start' => $start,
+                'box' => $box,
+                'search' => $search
+            ];
+        }
+        
+        if($this->input->post("tombol")=='print')
+        {
+            $this->pdf->setPaper('A4', 'landscape');
+            $this->pdf->load_view('report/report_transact', $data, 'print.pdf'); 
+        }
+        else
+        { $this->load->view('admin/transact', $data); }
     }
 
 	public function login()

@@ -41,8 +41,9 @@
 						<li><a href="<?php echo site_url('admin/') ?>"><i class="glyphicon glyphicon-home"></i> Beranda</a></li>
 						<li><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
                         <li><a href="<?php echo site_url('admin/category') ?>"><i class="glyphicon glyphicon-list"></i> Kategori</a></li>
-                        <li><a href="<?php echo site_url('admin/merek') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
+                        <li><a href="<?php echo site_url('admin/brand') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
 						<li class="current"><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
+                        <li><a href="<?php echo site_url('admin/transact') ?>"><i class="glyphicon glyphicon-credit-card"></i> Transaksi</a></li>
 					</ul>
 				</div>
 			</div>
@@ -58,19 +59,25 @@
 						<div class="content-box-large box-with-header">
 
 							<div class="panel-body">
-
-								<form class="form-inline" action="<?php echo site_url('admin/user') ?>" method="post">
-									<label for="Cari">Pencarian : </label>
-                                    <select class="form-control" id="kolom" name="kolom">
-                                        <option value="nama_user">Nama</option>
-                                        <option value="alamat">Alamat</option>
-                                        <option value="no_hp">HP</option>
-                                        <option value="email">E-mail</option>
-                                        <option value="role">Hak Akses</option>
-                                    </select>
-									<input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
-									<input class="btn btn-default" type="submit" name="filter" value="Go">
-								</form>
+                                <div class="row">
+                                    <form class="form-inline" action="<?php echo site_url('admin/user') ?>" method="post">
+                                    <div class="col-md-6">
+                                        <label for="Cari">Pencarian : </label>
+                                        <select class="form-control" id="kolom" name="kolom">
+                                            <option value="nama_user">Nama</option>
+                                            <option value="alamat">Alamat</option>
+                                            <option value="no_hp">HP</option>
+                                            <option value="email">E-mail</option>
+                                            <option value="role">Hak Akses</option>
+                                        </select>
+                                        <input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
+                                        <button class="btn btn-default" type="submit" name="tombol" value="filter">Go</button>
+                                    </div>
+									<div class="col-md-6" align="right">
+                                        <button class="btn btn-default" type="submit" name="tombol" value="print"><span class="glyphicon glyphicon-print"></span></button>
+                                    </div>
+                                    </form>
+                                </div>
 
 								<table class="table table-striped">
 									<thead>

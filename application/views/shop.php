@@ -169,12 +169,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 					<div class="additional_info_grid">
 						<h3>Pembayaran</h3>
+						<div class="alert alert-warning alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<strong>Selamat!</strong> Pembelian Anda Berhasil!
+						</div>
                         <p>
 							<center>
 								<br><h4><b>TERIMA KASIH TELAH BERBELANJA
 								<br>DI BAKUL KAMERA.</b></h4>
 								<br>
-								<table class="table" border="0">
+								<table class="table" style="white-space: nowrap; width: 1%;">
 									<tbody>
 										<tr>
 											<td>ID Transaksi</td>
@@ -201,7 +205,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<br>
 								<hr>
 								<br>
-								<a type="button" href="<?php echo site_url("shop/done").$id?>" class="btn btn-link">Konfirmasi Pembayaran</a>
+								<a type="button" href="<?php echo site_url("transact/pay/1/").$id?>" class="btn btn-link">Konfirmasi Pembayaran</a>
 							</center>
                         </p>
 					</div>

@@ -6,10 +6,19 @@ class Kamera_model extends CI_Model {
     public function select()
     { return $this->db->get('kamera')->result(); }
 
-    public function selectorder()
-    { 
-        $this->db->order_by('id_kamera','desc');
-        return $this->db->get('kamera')->result();
+    public function selectordername($box, $search)
+    {
+        $this->db->select('*');
+        $this->db->from('kamera');
+        $this->db->join('kategori','kamera.id_kategori=kategori.id_kategori','left');
+        $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
+
+        if ($box != 'null' && $search != 'null')
+        { $this->db->like($box, $search); }
+
+        $this->db->order_by('nama_kamera','asc');
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : false;
     }
 
     public function getTotal($box, $search)
@@ -20,7 +29,7 @@ class Kamera_model extends CI_Model {
         $this->db->join('merek','kamera.id_merek=merek.id_merek','left');
 
         if ($box != 'null' && $search != 'null')
-        {  $this->db->like($box, $search); }
+        { $this->db->like($box, $search); }
 
         return $this->db->count_all_results();
     }

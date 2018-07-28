@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Merek extends CI_Controller {
+class Brand extends CI_Controller {
 
     public function __construct()
     {

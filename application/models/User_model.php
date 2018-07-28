@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User_model extends CI_Model {
 
+    public function selectordername($box, $search)
+    {
+        if ($box != 'null' && $search != 'null')
+        { $this->db->like($box, $search); }
+
+        $this->db->order_by('nama_user','asc');
+        $query = $this->db->get('user');
+        return ($query->num_rows() > 0) ? $query->result() : false;
+    }
+
     public function getTotal($box, $search)
     { 
         if ($box != 'null' && $search != 'null')

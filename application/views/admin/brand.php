@@ -40,8 +40,9 @@
 						<li><a href="<?php echo site_url('admin/') ?>"><i class="glyphicon glyphicon-home"></i> Beranda</a></li>
 						<li><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
                         <li><a href="<?php echo site_url('admin/category') ?>"><i class="glyphicon glyphicon-list"></i> Kategori</a></li>
-						<li class="current"><a href="<?php echo site_url('admin/merek') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
+						<li class="current"><a href="<?php echo site_url('admin/brand') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
                         <li><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
+						<li><a href="<?php echo site_url('admin/transact') ?>"><i class="glyphicon glyphicon-credit-card"></i> Transaksi</a></li>
 					</ul>
 				</div>
 			</div>
@@ -58,7 +59,7 @@
 
 							<div class="panel-body">
 
-								<form class="form-inline" action="<?php echo site_url('admin/merek') ?>" method="post">
+								<form class="form-inline" action="<?php echo site_url('admin/brand') ?>" method="post">
 									<label for="Cari">Pencarian : </label>
 									<input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
 									<input class="btn btn-default" type="submit" name="filter" value="Go">
@@ -84,7 +85,7 @@
                 <h4 class="modal-title"><legend>Tambah Merek</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open_multipart('merek/store') ?>
+<?php echo form_open_multipart('brand/store') ?>
                 <fieldset>
                     <div class="form-group">
                         <label for="Name">Nama :</label>
@@ -140,7 +141,7 @@
                 <h4 class="modal-title"><legend>Edit Merek</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open_multipart('merek/update/'.$row->id_merek); echo form_hidden('id', $row->id_merek); ?>
+<?php echo form_open_multipart('brand/update/'.$row->id_merek); echo form_hidden('id', $row->id_merek); ?>
                 <fieldset>
                     <div class="form-group">
                         <label for="ID_Merek">ID Merek : <?php echo $row->id_merek ?></label>
@@ -169,7 +170,7 @@
 </div>
 <!-- Tutup Modal Ubah -->
 
-											<a href="<?php echo site_url('merek/destroy/'.$row->id_merek) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
+											<a href="<?php echo site_url('brand/destroy/'.$row->id_merek) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
 												onclick="return confirm('Apakah anda yakin?')"></a>
 										</td>
 										</tr>

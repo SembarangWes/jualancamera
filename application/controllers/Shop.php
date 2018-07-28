@@ -10,7 +10,8 @@ class Shop extends CI_Controller {
             'kamera' => $this->Kamera_model->select(),
             'kategori' => $this->Kategori_model->select(),
             'user' => $this->User_model->show($this->session->id),
-            'page' => 'shop'
+            'page' => 'shop',
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
 
 		$this->load->view('shop',$data);
@@ -68,7 +69,8 @@ class Shop extends CI_Controller {
             'kamera' => $this->Kamera_model->select(),
             'kategori' => $this->Kategori_model->select(),
             'user' => $this->User_model->show($this->session->id),
-            'page' => 'confirm'
+            'page' => 'confirm',
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
 
 		$this->load->view('shop',$data);
@@ -107,20 +109,11 @@ class Shop extends CI_Controller {
             'kategori' => $this->Kategori_model->select(),
             'user' => $this->User_model->show($this->session->id),
             'id' => $id,
-            'kode' => $kode
+            'kode' => $kode,
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
 
         $this->cart->destroy();
         $this->load->view('shop', $data);
-    }
-
-    public function done()
-    {
-        $data = [ 
-            'id_transaksi' => $this->uri->segment(3),
-            'bayar' => true
-        ];
-        $this->Transaksi_model->pay($data);
-        redirect('home');
     }
 }
