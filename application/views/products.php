@@ -78,7 +78,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- banner -->
 	<div class="banner banner1">
 		<div class="container">
-			<h2>Tawaran <span>Kamera</span> Langsung <i>Diskon 10%</i></h2> 
+			<h2>Toko Kamera <span>Dengan</span>Kamera <i>Terbaik</i></h2> 
 		</div>
 	</div> 
 	<!-- breadcrumbs -->

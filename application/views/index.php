@@ -79,7 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- banner -->
 	<div class="banner">
 		<div class="container">
-			<h3>Bakul Kamera, <span></span></h3>
+			<h3>Bakul'e <span>Kameramu</span></h3>
 		</div>
 	</div>
 	<!-- //banner --> 
@@ -188,7 +188,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col-md-3 agileinfo_new_products_grid">
 					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
 						<div class="hs-wrapper hs-wrapper1">
+						<?php for ($i = 0; $i < 8; $i++) { ?>
 							<img src="<?php echo base_url('assets/uploads/').$row->foto_kamera ?>" alt=" " class="img-responsive" />
+						<?php } ?>
 							<div class="w3_hs_bottom w3_hs_bottom_sub">
 								<ul>
 									<li>

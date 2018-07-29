@@ -114,7 +114,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<input type="email" name="Email" placeholder="Email" required="">
 						<input type="text" name="Telephone" placeholder="Telephone No" required="">
 						<textarea name="message" placeholder="Pesan..." required=""></textarea>
-						<input type="submit" value="Kirim" >
+						<input type="submit" value="Kirim" disabled >
 					</form>
 				</div>
 				<div class="clearfix"> </div>

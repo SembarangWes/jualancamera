@@ -89,7 +89,7 @@
 									</div>
 									<div class="form-group">
 										<label for="Stok">Stok Kamera :</label>
-										<input type="number" class="form-control" id="stok" name="stok"
+										<input type="number" class="form-control" id="stok" name="stok" min="1"
 											pattern="[0-9]{1,5}" required title="Harap diisi dengan angka"
 											placeholder="Masukkan Jumlah Stok ...">  
 									</div>
@@ -164,7 +164,7 @@
 									<div class="form-group">
 										<label for="Stok">Stok Kamera :</label>
 										<input type="number" class="form-control" id="stok" name="stok"
-											pattern="[0-9]{1,5}" title="Harap diisi dengan angka"
+											pattern="[0-9]{1,5}" title="Harap diisi dengan angka" min="1"
 											placeholder="Masukkan Jumlah Stok ..."
 											value="<?php echo $dataid->stok; ?>">  
 									</div>

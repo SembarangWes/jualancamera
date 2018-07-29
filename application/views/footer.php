@@ -23,7 +23,7 @@
 			<div class="w3_footer_grids">
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Kontak</h3>
-					<p>Hubungi Kami</p>
+					<p>Hubungi <a href="<?php echo site_url('admin/') ?>">Admin</a></p>
 					<ul class="address">
 						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>JL SOEKARNO HATTA 999999, <span>INDONESIA.</span></li>
 						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">BAKULKAMERA@Xmple.com</a></li>
@@ -35,7 +35,7 @@
 					<ul class="info"> 
 						<li><a href="<?php echo site_url('home/about_us') ?>">Tentang Kami</a></li>
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Hubungi Kami</a></li>
-						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="<?php echo site_url('home/faq') ?>">FAQ's</a></li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
@@ -50,6 +50,7 @@
 					<h3>Profil</h3>
 					<ul class="info"> 
 						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>
+						<li><a href="<?php echo site_url('home/products/id_kamera/desc') ?>">Produk Terbaru</a></li>
 					</ul>
 					<h4>Ikuti Kami</h4>
 					<div class="agileits_social_button">

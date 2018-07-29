@@ -38,7 +38,9 @@ class Transaksi_model extends CI_Model {
         if ($box != 'null' && $search != 'null')
         {  $this->db->like($box, $search); }
 
+        $this->db->order_by('id_transaksi', 'desc');
         $this->db->limit($limit,$start);
+        
         $query = $this->db->get();
         return ($query->num_rows() > 0) ? $query->result() : false;
     }
@@ -54,7 +56,7 @@ class Transaksi_model extends CI_Model {
     public function usertrans($id)
     {
         $this->db->where('id_user', $id);
-        $this->db->where('status', 0);
+        $this->db->where('status', false);
         return $this->db->get('transaksi')->result();
     }
 
@@ -68,5 +70,22 @@ class Transaksi_model extends CI_Model {
     {
         $this->db->where('id_transaksi', $id);
         $this->db->update('transaksi', $data);
+    }
+
+    public function getStock($id)
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi');
+        $this->db->join('detail', 'transaksi.id_transaksi = detail.id_transaksi');
+        $this->db->join('kamera', 'kamera.id_kamera = detail.id_kamera');
+        $this->db->where('transaksi.id_transaksi', $id);
+        return $this->db->get()->result();
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('id_transaksi', $id);
+        $this->db->delete('transaksi');
+        return result;
     }
 }

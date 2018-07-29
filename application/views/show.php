@@ -125,7 +125,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="color-quality">					
 					<div class="color-quality-left">
 						<br>
-						<h5>Stok : <?php echo $kamerow->stok ?></h5>
+						<h5>Stok : <?php if($kamerow->stok>=1) {echo $kamerow->stok;}else{echo "Kosong/Habis!";} ?></h5>
 						<form action="<?php echo site_url("shop/add") ?>" method="post">
 						<h5>Jumlah : <br><br>
 							<input type="number" maxlength="3" size="3" id="jumkam" name="jumkam"
@@ -138,13 +138,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								}
 								if ($q!='') {echo $q;} else {echo 1;}
 							?>"
-							min="1" max="<?php echo $kamerow->stok ?>" required class="form-control">
+							min="1" max="<?php $s=''; if($kamerow->stok>=1) {echo $kamerow->stok;} else {echo 0; $s='disabled';} ?>" required <?php $s ?> class="form-control">
 						</h5>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
 				<div class="simpleCart_shelfItem">
-					<p><i class="item_price">Rp. <?php echo number_format($kamerow->harga,0,",","."); ?>,-</i></p>
+					<p><i class="item_price"> Harga : Rp. <?php echo number_format($kamerow->harga,0,",","."); ?>,-</i></p>
 					
 						<input type="hidden" name="idkam" id="idkam" value="<?php echo $kamerow->id_kamera ?>">
 						<input type="hidden" name="namkam" value="<?php echo $kamerow->nama_kamera ?>">
@@ -162,7 +162,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
 					<ul>
 						<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Informasi Produk</span></li>
-						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Komentar</span></li>
+				<!--	<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Komentar</span></li> -->
                     </ul>		
                     
 					<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">

@@ -33,6 +33,7 @@
 										<div class="facts">
 											<div class="register">
 												<form action="<?php echo site_url('user/update/').$user->id_user ?>" method="post">
+													<input type="hidden" id="id" name="id" value="<?php echo $user->id_user ?>">
 													<input type="text" class="form-control" id="name" name="name"
 														pattern="^[^-\s][a-zA-Z_\s-]{1,50}" required title="Harap diisi dengan huruf"
 														placeholder="Masukkan nama ..." value="<?php echo $user->nama_user ?>"><br>
@@ -49,7 +50,7 @@
 														pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
 														maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
 														onmousedown="this.type='text'" onmouseup="this.type='password'"
-														value="<?php echo $user->password ?>">
+														value="<?php echo $this->encryption->decrypt($user->password) ?>">
 													<font color="#808080">Klik untuk melihat</font>
 													<input type="hidden" id="role" name="role" value="Pengguna">
 													<div class="sign-up">
@@ -84,7 +85,7 @@
 											<th class="text-center">Diverifikasi</th>
 										</thead>
 										<tbody>
-<?php $a=0; foreach($riwayat as $r) { $a++; ?>
+<?php if(isset($riwayat)) { $a=0; foreach($riwayat as $r) { $a++; ?>
 											<tr data-toggle="tooltip" data-placement="left" title="Rp. <?php echo number_format($r->total+$r->kode_unik,0,",","."); ?>,-">
 												<td align="center"><?php echo $a ?></td>
 												<td align="center"><?php echo $r->id_transaksi ?></td>
@@ -94,18 +95,24 @@
 													});
 												</script>
 												<td align="center">
-												<?php if ($r->bayar==true) { ?>
-													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/0/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-check"></span></a>
-												<?php } else { ?>
-													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/1/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
-												<?php } ?>
+													<?php if ($r->bayar==true) { ?>
+														<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/0/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-check"></span></a>
+													<?php } else { ?>
+														<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/1/".$r->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
+													<?php } ?>
 												</td>
 												<td align="center">
-												<?php if ($r->status==true) { ?>
-													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-check"></span></a>
-												<?php } else { ?>
-													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-unchecked"></span></a>
-												<?php } ?>
+													<?php if ($r->status==true) { ?>
+														<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-check"></span></a>
+													<?php } else { ?>
+														<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-unchecked"></span></a>
+													<?php } ?>
+												</td>
+											</tr>
+<?php } } else { ?>
+											<tr>
+												<td colspan='4'>
+													<center>Tidak ada pembelian tertunda.</center>
 												</td>
 											</tr>
 <?php } ?>

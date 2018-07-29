@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bakul'e Kamera :: Keranjang Belanja</title>
+    <title>Bakul'e Kamera :: Pembelian</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -99,6 +99,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php if($page=='confirm') { //KONFIRMASI PESANAN ?>
 
+<?php if($this->cart->total()==0) { redirect('shop/cart'); } ?>
 					<div class="additional_info_grid">
 						<h3>Konfirmasi Pemesanan</h3>
                         <p>

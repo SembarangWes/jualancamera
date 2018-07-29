@@ -4,5 +4,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Detail_model extends CI_Model {
 
     public function insert($data)
-    { $this->db->insert_batch('detail',$data); }
+    { $this->db->insert_batch('detail',$data); }    
 }

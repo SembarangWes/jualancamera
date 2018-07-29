@@ -6,6 +6,12 @@ class Kamera_model extends CI_Model {
     public function select()
     { return $this->db->get('kamera')->result(); }
 
+    public function selectorder()
+    {
+        $this->db->order_by('id_kamera', 'desc');
+        return $this->db->get('kamera')->result();
+    }
+
     public function selectordername($box, $search)
     {
         $this->db->select('*');

@@ -70,7 +70,7 @@
 											<option value="status">Diverifikasi</option>
 										</select>
 										<input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
-										<<button class="btn btn-default" type="submit" name="tombol" value="filter">Go</button>
+										<button class="btn btn-default" type="submit" name="tombol" value="filter">Go</button>
                                     </div>
 									<div class="col-md-6" align="right">
                                         <button class="btn btn-default" type="submit" name="tombol" value="print"><span class="glyphicon glyphicon-print"></span></button>
@@ -81,43 +81,48 @@
 								<table class="table table-striped">
 									<thead>
 										<th>No</th>
-										<th>ID Transaksi</th>
+										<th class="text-center">ID Transaksi</th>
                                         <th>User</th>
-                                        <th>Total Pembayaran</th>
-                                        <th>Dibayar</th>
-                                        <th>Diverifikasi</th>
+                                        <th class="text-center">Total Pembayaran</th>
+                                        <th class="text-center">Dibayar</th>
+                                        <th class="text-center">Diverifikasi</th>
+										<th class="text-center">Hapus</th>
 									</thead>
 <?php if(isset($data)) { ?>
 									<tbody>
 										<?php foreach($data as $row) { ?>
 										<tr>
-										<td>
-											<?php echo $start+=1 ?>
-										</td>
-										<td>
-											<?php echo $row->id_transaksi ?>
-										</td>
-                                        <td>
-											<?php echo $row->nama_user ?>
-										</td>
-										<td>
-											Rp. <?php echo number_format( $row->total+ $row->kode_unik,0,",","."); ?>,-
-										</td>
-                                        <td>
-                                        <?php if ($row->bayar==true) { ?>
-                                            <a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/0/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-check"></span></a>
-                                        <?php } else { ?>
-                                            <a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/1/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
-                                        <?php } ?>
-										</td>
-                                        <td>
-                                        <?php if ($row->status==true) { ?>
-                                            <a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/ver/0/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-check"></span></a>
-                                        <?php } else { ?>
-                                            <a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/ver/1/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
-                                        <?php } ?>
-										</td>
-									</tr>
+											<td>
+												<?php echo $start+=1 ?>
+											</td>
+											<td align="center">
+												<?php echo $row->id_transaksi ?>
+											</td>
+											<td>
+												<?php echo $row->nama_user ?>
+											</td>
+											<td align="right">
+												Rp. <?php echo number_format( $row->total+ $row->kode_unik,0,",","."); ?>,-
+											</td>
+											<td align="center">
+												<?php if ($row->bayar==true) { ?>
+													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-check"></span></a>
+												<?php } else { ?>
+													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/pay/1/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
+												<?php } ?>
+											</td>
+											<td align="center">
+												<?php if ($row->status==true) { ?>
+													<a type="button" class="btn btn-link btn-md"><span class="glyphicon glyphicon-check"></span></a>
+												<?php } else { ?>
+													<a type="button" class="btn btn-link btn-md" href="<?php echo site_url("transact/ver/1/".$row->id_transaksi) ?>"><span class="glyphicon glyphicon-unchecked"></span></a>
+												<?php } ?>
+											</td>
+											<td align="center">
+												<a href="<?php echo site_url('transact/destroy/'.$row->id_transaksi) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
+													onclick="return confirm('Apakah anda yakin?')"></a>
+											</td>
+										</tr>
 <?php } ?>
 									</tbody>
 								</table>

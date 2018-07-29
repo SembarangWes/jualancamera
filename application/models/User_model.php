@@ -56,6 +56,17 @@ class User_model extends CI_Model {
         $this->db->delete('user');
         return result;
     }
+
+    public function select()
+    {
+        return $this->db->get('user')->result();
+    }
+
+    public function cekLogin($user)
+    { 
+        $this->db->where('email',$user);
+        return $this->db->get('user')->result();
+    }
 }
 
 /* End of file ModelName.php */

@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Bakul'e Kamera :: Tentang</title>
+    <title>Bakul'e Kamera :: FAQ's</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,6 +19,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- Custom Theme files -->
 	<link href="<?php echo base_url('assets/')?>css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<?php echo base_url('assets/')?>css/style.css" rel="stylesheet" type="text/css" media="all" /> 
+	<link href="<?php echo base_url('assets/')?>css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- //Custom Theme files -->
 	<!-- font-awesome icons -->
 	<link href="<?php echo base_url('assets/')?>css/font-awesome.css" rel="stylesheet"> 
@@ -44,8 +45,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script>
 	<!-- //end-smooth-scrolling --> 
 </head> 
-<body> 
-	
+<body>
+
 <?php $this->load->view('header') ?>
 
 	<!-- navigation -->
@@ -65,7 +66,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<ul class="nav navbar-nav">
 						<li><a href="<?php echo site_url('home') ?>">Beranda</a></li>	
 						<li><a href="<?php echo site_url('home/products') ?>">Kamera</a></li>
-						<li><a href="<?php echo site_url('home/about_us') ?>" class="act">Tentang</a></li> 
+						<li><a href="<?php echo site_url('home/about_us') ?>">Tentang</a></li> 
 						<li><a href="<?php echo site_url('home/mail_us') ?>">Kontak</a></li>
 					</ul>
 				</div>
@@ -85,77 +86,67 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<ul>
 				<li><a href="<?php echo site_url('home') ?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Beranda</a> <i>/</i></li>
-				<li>Tentang Kami</li>
+				<li>FAQ's</li>
 			</ul>
 		</div>
 	</div>
 	<!-- //breadcrumbs --> 
-	<!-- about -->
-	<div class="about">
+	<!-- faq -->
+	<div class="faq">
 		<div class="container">	
-			<div class="w3ls_about_grids">
-				<div class="col-md-6 w3ls_about_grid_left">
-					<p>Bakul kamera merupakan salah satu website jual beli kamera untuk memudahkan Anda mendapatkan kamera yang Anda inginkan,
-					kami menjual produk asli 100%, ayo wujudkan impian kamera Anda bersama Bakul kamera, dapatkan kemudahan dengan berbelanja di Bakul Kamera.
-					.</p>
-					
-					<div class="clearfix"> </div>
+			<div class="w3l_faq_grids">
+				<div class="w3l_faq_grid">
+					<h3>1. Apakah produk kamera di sini selalu tersedia ?</h3>
+					<p><b>Jawaban.</b> Tidak, terkadang dengan banyaknya pembeli, membuat stok barang tidak menentu.
+						Harap periksa detail produk untuk melihat jumlah stok yang ada.</p>
 				</div>
-				<div class="col-md-6 w3ls_about_grid_right">
-					<img src="<?php echo base_url('assets/')?>images/52.jpg" alt=" " class="img-responsive" />
+				<div class="w3l_faq_grid">
+					<h3>2. Kenapa tidak ada diskon ?</h3>
+					<p><b>Jawaban.</b> Karena selama ini pelanggan kami puas dengan produk yang kami jual, sehingga
+						keberadaan diskon di Bakul Kamera kurang begitu diperlukan.</p>
 				</div>
-				<div class="clearfix"> </div>
+				<div class="w3l_faq_grid">
+					<h3>3. Dapatkah saya membatalkan pesanan saya ?</h3>
+					<p><b>Jawaban.</b> Bisa.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>4. Kapan pembelian saya diverifikasi ?</h3>
+					<p><b>Jawaban.</b> Secepatnya setelah pembeli melakukan pembayaran ke dalam
+						rekening toko kami. Semakin cepat pembeli melakukan pembayaran, maka kami
+						juga akan semakin untuk memverifikasi.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>5. Bisakah saya mengembalikan produk yang telah saya beli ?</h3>
+					<p><b>Jawaban.</b> Saat ini, Bakul Kamera belum dapat menerima barang kembalian, dikarenakan
+						produk kami yang asli berkualitas, sehingga dapat dipastikan produk-produk yang kami jual kuat
+						dan tahan lama.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>6. Ada jam tutupnya ?</h3>
+					<p><b>Jawaban</b> Ada, kalau servernya mati.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>7. Saya ndak ada uang mas.</h3>
+					<p><b>Jawaban.</b> Kerja.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>8. Berapa maksimal pembelian yang boleh saya lakukan ?</h3>
+					<p><b>Jawaban.</b> Lebih banyak, lebih baik. Semakin banyak, semakin menguntungkan.</p>
+				</div>
+				<div class="w3l_faq_grid">
+					<h3>9. Ada WA atau Line ?</h3>
+					<p><b>Jawaban.</b> Tidak ada. Karena Bakul Kamera adalah toko profesional. Yang profesional
+					pakenya E-mail (Electronic-Mail AKA Surat Elektronik).</p>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- //about --> 
-	<!-- team -->
-	<div class="team">
-		<div class="container">
-			<h3>Tim Kami</h3>
-			<div class="wthree_team_grids">
-				<div class="col-md-6 wthree_team_grid">
-					<img src="<?php echo base_url()?>assets/images/t55.jpg" alt=" " class="img-responsive" />
-					<h4>M. Iqbal Maulana<span>Developer</span></h4>
-					<div class="agileits_social_button">
-						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 wthree_team_grid">
-					<img src="<?php echo base_url()?>assets/images/t44.jpg" alt=" " class="img-responsive" />
-					<h4>Riza Awwalul Baqy<span>Developer</span></h4>
-					<div class="agileits_social_button">
-						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- //team -->
-	<!-- team-bottom -->
-	<div class="team-bottom">
-		<div class="container">
-			<h3>Siap dapatkan kamera terbaikmu?</h3>
-			<p>Tunggu apa lagi.</p>
-			<a href="products.html">Belanja Yuk</a>
-		</div>
-	</div>
-	<!-- //team-bottom -->
+	<!-- //faq -->
 
 <?php $this->load->view('footer') ?>
 
 	<!-- cart-js -->
-	<script src="<?php echo base_url('assets/')?>js/minicart.js"></script>
+	<script src="js/minicart.js"></script>
 	<script>
         w3ls.render();
 

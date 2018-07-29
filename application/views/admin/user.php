@@ -227,7 +227,7 @@
                             pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
                             maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
                             onmousedown="this.type='text'" onmouseup="this.type='password'"
-                            value="<?php echo $row->password ?>">
+                            value="<?php echo $this->encryption->decrypt($row->password) ?>">
                         <font color="#808080">Klik untuk melihat</font>
                     </div>
                     <div class="form-group">

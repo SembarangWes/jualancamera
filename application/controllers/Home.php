@@ -102,7 +102,6 @@ class Home extends CI_Controller {
 
 	public function about_us()
 	{ 
-
         $data = [
             'kategori' => $this->Kategori_model->select(),
             'user' => $this->User_model->show($this->session->id),
@@ -131,5 +130,15 @@ class Home extends CI_Controller {
             'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
         ];
         $this->load->view('show', $data);
+    }
+
+    public function faq()
+    {
+        $data = [
+            'kategori' => $this->Kategori_model->select(),
+            'user' => $this->User_model->show($this->session->id),
+            'riwayat' => $this->Transaksi_model->usertrans($this->session->id)
+        ];
+        $this->load->view('faq', $data);
     }
 }

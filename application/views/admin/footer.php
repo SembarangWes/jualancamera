@@ -2,7 +2,7 @@
     <div class="container">
         
         <div class="copy text-center">
-            Kamera-Shop <a href='#'>Website</a>
+            .: <a href='<?php echo site_url('home/') ?>'>Bakul'e Kamera</a> :.
         </div>
         
     </div>

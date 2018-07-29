@@ -47,7 +47,7 @@
 
 					<div class="already">
 						<p>Bukan Administrator?</p>
-						<a href="<?php echo site_url('home/') ?>">Kembali ke Web</a>
+						<a href="<?php echo site_url('home/') ?>">Kembali ke Halaman Utama</a>
 					</div>
 
 				</div>

@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','form_validation','pagination','session','pdf','cart');
+$autoload['libraries'] = array('database','form_validation','pagination','session','pdf','cart','encryption');
 
 /*
 | -------------------------------------------------------------------
@@ -136,7 +136,6 @@ $autoload['model'] = array(
     'Detail_model',
     'Kamera_model',
     'Kategori_model',
-    'Log_model',
     'Merek_model',
     'Transaksi_model',
     'User_model'
