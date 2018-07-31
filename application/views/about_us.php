@@ -119,10 +119,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h4>M. Iqbal Maulana<span>Developer</span></h4>
 					<div class="agileits_social_button">
 						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="http://facebook.com" class="facebook"> </a></li>
+							<li><a href="http://twitter.com" class="twitter"> </a></li>
+							<li><a href="http://google.com" class="google"> </a></li>
+							<li><a href="http://pinterest.com" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>
@@ -131,10 +131,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h4>Riza Awwalul Baqy<span>Developer</span></h4>
 					<div class="agileits_social_button">
 						<ul>
-							<li><a href="#" class="facebook"> </a></li>
-							<li><a href="#" class="twitter"> </a></li>
-							<li><a href="#" class="google"> </a></li>
-							<li><a href="#" class="pinterest"> </a></li>
+							<li><a href="http://facebook.com" class="facebook"> </a></li>
+							<li><a href="http://twitter.com" class="twitter"> </a></li>
+							<li><a href="http://google.com" class="google"> </a></li>
+							<li><a href="http://pinterest.com" class="pinterest"> </a></li>
 						</ul>
 					</div>
 				</div>

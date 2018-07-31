@@ -88,4 +88,26 @@ class Transaksi_model extends CI_Model {
         $this->db->delete('transaksi');
         return result;
     }
+
+    public function reportTime($date)
+    {
+        $this->db->select('*');
+        $this->db->select_sum('jumlah');
+        $this->db->from('transaksi');
+        $this->db->join('user', 'user.id_user = transaksi.id_user', 'left');
+        $this->db->join('detail', 'transaksi.id_transaksi = detail.id_transaksi');
+        $this->db->join('kamera', 'kamera.id_kamera = detail.id_kamera');
+
+        if($date=='Hari')
+        { $this->db->group_by('day(tgl_transaksi)'); }
+        if($date=='Bulan')
+        { $this->db->group_by('month(tgl_transaksi)'); }
+        if($date=='Tahun')
+        { $this->db->group_by('year(tgl_transaksi)'); }
+
+        $this->db->group_by('nama_kamera');
+        $this->db->order_by('tgl_transaksi', 'desc');
+        
+        return $this->db->get()->result();
+    }
 }

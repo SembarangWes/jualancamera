@@ -7,6 +7,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" type="image/png" href="<?php echo base_url('images/ic.png')?>" sizes="16x16">
+	<link rel="shortcut icon" href="<?php echo base_url('images/ic.png')?>">
 	<title>Bakul'e Kamera :: Beranda</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">

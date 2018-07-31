@@ -327,6 +327,23 @@ class Admin extends CI_Controller {
         { $this->load->view('admin/transact', $data); }
     }
 
+    public function report()
+    {
+        if($this->input->post('submit')=='submit')
+        {
+            $date = $this->input->post('kolom');
+            $data = [
+                'data' => $this->Transaksi_model->reportTime($date),
+                'date' => $date
+            ];
+
+            $this->pdf->setPaper('A4', 'landscape');
+            $this->pdf->load_view('report/report_report', $data, 'print.pdf');
+        }
+        else
+        { $this->load->view('admin/report'); }
+    }
+
 	public function login()
 	{ $this->load->view('admin/login'); }
 }

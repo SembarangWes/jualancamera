@@ -47,6 +47,11 @@
 						<li><a href="<?php echo site_url('admin/transact') ?>"><i class="glyphicon glyphicon-credit-card"></i> Transaksi</a></li>
 					</ul>
 				</div>
+				<div class="sidebar content-box" style="display: block;">
+					<ul class="nav">
+                        <li><a href="<?php echo site_url('admin/report') ?>"><i class="glyphicon glyphicon-book"></i> Laporan</a></li>
+                    </ul>
+				</div>
 			</div>
 
 			<div class="col-md-10">
