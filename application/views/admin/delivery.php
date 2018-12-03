@@ -42,9 +42,9 @@
 						<li><a href="<?php echo site_url('admin/camera') ?>"><i class="glyphicon glyphicon-camera"></i> Kamera</a></li>
                         <li><a href="<?php echo site_url('admin/category') ?>"><i class="glyphicon glyphicon-list"></i> Kategori</a></li>
                         <li><a href="<?php echo site_url('admin/brand') ?>"><i class="glyphicon glyphicon-copyright-mark"></i> Merek</a></li>
-						<li class="current"><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
+						<li><a href="<?php echo site_url('admin/user') ?>"><i class="glyphicon glyphicon-user"></i> Pengguna</a></li>
                         <li><a href="<?php echo site_url('admin/transact') ?>"><i class="glyphicon glyphicon-credit-card"></i> Transaksi</a></li>
-                        <li><a href="<?php echo site_url('admin/delivery') ?>"><i class="glyphicon glyphicon-gift"></i> Pengiriman</a></li>
+                        <li class="current"><a href="<?php echo site_url('admin/delivery') ?>"><i class="glyphicon glyphicon-gift"></i> Pengiriman</a></li>
 					</ul>
 				</div>
 				<div class="sidebar content-box" style="display: block;">
@@ -59,22 +59,22 @@
 					<div class="col-md-12">
 
                         <div class="content-box-header">
-                            <div class="panel-title"><b>Admin / Pengguna</b></div>
+                            <div class="panel-title"><b>Admin / Pengiriman</b></div>
                         </div>
 
 						<div class="content-box-large box-with-header">
 
 							<div class="panel-body">
                                 <div class="row">
-                                    <form class="form-inline" action="<?php echo site_url('admin/user') ?>" method="post">
+                                    <form class="form-inline" action="<?php echo site_url('admin/delivery') ?>" method="post">
                                     <div class="col-md-6">
                                         <label for="Cari">Pencarian : </label>
                                         <select class="form-control" id="kolom" name="kolom">
-                                            <option value="nama_user">Nama</option>
-                                            <option value="alamat">Alamat</option>
-                                            <option value="no_hp">HP</option>
-                                            <option value="email">E-mail</option>
-                                            <option value="role">Hak Akses</option>
+                                            <option value="id_pengiriman">ID Pengiriman</option>
+                                            <option value="nama_paket">Paket</option>
+                                            <option value="jenis">Jenis Pengiriman</option>
+                                            <option value="nama">Nama Pengirim</option>
+                                            <option value="nama_penerima">Nama Tujuan</option>
                                         </select>
                                         <input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
                                         <button class="btn btn-default" type="submit" name="tombol" value="filter">Go</button>
@@ -88,10 +88,10 @@
 								<table class="table table-striped">
 									<thead>
 										<th>No</th>
-										<th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>No. Handphone</th>
-                                        <th>E-mail</th>
+										<th>Paket</th>
+                                        <th>Tujuan</th>
+                                        <th>Jenis</th>
+                                        <th>Status</th>
 										<th>
                                             <!-- Tombol Modal Tambah-->
                                             <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalTambah"> Tambah</button>
@@ -104,49 +104,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><legend>Tambah Pengguna</legend></h4>
+                <h4 class="modal-title"><legend>Tambah Pengiriman</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open('user/store') ?>
+<?php echo form_open('delivery/store') ?>
                 <fieldset>
                     <div class="form-group">
-                        <label for="Name">Nama :</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            pattern="^[^-\s][a-zA-Z_\s-]{1,50}" required title="Harap diisi dengan huruf"
-                            placeholder="Masukkan nama ...">  
+                        <label for="Name">ID Transaksi :</label>
+                        <select  id="id_transaksi" name="id_transaksi">
+                            <?php //foreach($id as $i) { ?>
+                            <option value="<?php echo 'id_transaksi' ?>"><?php echo "id_transaksi" ?></option>
+                            <?php //} ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="Alamat">Alamat :</label>
-                        <textarea type="text" class="form-control" id="alamat" name="alamat"
-                            pattern="{1,1000}" required title="Harap diisi"
-                            placeholder="Masukkan alamat ...">  
-                        </textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="hp">No. HP :</label>
-                        <input type="number" class="form-control" id="hp" name="hp"
+                        <label for="berat">Berat :</label>
+                        <input type="number" class="form-control" id="berat" name="berat"
                             pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan nomer handphone ...">  
+                            placeholder="Masukkan berat (dalam Kilogram) ...">  
                     </div>
                     <div class="form-group">
-                        <label for="email">E-mail :</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            pattern="{1,50}" required title="Harap diisi"
-                            placeholder="Masukkan email ...">  
+                        <label for="ukuran">Ukuran :</label>
+                        <input type="number" class="form-control" id="ukuran" name="ukuran"
+                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+                            placeholder="Masukkan ukuran (dalam cm3) ...">  
                     </div>
                     <div class="form-group">
-                        <label for="pass">Password :</label>
-                        <input type="password" class="form-control" id="pass" name="pass"
-                            pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
-                            maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
-                            onmousedown="this.type='text'" onmouseup="this.type='password'">
-                        <font color="#808080">Klik untuk melihat</font>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Hak Akses Sebagai :</label>
-                        <select class="form-control" id="role" name="role">
-                            <option value="Administrator">Administrator</option>
-                            <option value="Pengguna">Pengguna</option>
+                        <label for="Jenis">Jenis :</label>
+                        <select  id="jenis" name="jenis">
+                            <?php //foreach($jenis as $j) { ?>
+                            <option value="<?php echo 'id_kategori' ?>"><?php echo "Jenis" ?></option>
+                            <?php //} ?>
                         </select>
                     </div>
                 </fieldset>
@@ -166,82 +154,66 @@
 									</thead>
 <?php if(isset($data)) { ?>
 									<tbody>
-										<?php foreach($data as $row) { ?>
+										<?php $start=0; foreach($data as $row) { ?>
 										<tr>
 										<td>
 											<?php echo $start+=1 ?>
 										</td>
 										<td>
-											<?php echo $row->nama_user ?>
+											<?php echo $row->nama_paket ?>
 										</td>
                                         <td>
-											<?php echo $row->alamat ?>
+											<?php echo $row->nama_penerima ?>
+                                            <br/>
+                                            <?php echo $row->alamat_penerima ?>
 										</td>
                                         <td>
-											<?php echo $row->no_hp ?>
+											<?php echo $row->jenis ?>
 										</td>
                                         <td>
-											<?php echo $row->email ?>
+											<?php echo $row->status ?>
 										</td>
 										<td>
                                             <!-- Tombol Modal Ubah-->
-                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_user ?>"></button>
+                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_pengiriman ?>"></button>
 
 <!-- Modal Ubah -->
-<div id="ModalUbah<?php echo $row->id_user ?>" class="modal fade" role="dialog">
+<div id="ModalUbah<?php echo $row->id_pengiriman ?>" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><legend>Edit Pengguna</legend></h4>
+                <h4 class="modal-title"><legend>Edit Pengiriman</legend></h4>
             </div>
             <div class="modal-body">
-<?php echo form_open('user/update/'.$row->id_user); echo form_hidden('id', $row->id_user); ?>
+<?php echo form_open('delivery/update/'.$row->id_pengiriman) ; echo form_hidden('id', $row->id_pengiriman); ?>
                 <fieldset>
                     <div class="form-group">
-                        <label for="ID_Pengguna">ID Pengguna : <?php echo $row->id_user ?></label>
+                        <label for="id_pengiriman">ID Pengiriman : <?php echo $row->id_pengiriman ?></label>
+                    </div>
+                    <div c lass="form-group">
+                        <l abel for="id_transaksi">ID Transaksi : <?php echo $row->id_transaksi ?></label>
                     </div>
                     <div class="form-group">
-                        <label for="Name">Nama :</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            pattern="^[^-\s][a-zA-Z_\s-]{1,50}" required title="Harap diisi dengan huruf"
-                            placeholder="Masukkan nama ..." value="<?php echo $row->nama_user ?>">  
-                    </div>
-                    <div class="form-group">
-                        <label for="Alamat">Alamat :</label>
-                        <textarea type="text" class="form-control" id="alamat" name="alamat"
-                            pattern="{1,1000}" required title="Harap diisi"
-                            placeholder="Masukkan alamat ..."><?php echo $row->alamat ?></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="hp">No. HP :</label>
-                        <input type="number" class="form-control" id="hp" name="hp"
+                        <label for="berat">Berat :</label>
+                        <input type="number" class="form-control" id="berat" name="berat"
                             pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan nomer handphone ..." value="<?php echo $row->no_hp ?>">  
+                            placeholder="Masukkan berat (dalam Kilogram) ..." value="<?php echo $row->berat ?>"">  
                     </div>
                     <div class="form-group">
-                        <label for="email">E-mail :</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                            pattern="{1,50}" required title="Harap diisi"
-                            placeholder="Masukkan email ..." value="<?php echo $row->email ?>">  
+                        <label for="ukuran">Ukuran :</label>
+                        <input type="number" class="form-control" id="ukuran" name="ukuran"
+                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+                            placeholder="Masukkan ukuran (dalam cm3) ..." value="<?php echo $row->ukuran ?>"">  
                     </div>
                     <div class="form-group">
-                        <label for="pass">Password :</label>
-                        <input type="password" class="form-control" id="pass" name="pass"
-                            pattern=".{8,}" required title="Harap diisi sebanyak 8 karakter"
-                            maxlength="8" placeholder="Masukkan password ..." onmousemove="this.type='password'"
-                            onmousedown="this.type='text'" onmouseup="this.type='password'"
-                            value="<?php echo $this->encryption->decrypt($row->password) ?>">
-                        <font color="#808080">Klik untuk melihat</font>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Hak Akses Sebagai :</label>
-<?php if($row->role=="Administrator"){$a='selected';$p=null;}else{$a=null;$p='selected';}?>
-                        <select class="form-control" id="role" name="role">
-                            <option value="Administrator" <?php echo $a ?>>Administrator</option>
-                            <option value="Pengguna" <?php echo $p ?>>Pengguna</option>
+                        <label for="Jenis">Jenis :</label>
+                        <select  id="jenis" name="jenis">
+                            <?php // foreach($jenis as $j) { $s=""; if($j==$row->jenis) {$s="selected"} ?>
+                            <option value="<?php echo 'id_kategori' ?>" <?php echo $s ?>><?php echo "Jenis" ?></option>
+                            <?php //} ?>
                         </select>
                     </div>
                 </fieldset>
@@ -257,7 +229,7 @@
 </div>
 <!-- Tutup Modal Ubah -->
 
-											<a href="<?php echo site_url('user/destroy/'.$row->id_user) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
+											<a href="<?php echo site_url('delivery/destroy/'.$row->id_pengiriman) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
 												onclick="return confirm('Apakah anda yakin?')"></a>
 										</td>
 										</tr>
@@ -267,7 +239,7 @@
 							</div>
 
 							<div class="panel-footer">
-<?php echo $links ?>
+
 							</div>
 
 <?php } else {echo "<center>Tidak Ada Data!</center>";} ?>

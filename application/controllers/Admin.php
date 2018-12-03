@@ -99,6 +99,63 @@ class Admin extends CI_Controller {
     public function category()
     { $this->load->view('admin/category'); }
     
+    public function brand($error='')
+    {
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $search=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("search"))
+            { $search = $this->input->post("search"); }
+            else
+            { $search = 'null'; }
+        }
+
+        $data = [];
+        $total = $this->Merek_model->getTotal($search);
+        if ($total > 0)
+        {
+            $limit = 5;
+            $start = $this->uri->segment(4, 0);
+            $config = [
+                'base_url' => base_url() . 'admin/brand/'. $search,
+                'total_rows' => $total,
+                'per_page' => $limit,
+                'uri_segment' => 4,
+
+                // Bootstrap 3 Pagination
+                'first_link' => '&laquo;',
+                'last_link' => '&raquo;',
+                'next_link' => 'Next',
+                'prev_link' => 'Prev',
+                'full_tag_open' => '<ul class="pagination">',
+                'full_tag_close' => '</ul>',
+                'num_tag_open' => '<li>',
+                'num_tag_close' => '</li>',
+                'cur_tag_open' => '<li class="active"><span>',
+                'cur_tag_close' => '<span class="sr-only">(current)</span></span></li>',
+                'next_tag_open' => '<li>',
+                'next_tag_close' => '</li>',
+                'prev_tag_open' => '<li>',
+                'prev_tag_close' => '</li>',
+                'first_tag_open' => '<li>',
+                'first_tag_close' => '</li>',
+                'last_tag_open' => '<li>',
+                'last_tag_close' => '</li>',
+            ];
+            $this->pagination->initialize($config);
+            $data = [
+                'data' => $this->Merek_model->list($limit, $start, $search),
+                'links' => $this->pagination->create_links(),
+                'start' => $start,
+                'error' => $error
+            ];
+        }
+        
+		$this->load->view('admin/brand', $data);
+    }
+
     public function user()
     {
         // Cek kolom combobox
@@ -180,63 +237,6 @@ class Admin extends CI_Controller {
         else
         { $this->load->view('admin/user', $data); }
 		
-    }
-
-    public function brand($error='')
-    {
-        // Cek kolom combobox
-        if($this->uri->segment(3))
-        { $search=$this->uri->segment(3); }
-        else
-        {
-            if($this->input->post("search"))
-            { $search = $this->input->post("search"); }
-            else
-            { $search = 'null'; }
-        }
-
-        $data = [];
-        $total = $this->Merek_model->getTotal($search);
-        if ($total > 0)
-        {
-            $limit = 5;
-            $start = $this->uri->segment(4, 0);
-            $config = [
-                'base_url' => base_url() . 'admin/brand/'. $search,
-                'total_rows' => $total,
-                'per_page' => $limit,
-                'uri_segment' => 4,
-
-                // Bootstrap 3 Pagination
-                'first_link' => '&laquo;',
-                'last_link' => '&raquo;',
-                'next_link' => 'Next',
-                'prev_link' => 'Prev',
-                'full_tag_open' => '<ul class="pagination">',
-                'full_tag_close' => '</ul>',
-                'num_tag_open' => '<li>',
-                'num_tag_close' => '</li>',
-                'cur_tag_open' => '<li class="active"><span>',
-                'cur_tag_close' => '<span class="sr-only">(current)</span></span></li>',
-                'next_tag_open' => '<li>',
-                'next_tag_close' => '</li>',
-                'prev_tag_open' => '<li>',
-                'prev_tag_close' => '</li>',
-                'first_tag_open' => '<li>',
-                'first_tag_close' => '</li>',
-                'last_tag_open' => '<li>',
-                'last_tag_close' => '</li>',
-            ];
-            $this->pagination->initialize($config);
-            $data = [
-                'data' => $this->Merek_model->list($limit, $start, $search),
-                'links' => $this->pagination->create_links(),
-                'start' => $start,
-                'error' => $error
-            ];
-        }
-        
-		$this->load->view('admin/brand', $data);
     }
 
     public function transact()
@@ -325,6 +325,51 @@ class Admin extends CI_Controller {
         }
         else
         { $this->load->view('admin/transact', $data); }
+    }
+
+    public function delivery()
+    {
+        // Cek kolom combobox
+        if($this->uri->segment(3))
+        { $box=$this->uri->segment(3); }
+        else
+        {
+            if($this->input->post("kolom"))
+            { $box = $this->input->post("kolom"); }
+            else
+            { $box = null; }
+        }
+
+        // Cek isi kotak
+        if($this->uri->segment(4))
+        { $search=$this->uri->segment(4); }
+        else
+        {
+            if($this->input->post("search"))
+            { $search = $this->input->post("search"); }
+            else
+            { $search = null; }
+        }
+        
+        $API="http://localhost:8012/express_server/index.php";
+        $params = [
+            'box' => $box,
+            'search' => $search
+        ];
+
+        $data = [
+            'data' => json_decode($this->curl->simple_get($API.'/pengiriman', $params)),
+            'box' => $box,
+            'search' => $search
+        ];
+        
+        if($this->input->post("tombol")=='print')
+        {
+            $this->pdf->setPaper('A4', 'landscape');
+            $this->pdf->load_view('report/report_delivery', $data, 'print.pdf'); 
+        }
+        else
+        { $this->load->view('admin/delivery', $data); }	
     }
 
     public function report()

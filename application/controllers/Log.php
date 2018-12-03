@@ -29,7 +29,7 @@ class Log extends CI_Controller {
                     'role' => $s->role,
                     'status' => 'Logged'
                 ];
-                $this->session->set_userdata($log);            
+                $this->session->set_userdata($log);
     
                 if($this->session->role=="Administrator")
                 { redirect('admin/'); }
