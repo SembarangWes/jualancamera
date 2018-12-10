@@ -1,13 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
-
+class Admin extends CI_Controller
+{
+    var $API = "";
 	public function __construct()
     {
         parent::__construct();
         if($this->session->role!='Administrator')
         { redirect('log/'); }
+
+        // URL UNTUK REST
+        $this->API = "http://localhost:8012/express_server/index.php";
+        // URL UNTUK REST
     }
 
 	public function index()
@@ -351,14 +356,15 @@ class Admin extends CI_Controller {
             { $search = null; }
         }
         
-        $API="http://localhost:8012/express_server/index.php";
         $params = [
             'box' => $box,
             'search' => $search
         ];
 
         $data = [
-            'data' => json_decode($this->curl->simple_get($API.'/pengiriman', $params)),
+            'dataID' => $this->Transaksi_model->selectIDpaid(),
+            'dataKat' => json_decode($this->curl->simple_get($this->API.'/kategori')),
+            'data' => json_decode($this->curl->simple_get($this->API.'/pengiriman', $params)),
             'box' => $box,
             'search' => $search
         ];
@@ -369,7 +375,7 @@ class Admin extends CI_Controller {
             $this->pdf->load_view('report/report_delivery', $data, 'print.pdf'); 
         }
         else
-        { $this->load->view('admin/delivery', $data); }	
+        { $this->load->view('admin/delivery', $data); }
     }
 
     public function report()

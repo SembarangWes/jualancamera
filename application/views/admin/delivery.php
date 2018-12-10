@@ -10,8 +10,11 @@
 		<!-- styles -->
 		<link href="<?php echo base_url('assets/')?>css/styles.css" rel="stylesheet">
 
+		<!-- CSS Datatables -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/')?>datatables/datatables.min.css">
+
 		<!-- CSS Editor -->
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/')?>vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css"></link>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/')?>vendors/bootstrap-wysihtml5/src/bootstrap-wysihtml5.css">
 
 		<!-- CSS Form -->
 		<link href="<?php echo base_url('assets/')?>css/fontawesome.css" rel="stylesheet">
@@ -47,7 +50,7 @@
                         <li class="current"><a href="<?php echo site_url('admin/delivery') ?>"><i class="glyphicon glyphicon-gift"></i> Pengiriman</a></li>
 					</ul>
 				</div>
-				<div class="sidebar content-box" style="display: block;">
+                <div class="sidebar content-box" style="display: block;">
 					<ul class="nav">
                         <li><a href="<?php echo site_url('admin/report') ?>"><i class="glyphicon glyphicon-book"></i> Laporan</a></li>
                     </ul>
@@ -64,95 +67,69 @@
 
 						<div class="content-box-large box-with-header">
 
-							<div class="panel-body">
-                                <div class="row">
-                                    <form class="form-inline" action="<?php echo site_url('admin/delivery') ?>" method="post">
-                                    <div class="col-md-6">
-                                        <label for="Cari">Pencarian : </label>
-                                        <select class="form-control" id="kolom" name="kolom">
-                                            <option value="id_pengiriman">ID Pengiriman</option>
-                                            <option value="nama_paket">Paket</option>
-                                            <option value="jenis">Jenis Pengiriman</option>
-                                            <option value="nama">Nama Pengirim</option>
-                                            <option value="nama_penerima">Nama Tujuan</option>
-                                        </select>
-                                        <input class="form-control" type="text" id="search" name="search" value="" placeholder="Search...">
-                                        <button class="btn btn-default" type="submit" name="tombol" value="filter">Go</button>
-                                    </div>
-									<div class="col-md-6" align="right">
-                                        <button class="btn btn-default" type="submit" name="tombol" value="print"><span class="glyphicon glyphicon-print"></span></button>
-                                    </div>
-                                    </form>
-                                </div>
+                            <table class="table table-striped" id="myTable">
+                                <thead>
+                                    <th>No</th>
+                                    <th>Paket</th>
+                                    <th>Tujuan</th>
+                                    <th>Jenis</th>
+                                    <th>Status</th>
+                                    <th>
+                                        <!-- Tombol Modal Tambah-->
+                                        <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalTambah"> Tambah</button>
 
-								<table class="table table-striped">
-									<thead>
-										<th>No</th>
-										<th>Paket</th>
-                                        <th>Tujuan</th>
-                                        <th>Jenis</th>
-                                        <th>Status</th>
-										<th>
-                                            <!-- Tombol Modal Tambah-->
-                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalTambah"> Tambah</button>
+                                        <!-- Modal Tambah -->
+                                        <div id="ModalTambah" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
 
-<!-- Modal Tambah -->
-<div id="ModalTambah" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title"><legend>Tambah Pengiriman</legend></h4>
+                                                    </div>
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><legend>Tambah Pengiriman</legend></h4>
-            </div>
-            <div class="modal-body">
-<?php echo form_open('delivery/store') ?>
-                <fieldset>
-                    <div class="form-group">
-                        <label for="Name">ID Transaksi :</label>
-                        <select  id="id_transaksi" name="id_transaksi">
-                            <?php //foreach($id as $i) { ?>
-                            <option value="<?php echo 'id_transaksi' ?>"><?php echo "id_transaksi" ?></option>
-                            <?php //} ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="berat">Berat :</label>
-                        <input type="number" class="form-control" id="berat" name="berat"
-                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan berat (dalam Kilogram) ...">  
-                    </div>
-                    <div class="form-group">
-                        <label for="ukuran">Ukuran :</label>
-                        <input type="number" class="form-control" id="ukuran" name="ukuran"
-                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan ukuran (dalam cm3) ...">  
-                    </div>
-                    <div class="form-group">
-                        <label for="Jenis">Jenis :</label>
-                        <select  id="jenis" name="jenis">
-                            <?php //foreach($jenis as $j) { ?>
-                            <option value="<?php echo 'id_kategori' ?>"><?php echo "Jenis" ?></option>
-                            <?php //} ?>
-                        </select>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="tambah">Tambah</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-            </div>
-<?php echo form_close() ?>
-        </div>
+                                        <?php echo form_open('delivery/store') ?>
+                                                    <div class="modal-body">
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <label for="Name">ID Transaksi :</label>
+                                                                <select  class="form-control" id="id_transaksi" name="id_transaksi">
+                                                                    <?php foreach($dataID as $d) { ?>
+                                                                    <option value="<?php echo $d->id_transaksi ?>"><?php echo $d->id_transaksi ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="berat">Berat (Kg) :</label>
+                                                                <input type="number" class="form-control" id="berat" name="berat"
+                                                                    pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+                                                                    placeholder="Masukkan berat (Kg) ...">  
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Jenis">Jenis :</label>
+                                                                <select class="form-control" id="jenis" name="jenis">
+                                                                    <?php foreach($dataKat as $dk) { ?>
+                                                                    <option value="<?php echo $dk->id_kategori ?>"><?php echo $dk->jenis ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary" id="tambah">Tambah</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                                    </div>
+                                        <?php echo form_close() ?>
+                                                </div>
 
-    </div>
-</div>
-<!-- Tutup Modal Tambah -->
+                                            </div>
+                                        </div>
+                                        <!-- Tutup Modal Tambah -->
 
-										</th>
-									</thead>
-<?php if(isset($data)) { ?>
+                                    </th>
+                                </thead>
+                                <?php if(isset($data)) { ?>
 									<tbody>
 										<?php $start=0; foreach($data as $row) { ?>
 										<tr>
@@ -163,7 +140,7 @@
 											<?php echo $row->nama_paket ?>
 										</td>
                                         <td>
-											<?php echo $row->nama_penerima ?>
+											<b><?php echo $row->nama_penerima ?></b>
                                             <br/>
                                             <?php echo $row->alamat_penerima ?>
 										</td>
@@ -177,63 +154,63 @@
                                             <!-- Tombol Modal Ubah-->
                                             <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_pengiriman ?>"></button>
 
-<!-- Modal Ubah -->
-<div id="ModalUbah<?php echo $row->id_pengiriman ?>" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+                                            <!-- Modal Ubah -->
+                                            <div id="ModalUbah<?php echo $row->id_pengiriman ?>" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><legend>Edit Pengiriman</legend></h4>
-            </div>
-            <div class="modal-body">
-<?php echo form_open('delivery/update/'.$row->id_pengiriman) ; echo form_hidden('id', $row->id_pengiriman); ?>
-                <fieldset>
-                    <div class="form-group">
-                        <label for="id_pengiriman">ID Pengiriman : <?php echo $row->id_pengiriman ?></label>
-                    </div>
-                    <div c lass="form-group">
-                        <l abel for="id_transaksi">ID Transaksi : <?php echo $row->id_transaksi ?></label>
-                    </div>
-                    <div class="form-group">
-                        <label for="berat">Berat :</label>
-                        <input type="number" class="form-control" id="berat" name="berat"
-                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan berat (dalam Kilogram) ..." value="<?php echo $row->berat ?>"">  
-                    </div>
-                    <div class="form-group">
-                        <label for="ukuran">Ukuran :</label>
-                        <input type="number" class="form-control" id="ukuran" name="ukuran"
-                            pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                            placeholder="Masukkan ukuran (dalam cm3) ..." value="<?php echo $row->ukuran ?>"">  
-                    </div>
-                    <div class="form-group">
-                        <label for="Jenis">Jenis :</label>
-                        <select  id="jenis" name="jenis">
-                            <?php // foreach($jenis as $j) { $s=""; if($j==$row->jenis) {$s="selected"} ?>
-                            <option value="<?php echo 'id_kategori' ?>" <?php echo $s ?>><?php echo "Jenis" ?></option>
-                            <?php //} ?>
-                        </select>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-            </div>
-<?php echo form_close() ?>
-        </div>
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title"><legend>Edit Pengiriman</legend></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <?php echo form_open('delivery/update/'.$row->id_pengiriman) ; echo form_hidden('id', $row->id_pengiriman); ?>
+                                                            <fieldset>
+                                                                <div class="form-group">
+                                                                    <label for="id_pengiriman">ID Pengiriman : <?php echo $row->id_pengiriman ?></label>
+                                                                </div>
+                                                                <div c lass="form-group">
+                                                                    <l abel for="id_transaksi">ID Transaksi : <?php echo $row->id_transaksi ?></label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="berat">Berat :</label>
+                                                                    <input type="number" class="form-control" id="berat" name="berat"
+                                                                        pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+                                                                        placeholder="Masukkan berat (dalam Kilogram) ..." value="<?php echo $row->berat ?>"">  
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="ukuran">Ukuran :</label>
+                                                                    <input type="number" class="form-control" id="ukuran" name="ukuran"
+                                                                        pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+                                                                        placeholder="Masukkan ukuran (dalam cm3) ..." value="<?php echo $row->ukuran ?>"">  
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="Jenis">Jenis :</label>
+                                                                    <select  id="jenis" name="jenis">
+                                                                        <?php // foreach($jenis as $j) { $s=""; if($j==$row->jenis) {$s="selected"} ?>
+                                                                        <option value="<?php echo 'id_kategori' ?>" <?php echo $s ?>><?php echo "Jenis" ?></option>
+                                                                        <?php //} ?>
+                                                                    </select>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary" id="ubah">Ubah</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                                        </div>
+                                                    <?php echo form_close() ?>
+                                                    </div>
 
-    </div>
-</div>
-<!-- Tutup Modal Ubah -->
+                                                </div>
+                                            </div>
+                                            <!-- Tutup Modal Ubah -->
 
 											<a href="<?php echo site_url('delivery/destroy/'.$row->id_pengiriman) ?>" type="button" class="btn btn-danger btn-sm glyphicon glyphicon-trash"
 												onclick="return confirm('Apakah anda yakin?')"></a>
 										</td>
 										</tr>
-<?php } ?>
+                                        <?php } ?>
 									</tbody>
 								</table>
 							</div>
@@ -242,7 +219,7 @@
 
 							</div>
 
-<?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
+                            <?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
 
 						</div>
 					</div>
@@ -262,6 +239,14 @@
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="<?php echo base_url('assets/')?>bootstrap/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url('assets/')?>js/custom.js"></script>
+
+        <!-- JS Datatables -->
+        <script type="text/javascript" charset="utf8" src="<?php echo base_url('assets/')?>datatables/datatables.min.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#myTable').DataTable();
+            } );
+        </script>
 
 		<!-- JS Form -->
 		<script src="<?php echo base_url('assets/')?>vendors/select/bootstrap-select.min.js"></script>

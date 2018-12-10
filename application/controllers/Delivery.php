@@ -3,12 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Delivery extends CI_Controller
 {
-    var $API ="";
-
+    var $API = "";
 	public function __construct()
     {
         parent::__construct();
-        $this->API="http://localhost:8012/rest_server/index.php";
+        
+        // URL UNTUK REST
+        $this->API = "http://localhost:8012/express_server/index.php";
+        // URL UNTUK REST
     }
 
 	public function store()

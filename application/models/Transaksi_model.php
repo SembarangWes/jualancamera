@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Transaksi_model extends CI_Model {
 
+    public function selectIDpaid()
+    {
+        $this->db->select('id_transaksi');
+        $this->db->where('bayar', 1);
+        return $this->db->get('transaksi')->result();
+    }
+
     public function selectordername($box, $search)
     {
         $this->db->select('*');
