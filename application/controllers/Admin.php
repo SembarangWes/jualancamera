@@ -334,39 +334,15 @@ class Admin extends CI_Controller
 
     public function delivery()
     {
-        // Cek kolom combobox
-        if($this->uri->segment(3))
-        { $box=$this->uri->segment(3); }
-        else
-        {
-            if($this->input->post("kolom"))
-            { $box = $this->input->post("kolom"); }
-            else
-            { $box = null; }
-        }
-
-        // Cek isi kotak
-        if($this->uri->segment(4))
-        { $search=$this->uri->segment(4); }
-        else
-        {
-            if($this->input->post("search"))
-            { $search = $this->input->post("search"); }
-            else
-            { $search = null; }
-        }
-        
         $params = [
-            'box' => $box,
-            'search' => $search
+            'box' => 'pengirim.id_pengirim',
+            'search' => '2'
         ];
 
         $data = [
             'dataID' => $this->Transaksi_model->selectIDpaid(),
             'dataKat' => json_decode($this->curl->simple_get($this->API.'/kategori')),
-            'data' => json_decode($this->curl->simple_get($this->API.'/pengiriman', $params)),
-            'box' => $box,
-            'search' => $search
+            'data' => json_decode($this->curl->simple_get($this->API.'/pengiriman', $params))
         ];
         
         if($this->input->post("tombol")=='print')

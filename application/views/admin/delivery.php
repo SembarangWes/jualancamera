@@ -212,14 +212,13 @@
 										</tr>
                                         <?php } ?>
 									</tbody>
+                                    <?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
 								</table>
 							</div>
 
 							<div class="panel-footer">
 
 							</div>
-
-                            <?php } else {echo "<center>Tidak Ada Data!</center>";} ?>
 
 						</div>
 					</div>
