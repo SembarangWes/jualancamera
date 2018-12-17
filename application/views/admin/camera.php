@@ -87,6 +87,12 @@
 											placeholder="Masukkan Spesifikasi ...">
 										</textarea>
 									</div>
+                                    <div class="form-group">
+										<label for="Berat">Berat (Kg) :</label>
+										<input type="number" class="form-control" id="berat" name="berat"
+											pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+											placeholder="Masukkan Berat ...">  
+									</div>
 									<div class="form-group">
 										<label for="Harga">Harga (Rp.) :</label>
 										<input type="number" class="form-control" id="harga" name="harga"
@@ -159,6 +165,13 @@
 											placeholder="Masukkan Spesifikasi ...">
 											<?php echo $dataid->spesifikasi ?>
 										</textarea>
+									</div>
+                                    <div class="form-group">
+										<label for="Berat">Berat (Kg) :</label>
+										<input type="number" class="form-control" id="berat" name="berat"
+											pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
+											placeholder="Masukkan Berat ..."
+                                            value="<?php echo $dataid->berat ?>">
 									</div>
 									<div class="form-group">
 										<label for="Harga">Harga (Rp.) :</label>
@@ -291,21 +304,28 @@
 			<?php echo $row->spesifikasi ?>
 		</div>
 		<div class="modal-footer">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<?php if($row->nama_kategori==null) { ?>
 				<b><center>Tidak ada kategori.</center></b>
 				<?php } else { ?>
 				<p align="left"><b>Kategori : <?php echo $row->nama_kategori ?></b></p>
 				<?php } ?>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<?php if($row->nama_merek==null) { ?>
 				<b><center>Tidak ada merek.</center></b>
 				<?php } else { ?>
 				<p align="left"><b>Merek : <?php echo $row->nama_merek ?></b></p>
 				<?php } ?>
 			</div>
-			<div class="col-md-4">
+            <div class="col-md-3">
+				<?php if($row->berat==null) { ?>
+				<b><center>Tidak ada berat.</center></b>
+				<?php } else { ?>
+				<p align="left"><b>Berat : <?php echo $row->berat ?> Kg</b></p>
+				<?php } ?>
+			</div>
+			<div class="col-md-3">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
 			</div>
 		</div>

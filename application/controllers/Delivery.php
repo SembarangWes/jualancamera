@@ -3,35 +3,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Delivery extends CI_Controller
 {
-    var $API = "";
+    var $API = "", $PT = "";
 	public function __construct()
     {
         parent::__construct();
+        if($this->session->role!='Administrator')
+        { redirect('log/'); }
         
         // URL UNTUK REST
         $this->API = "http://localhost:8012/express_server/index.php";
         // URL UNTUK REST
+        $this->PT = "PT. Bakul Kamera";
     }
 
-	public function store()
-    {
-        // Insert data
-        $data = [
-            'nama_user' => $this->input->post('name'),
-            'alamat' => $this->input->post('alamat'),
-            'no_hp' => $this->input->post('hp'),
-            'email  ' => $this->input->post('email'),
-            'password' => $this->encryption->encrypt($this->input->post('pass')),
-            'role' => $this->input->post('role')
-            ];
-        
-        if ($this->User_model->insert($data))
-        { 
-            if($this->session->role=='Administrator')
-            { redirect('admin/user'); }
-            else
-            { redirect('home/'); }
+	public function store($id)
+    {    
+        $detail = $this->Detail_model->getDetail($id);
+        $weights = null;
+        foreach ($detail as $d)
+        {
+            $weight = $d->berat * $d->jumlah;
+            if ($weight <= 1) { $weight = 1; }
+            $weights += $weight;
         }
+
+        $short = $this->Transaksi_model->selectShortTrans($id);
+        $dataPengiriman = [
+            'nama_penerima' => $short->nama_user,
+            'alamat_penerima' => $short->alamat,
+            'berat' => $weights,
+            'id_kategori' => $short->id_kirim,
+            'nama_pengirim' => $this->PT
+        ];
+        
+        $id_pengiriman = $this->curl->simple_post($this->API.'/pengiriman', $dataPengiriman, array(CURLOPT_BUFFERSIZE => 10));
+        
+        foreach ($detail as $d)
+        {
+            $weight = $d->berat * $d->jumlah;
+            if ($weight <= 1) { $weight = 1; }
+
+            $dataPaket = [
+                'nama_paket' => $d->nama_kamera,
+                'berat' => $weight,
+                'id_pengiriman' => $id_pengiriman
+            ];
+            
+            $this->curl->simple_post($this->API.'/paket', $dataPaket, array(CURLOPT_BUFFERSIZE => 10));
+        }
+
+        redirect('admin/delivery');
     }
 
 	public function update($id)
@@ -62,7 +83,11 @@ class Delivery extends CI_Controller
         if($this->session->role!='Administrator')
         { redirect('log/'); }
 
-		if ($this->User_model->delete($id))
-		{ redirect('admin/user'); }
+        $data = [
+            'id_pengiriman' => $id
+        ];
+
+		if ($this->curl->simple_delete($this->API.'/pengiriman', $data, array(CURLOPT_BUFFERSIZE => 10)))
+        { redirect('admin/delivery'); }
     }
 }

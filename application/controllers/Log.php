@@ -18,27 +18,32 @@ class Log extends CI_Controller {
         $pass = $this->input->post('pass');
 
         $set = $this->User_model->cekLogin($user);
-        foreach ($set as $s)
+        if (!empty($set))
         {
-            $p=$this->encryption->decrypt($s->password);
-            if($p == $pass)
-            { 
-                $log = [
-                    'id' => $s->id_user,
-                    'username' => $s->nama_user,
-                    'role' => $s->role,
-                    'status' => 'Logged'
-                ];
-                $this->session->set_userdata($log);
-    
-                if($this->session->role=="Administrator")
-                { redirect('admin/'); }
+            foreach ($set as $s)
+            {
+                $p=$this->encryption->decrypt($s->password);
+                if($p == $pass)
+                { 
+                    $log = [
+                        'id' => $s->id_user,
+                        'username' => $s->nama_user,
+                        'role' => $s->role,
+                        'status' => 'Logged'
+                    ];
+                    $this->session->set_userdata($log);
+        
+                    if($this->session->role=="Administrator")
+                    { redirect('admin/'); }
+                    else
+                    { redirect('home/'); }
+                }
                 else
-                { redirect('home/'); }
+                { $this->index($error = 'Username atau Password Salah!'); }
             }
-            else
-            { $this->index($error = 'Username atau Password Salah!'); }
         }
+        else
+        { $this->index($error = 'Username atau Password Salah!'); }
     }
 
     public function logout()

@@ -48,6 +48,7 @@ class Camera extends CI_Controller {
             $data = [
                 'nama_kamera' => $this->input->post('kamera'),
                 'spesifikasi' => $this->input->post('spesifikasi'),
+                'berat' => $this->input->post('berat'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'id_kategori' => $this->input->post('kategori'),
@@ -82,6 +83,7 @@ class Camera extends CI_Controller {
             $data = [
                 'nama_kamera' => $this->input->post('kamera'),
                 'spesifikasi' => $this->input->post('spesifikasi'),
+                'berat' => $this->input->post('berat'),
                 'harga' => $this->input->post('harga'),
                 'stok' => $this->input->post('stok'),
                 'id_kategori' => $this->input->post('kategori'),

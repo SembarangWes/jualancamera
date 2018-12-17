@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transact extends CI_Controller {
-
+class Transact extends CI_Controller 
+{
     public function pay()
     {
         $id = $this->uri->segment(4);
@@ -33,10 +33,7 @@ class Transact extends CI_Controller {
             $this->Kamera_model->update($r->id_kamera, $data);
         }
 
-        if($this->session->role=='Administrator')
-        { redirect('admin/transact'); }
-        else
-        { redirect('home'); }
+        redirect('delivery/store/'.$id);
     }
 
     public function destroy($id)
@@ -44,7 +41,11 @@ class Transact extends CI_Controller {
         if($this->session->role!='Administrator')
         { redirect('log/'); }
 
-		if ($this->Transaksi_model->delete($id))
+		if (
+            $this->Transaksi_model->delete($id)
+            &&
+            $this->Detail_model->delete($id)
+            )
         { redirect('admin/transact'); }
     }
 }

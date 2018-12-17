@@ -132,7 +132,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <th class="text-center">Total Harga</th>
                                 </thead>
                                 <tbody>
-<?php if(!empty($carts)) { $a=0; foreach ($carts as $c) { ?>
+<?php if(!empty($carts)) { $d=''; $a=1; foreach ($carts as $c) { ?>
 									<tr>
 										<td align="center"><?php echo $a++ ?></td>
 										<td><?php echo $c['name'] ?></td>
@@ -140,28 +140,69 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<td align="right">Rp. <?php echo number_format($c['price'],0,",","."); ?>,-</td>
 										<td align="right">Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
 									</tr>
-<?php } } else { ?>
+<?php } } else { $d='onclick="return false;" disabled' ?>
 									<tr>
 										<td colspan='6'><center>Keranjang Anda kosong.</center></td>
 									</tr>								
 <?php } ?>
 								</tbody>
+                                <?php echo form_open('shop/payment') ?>
 								<tfoot>
 									<tr>
-										<td align="center">##</td>
-										<td colspan="3"><h4><b>Total</b></h4></td>
-										<td align="right"><h4><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h4></td>
+										<td colspan="4"><h4><b>Total Harga</b></h4></td>
+										<td align="right">
+                                            <input type="text" class="form-control" id="total_harga" name="total_harga"
+                                                value="<?php echo $this->cart->total() ?>" readonly>
+                                        </td>
 									</tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h4><b> Berat : <?php echo $berat ?> Kg </b></h4>
+                                            <input type="hidden" id="berat" name="berat" value="<?php echo $berat ?>" >
+                                        </td>
+										<td colspan="2">
+                                            <h4><b>Pengiriman :
+                                                <select id="id_kirim" name="id_kirim">
+                                                <?php foreach($kirim as $k) { ?>
+                                                    <option value="<?php echo $k->id_kategori ?>:<?php echo $k->harga ?>"><?php echo $k->jenis ?></option>
+                                                <?php } ?>
+                                                </select>
+                                            </b></h4>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" id="harga_kirim" name="harga_kirim" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+										<td colspan="4"><h4><b>Total Pembayaran</b></h4></td>
+										<td>
+                                            <input type="text" class="form-control" id="total_pembayaran" name="total_pembayaran" readonly>
+                                        </td>
+									</tr>
+                                    <script>
+                                        $('#id_kirim').change(function(){
+                                            var tothar = parseInt($('#total_harga').val());
+                                            var cbKirim = $('#id_kirim').val();
+                                            var berat = $('#berat').val();
+                                            var sp = cbKirim.split(":");
+                                            $("#harga_kirim").val(sp[1] * berat);
+                                            var bayar = tothar + (parseInt(sp[1]) * berat);
+                                            $("#total_pembayaran").val(bayar);
+                                        });
+                                    </script>
 								</tfoot>
                             </table>
                             <div class="row">
 								<div class="col-sm-6 text-left">
-								<button onclick="history.go(-1);" class="btn btn-primary"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
+								<a href="<?php echo site_url('shop/cart') ?>" class="btn btn-primary"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
 								</div>
 								<div class="col-sm-6 text-right">
-                                	<a type="button" href="<?php echo site_url("shop/payment") ?>" class="btn btn-success" ><span class="fa fa-money"></span> Pembayaran <span class="fa fa-money"></span></a>
+                                    <button type='submit' class="btn btn-success" <?php echo $d; ?> >
+                                        <span class="fa fa-money"></span> Pembayaran <span class="fa fa-money"></span>
+                                    </button>
 								</div>
 							</div>
+                            <?php echo form_close() ?>
 							<br>
                         </p>
 					</div>
@@ -172,7 +213,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<h3>Pembayaran</h3>
 						<div class="alert alert-warning alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Selamat!</strong> Pembelian Anda Berhasil!
+							<strong>Selamat!</strong> Pemesanan Anda Berhasil!
 						</div>
                         <p>
 							<center>
@@ -191,15 +232,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<td>:</td>
 											<td align="right"><b>Rp. <?php echo number_format($total,0,",","."); ?>,-</b></td>
 										</tr>
+                                        <tr>
+											<td>Biaya Pengiriman</td>
+											<td>:</td>
+											<td align="right"><b>Rp. <?php echo number_format($kirim,0,",","."); ?>,-</b></td>
+										</tr>
 										<tr>
 											<td>Kode Unik</td>
 											<td>:</td>
-											<td align="right"><?php echo $kode ?></td>
+											<td align="right"><b>Rp. <?php echo number_format($kode,0,",","."); ?>,-</b></td>
 										</tr>
 										<tr>
 											<td>Total Pembayaran</td>
 											<td>:</td>
-											<td align="right"><b>Rp. <?php echo number_format($total+$kode,0,",","."); ?>,-</b></td>
+											<td align="right"><b>Rp. <?php echo number_format($total+$kirim+$kode,0,",","."); ?>,-</b></td>
 										</tr>
 									</tbody>
 								</table>
@@ -236,7 +282,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<td align="right">Rp. <?php echo number_format($c['price']*$c['qty'],0,",","."); ?>,-</td>
 										<td align="center"><a href="<?php echo site_url('shop/cancel/'.$c['rowid']) ?>" type="button" class="btn btn-danger btn-sm">X</a></td>
 									</tr>
-<?php } } else { $d='disabled' ?>
+<?php } } else { $d='onclick="return false;" disabled' ?>
 									<tr>
 										<td colspan='6'><center>Keranjang Anda kosong.</center></td>
 									</tr>								
@@ -244,10 +290,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</tbody>
 								<tfoot>
 									<tr>
-										<td align="center">##</td>
-										<td colspan="3"><h4><b>Total</b></h4></td>
+										<td colspan="4"><h4><b>Total</b></h4></td>
 										<td align="right"><h4><b>Rp. <?php echo number_format($this->cart->total(),0,",","."); ?>,-</b></h4></td>
-										<td align="center"><a href="<?php echo site_url('shop/cancel/') ?>delete" type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a></td>
+										<td align="center">
+                                            <a href="<?php echo site_url('shop/cancel/') ?>delete" type="button" class="btn btn-danger btn-sm"
+                                                <?php echo $d; ?> >
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
 									</tr>
 								</tfoot>
                             </table>
@@ -256,7 +306,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<button onclick="history.go(-1);" class="btn btn-warning"><span class="glyphicon glyphicon-hand-left"> Kembali</span></a>
 								</div>
 								<div class="col-sm-6 text-right">
-									<a type="button" href="<?php echo site_url("shop/confirm") ?>" class="btn btn-primary" <?php echo $d; ?>>Lanjutkan <span class="glyphicon glyphicon-hand-right"></span></a>
+									<a type="button" href="<?php echo site_url("shop/confirm") ?>" class="btn btn-primary" <?php echo $d; ?> >
+                                        Lanjutkan <span class="glyphicon glyphicon-hand-right"></span>
+                                    </a>
 								</div>
 							</div>
 							<br>

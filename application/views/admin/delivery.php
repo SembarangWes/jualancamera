@@ -70,64 +70,12 @@
                             <table class="table table-striped" id="myTable">
                                 <thead>
                                     <th>No</th>
+                                    <th>ID</th>
                                     <th>Paket</th>
                                     <th>Tujuan</th>
                                     <th>Jenis</th>
                                     <th>Status</th>
-                                    <th>
-                                        <!-- Tombol Modal Tambah-->
-                                        <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus" data-toggle="modal" data-target="#ModalTambah"> Tambah</button>
-
-                                        <!-- Modal Tambah -->
-                                        <div id="ModalTambah" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
-
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              data-dismiss="modal">&times;</button>
-                                                        <h4 class="modal-title"><legend>Tambah Pengiriman</legend></h4>
-                                                    </div>
-
-                                        <?php echo form_open('delivery/store') ?>
-                                                    <div class="modal-body">
-                                                        <fieldset>
-                                                            <div class="form-group">
-                                                                <label for="Name">ID Transaksi :</label>
-                                                                <select  class="form-control" id="id_transaksi" name="id_transaksi">
-                                                                    <?php foreach($dataID as $d) { ?>
-                                                                    <option value="<?php echo $d->id_transaksi ?>"><?php echo $d->id_transaksi ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="berat">Berat (Kg) :</label>
-                                                                <input type="number" class="form-control" id="berat" name="berat"
-                                                                    pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
-                                                                    placeholder="Masukkan berat (Kg) ...">  
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="Jenis">Jenis :</label>
-                                                                <select class="form-control" id="jenis" name="jenis">
-                                                                    <?php foreach($dataKat as $dk) { ?>
-                                                                    <option value="<?php echo $dk->id_kategori ?>"><?php echo $dk->jenis ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary" id="tambah">Tambah</button>
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-                                                    </div>
-                                        <?php echo form_close() ?>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!-- Tutup Modal Tambah -->
-
-                                    </th>
+                                    <th>Opsi</th>
                                 </thead>
                                 <?php if(isset($data)) { ?>
 									<tbody>
@@ -136,6 +84,9 @@
 										<td>
 											<?php echo $start+=1 ?>
 										</td>
+                                        <td>
+                                        <?php echo $row->id_pengiriman ?>
+                                        </td>
 										<td>
 											<?php echo $row->nama_paket ?>
 										</td>

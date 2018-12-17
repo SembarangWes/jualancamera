@@ -3,13 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Transaksi_model extends CI_Model {
 
-    public function selectIDpaid()
-    {
-        $this->db->select('id_transaksi');
-        $this->db->where('bayar', 1);
-        return $this->db->get('transaksi')->result();
-    }
-
     public function selectordername($box, $search)
     {
         $this->db->select('*');
@@ -92,8 +85,7 @@ class Transaksi_model extends CI_Model {
     public function delete($id)
     {
         $this->db->where('id_transaksi', $id);
-        $this->db->delete('transaksi');
-        return result;
+        return $this->db->delete('transaksi');
     }
 
     public function reportTime($date)
@@ -116,5 +108,23 @@ class Transaksi_model extends CI_Model {
         $this->db->order_by('tgl_transaksi', 'desc');
         
         return $this->db->get()->result();
+    }
+
+    // REST
+
+    public function selectShortTrans($id)
+    {
+        $this->db->join('user', 'user.id_user = transaksi.id_user');
+        $this->db->where('transaksi.id_transaksi', $id);
+        return $this->db->get('transaksi')->row();
+    }
+
+    public function selectLongTrans($id)
+    {
+        $this->db->join('detail', 'detail.id_transaksi = transaksi.id_transaksi');
+        $this->db->join('kamera', 'detail.id_kamera = kamera.id_kamera');
+        $this->db->join('user', 'user.id_user = transaksi.id_user');
+        $this->db->where('transaksi.id_transaksi', $id);
+        return $this->db->get('transaksi')->result();
     }
 }

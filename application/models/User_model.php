@@ -64,7 +64,7 @@ class User_model extends CI_Model {
 
     public function cekLogin($user)
     { 
-        $this->db->where('email',$user);
+        $this->db->where('nama_user',$user);
         return $this->db->get('user')->result();
     }
 }
