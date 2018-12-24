@@ -89,7 +89,7 @@
 									</div>
                                     <div class="form-group">
 										<label for="Berat">Berat (Kg) :</label>
-										<input type="number" class="form-control" id="berat" name="berat"
+										<input type="number" step=0.1 class="form-control" id="berat" name="berat"
 											pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
 											placeholder="Masukkan Berat ...">  
 									</div>
@@ -168,7 +168,7 @@
 									</div>
                                     <div class="form-group">
 										<label for="Berat">Berat (Kg) :</label>
-										<input type="number" class="form-control" id="berat" name="berat"
+										<input type="number" step=0.1 class="form-control" id="berat" name="berat"
 											pattern="[0-9]{1,15}" required title="Harap diisi dengan angka"
 											placeholder="Masukkan Berat ..."
                                             value="<?php echo $dataid->berat ?>">

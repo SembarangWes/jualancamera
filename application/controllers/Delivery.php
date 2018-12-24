@@ -44,7 +44,7 @@ class Delivery extends CI_Controller
             if ($weight <= 1) { $weight = 1; }
 
             $dataPaket = [
-                'nama_paket' => $d->nama_kamera,
+                'nama_paket' => $d->nama_kamera." (".$d->jumlah." buah)" ,
                 'berat' => $weight,
                 'id_pengiriman' => $id_pengiriman
             ];

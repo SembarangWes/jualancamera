@@ -119,8 +119,7 @@
                         <label for="Alamat">Alamat :</label>
                         <textarea type="text" class="form-control" id="alamat" name="alamat"
                             pattern="{1,1000}" required title="Harap diisi"
-                            placeholder="Masukkan alamat ...">  
-                        </textarea>
+                            placeholder="Masukkan alamat ..."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="hp">No. HP :</label>

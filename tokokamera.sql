@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2018 at 10:23 AM
+-- Generation Time: Dec 24, 2018 at 02:41 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -44,7 +44,9 @@ INSERT INTO `detail` (`id_detail`, `id_kamera`, `jumlah`, `id_transaksi`) VALUES
 (18, 5, 1, 20),
 (19, 4, 1, 20),
 (20, 3, 1, 21),
-(21, 5, 1, 21);
+(21, 5, 1, 21),
+(22, 2, 3, 22),
+(23, 5, 5, 22);
 
 -- --------------------------------------------------------
 
@@ -70,10 +72,10 @@ CREATE TABLE `kamera` (
 
 INSERT INTO `kamera` (`id_kamera`, `nama_kamera`, `foto_kamera`, `spesifikasi`, `berat`, `harga`, `stok`, `id_kategori`, `id_merek`) VALUES
 (1, 'Canon PowerShot SX400 IS', '0_1d5c9d81-5612-4336-bcef-cd20ee0ecd01_654_626.jpg', '<b>Isi Box :</b><br>- Kamera Canon PowerShot SX400 IS<br>- Charger Battery Canon CB-2LFE, CB-2LFC<br>- Li-ion Battery NB-11LH<br>- Strap Canon<br>- Lenscap / Tutup Lensa<br>- Cable Usb<br>- Manual Book &amp; CD<br><br><b>Spesifikasi Produk :</b><br>- 16,0 MP dengan Processor Canon DIGIC 4+ menghasilkan hasil photo yg lebih tajam<br>- 30x Optical Zoom (24-720mm) dengan 24mm Wide-Angle lens<br>- 3\'0 TFT LCD<br>- Image Stabilizer ( IS ) photo yg dihasilkan lebih fokus tanpa blur<br>- HD Video dengan kualitas 1280x720p untuk Video Movie<br>- Smart AUTO setting otomatis yg efektik untuk fungsi &amp; mode pengambilan photo<br>- ISO ( Auto, 100, 200, 400, 800, 1600 )<br>- Li-ion Battery ga perlu lagi repot beli baterai utk operasional kamera<br>', 0.3, 1950000, 10, 4, 3),
-(2, 'CANON EOS 650 D KIT18-55 IS II', '2222335_7717cfaa-0800-4b10-af2c-ec1afd578a7b.jpg', '<h3>Deskripsi Produk</h3><ul><li>Tipe:Canon EOS 650D&nbsp;</li><li>Ukuran (L x W x H cm):13.31 x 9.98 x 7.8 cm</li><li>Berat (kg):0.6</li><li>Tipe Layar:TFT Layar</li><li>Ukuran Layar (inc):3.0</li><li>Resolusi Layar:1040k dots</li><li>Megapiksel:18.0</li><li>Format Foto:JPEG, RAW</li><li>Ukuran File Foto:5184 x 345</li><li>Format Video:MOV</li><li>Video HD:Ya</li><li>Resolusi Video:19201080</li><li>Focal Length:29 216mm</li><li>Image Stabilization:Ya</li><li>Built in Flash:Ya</li><li>ISO Range:100-12800</li><li>Range Shutter Speed:1/4000- 1/60 detik</li><li>Range Aperture Lensa:f/3.5-5.6</li><li>Tipe Memory Card:SD/SDHC/SDXC</li><li>Input:USB</li><li>Output:Component Video|Composite Video|3.5mm jack|USB|HDMI</li><li>HDMI Port:Ya</li><li>Tipe Baterai:Li-Ion</li><li>Zoom Optik:7.0</li></ul>', 0.5, 5700000, 3, 1, 3),
+(2, 'CANON EOS 650 D KIT18-55 IS II', '2222335_7717cfaa-0800-4b10-af2c-ec1afd578a7b.jpg', '<h3>Deskripsi Produk</h3><ul><li>Tipe:Canon EOS 650D&nbsp;</li><li>Ukuran (L x W x H cm):13.31 x 9.98 x 7.8 cm</li><li>Berat (kg):0.6</li><li>Tipe Layar:TFT Layar</li><li>Ukuran Layar (inc):3.0</li><li>Resolusi Layar:1040k dots</li><li>Megapiksel:18.0</li><li>Format Foto:JPEG, RAW</li><li>Ukuran File Foto:5184 x 345</li><li>Format Video:MOV</li><li>Video HD:Ya</li><li>Resolusi Video:19201080</li><li>Focal Length:29 216mm</li><li>Image Stabilization:Ya</li><li>Built in Flash:Ya</li><li>ISO Range:100-12800</li><li>Range Shutter Speed:1/4000- 1/60 detik</li><li>Range Aperture Lensa:f/3.5-5.6</li><li>Tipe Memory Card:SD/SDHC/SDXC</li><li>Input:USB</li><li>Output:Component Video|Composite Video|3.5mm jack|USB|HDMI</li><li>HDMI Port:Ya</li><li>Tipe Baterai:Li-Ion</li><li>Zoom Optik:7.0</li></ul>', 0.5, 5700000, 10, 1, 3),
 (3, 'Go Pro Cam Full HD 1080P WIFI', '50481633_b50456aa-e909-46ce-a69a-a673787b95fa_700_700.png', '<b>Action kamera</b><br><br>- wifi connection<br>- HMDI slot<br>- 2 inch screen<br>- waterproof casing housing<br>- water resistence<br>- HD 1020p<br>- include : clip 1, handle bar / pole mount, mount 1, mount 2, mount 3<br>- video : 1080P / 720P / QVGA<br>- recorded MOV format<br>- micro sdhc card slot<br>- dimension : 59.27 x 29.28 x 41.1 mm<br>- 12 MP HD wide angle lens,memory micro sd ( tidak dapat )<br>warna : hitam, biru, silver, gold, kuning										<br>', 0.1, 600000, 18, 3, 7),
 (4, 'SONY ALPHA A6000 Kit 16-50', '478016_dbf3b261-8225-4e9e-b399-833d04aa0ab3.jpg', 'SONY ALPHA A6000 Kit 16-50-Camera<br>BLACK,GRAY,SILVER Dan WHITE<br>BONUS UV FILTER<br><br>Mirrorless<br>Spesifikasi :<br>Lensa : KIT 16-50mm f/3.5-5.6 OSS<br>Body : Rangefinder-style mirrorless<br>Sensor :<br>Resolusi Maximum : 6000 x 4000<br>Pixels : 24 megapixels<br>Ukuran Sensor : APS-C (23.5 x 15.6 mm)<br>Tipe Sensor : CMOS<br>Prosesor : Bionz X<br><br>Image : ISO : Auto, 100-25600 (51200 with Multi-Frame NR)<br>LCD:Dapat diputar /dimiringkan<br>Ukuran layar: 3 Resolusi Layar: 921.600 dot<br>Min shutter speed: 30 sec<br>Max shutter speed: 1/4000 sec<br>Format: MPEG-4, AVCHD<br>Jenis penyimpanan: SD / SDHC / SDXC, Memory Stick Pro Duo / Pro-HG Duo<br><br>Optik &amp; Fokus :<br>Digital Zoom : Yes (2x)<br>Manual Fokus : Yes<br>Jumlah Titik Fokus : 179<br>Dudukan Lensa : Sony E<br>Focal Length (mult. / equiv.) : 1.5x<br><br>Layar / Viewfinder :<br>Articulate LCD : Tilting<br>Ukuran Layar : 3 inch<br>Screen Dots : 921,000<br>Layar Sentuh : No<br>Tipe Layar : TFT LCD<br><br>Fitur Foto :<br>Min Shutter Speed : 30 sec<br>Max Shutter Speed : 1/4000 sec<br>Built in Flash : Yes<br>Jangkauan Flash : 6.00 m (at ISO 100)<br><br>Fitur Video :<br>Resolusi : 1920 x 1080 (60p, 60i, 24p), 1440 x 1080 (30p, 25p), 640 x 480 (30p, 25p)<br>Format : MPEG-4, AVCHD<br><br>USB 2.0 (480 MBPS)<br>Berat (inc baterai.): 344 g<br>Dimensi: 120 x 67 x 45cm<br>', 0.3, 7189000, 9, 5, 4),
-(5, 'Samsung SCP-2370RH', '7952936_cbc66962-bdd7-47bc-baef-d07cb3e097e3_500_500.jpg', 'High Resolution of 600TV Lines ( Color ), 700TV Lines ( B/W )<br>Min. Illumination 0 Lux @F1.6 (IR LED On),<br>0.2Lux @F1.6 (Color), 0.02Lux (B/W)<br>Powerful 37x Zoom (3.5 ~ 129.5mm), Digital 16x<br>True Day &amp; Night (ICR), MD, SSNR (3D+2D Noise Reduction)<br>IP66, Coaxial Control (Pelco-C), RS-485, 24V AC<br>IR intensity adjustment with zooming in/out ratio<br>', 6.0, 23790000, 243, 6, 5);
+(5, 'Samsung SCP-2370RH', '7952936_cbc66962-bdd7-47bc-baef-d07cb3e097e3_500_500.jpg', 'High Resolution of 600TV Lines ( Color ), 700TV Lines ( B/W )<br>Min. Illumination 0 Lux @F1.6 (IR LED On),<br>0.2Lux @F1.6 (Color), 0.02Lux (B/W)<br>Powerful 37x Zoom (3.5 ~ 129.5mm), Digital 16x<br>True Day &amp; Night (ICR), MD, SSNR (3D+2D Noise Reduction)<br>IP66, Coaxial Control (Pelco-C), RS-485, 24V AC<br>IR intensity adjustment with zooming in/out ratio<br>', 6.0, 23790000, 238, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -158,7 +160,8 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`id_transaksi`, `id_user`, `tgl_transaksi`, `kode_unik`, `id_kirim`, `total`, `bayar`, `status`) VALUES
 (18, 5, '2018-12-16', 920, 3, 9765000, 1, 1),
 (20, 9, '2018-12-16', 666, 1, 31224000, 1, 1),
-(21, 5, '2018-12-17', 595, 2, 24530000, 1, 1);
+(21, 5, '2018-12-17', 595, 2, 24530000, 1, 1),
+(22, 5, '2018-12-21', 228, 2, 136680000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -241,7 +244,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail`
 --
 ALTER TABLE `detail`
-  MODIFY `id_detail` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_detail` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `kamera`
 --
@@ -266,7 +269,7 @@ ALTER TABLE `merek`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_transaksi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `user`
 --
