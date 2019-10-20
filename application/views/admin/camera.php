@@ -67,7 +67,7 @@
 							</div>
 
 							<div class="panel-body">
-<?php echo form_open_multipart('camera/store') ?>
+                            <?php echo form_open_multipart('camera/store') ?>
 								<fieldset>
 									<div class="form-group">
 										<label for="Kamera">Kamera :</label>
@@ -78,7 +78,7 @@
 									<div class="form-group">
 										<label for="Foto">Foto / Gambar :</label>
 										<input type="file" id="foto" name="foto" size="20" accept="image/*">
-<?php echo $error ?>
+                            <?php echo $error ?>
 									</div>
 									<div class="form-group">
 										<label for="Spesifikasi">Spesifikasi :</label>
@@ -144,7 +144,7 @@
 							</div>
 						
 							<div class="panel-body">
-<?php echo form_open_multipart('camera/update/'.$dataid->id_kamera); echo form_hidden('id', $dataid->id_kamera); ?>
+                            <?php echo form_open_multipart('camera/update/'.$dataid->id_kamera); echo form_hidden('id', $dataid->id_kamera); ?>
 								<fieldset>
 									<div class="form-group">
 										<label for="Kamera">Kamera :</label>
@@ -156,7 +156,7 @@
 									<div class="form-group">
 										<label for="Foto">Foto / Gambar :</label>
 										<input type="file" id="foto" name="foto" size="20" accept="image/*">
-<?php echo $error ?>
+                            <?php echo $error ?>
 									</div>
 									<div class="form-group">
 										<label for="Spesifikasi">Spesifikasi :</label>
@@ -273,7 +273,7 @@
 											<a href="<?php echo site_url('camera/create') ?>" type="button" class="btn btn-info btn-sm glyphicon glyphicon-plus"> Tambah</a>
 										</th>
 									</thead>
-<?php if(isset($data)) { ?>
+                                    <?php if(isset($data)) { ?>
 									<tbody>
 										<?php foreach($data as $row) { ?>
 										<tr>

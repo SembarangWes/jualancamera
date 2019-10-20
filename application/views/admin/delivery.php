@@ -103,7 +103,7 @@
 										</td>
 										<td>
                                             <!-- Tombol Modal Ubah-->
-                                            <button type="button" class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_pengiriman ?>"></button>
+                                            <button class="btn btn-info btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#ModalUbah<?php echo $row->id_pengiriman ?>"></button>
 
                                             <!-- Modal Ubah -->
                                             <div id="ModalUbah<?php echo $row->id_pengiriman ?>" class="modal fade" role="dialog">
